@@ -1,0 +1,27 @@
+@startuml C4_Elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+SHOW_PERSON_OUTLINE()
+LAYOUT_WITH_LEGEND()
+
+Person(Reiziger, "Reiziger", "Een gebruiker die een reis zoekt en boekt")
+
+System(TriptopApp, "Triptop", "Hiermee kunnen reizen ingezien en geplanned worden met bijbehorenden accomodaties.")
+
+System_Ext(BookingAPI, "Booking API", "Hiermee kunnen reserveringen worden gemaakt op verschillende accomodaties, denk aan booking.com, RBNB.")
+
+System_Ext(VervoerAPI, "Vervoer API", "Hiermee kan openbaar vervoer en vluchten worden geplanned: routes kaartjes etc, denk aan NS.")
+
+System_Ext(BezienswaardigheidAPI, "Bezienswaardigheden API", "Hiermee wordt informatie gedeeld over bezienswaardigheden (bijvoorbeeld museums), bijvoorbeeld Tripadvisor")
+
+System_Ext(HorecaApi, "Horeca API", "Hiermee kunnen intrassanten restaurants gevonden en gereserveerd worden.")
+
+
+
+
+Rel(Reiziger, TriptopApp, "planned reizen met")
+Rel(TriptopApp, BookingAPI, "regelt booking met")
+Rel(TriptopApp, VervoerAPI, "deelt vervoers data met")
+Rel(TriptopApp, BezienswaardigheidAPI, "deelt bezienswaardigheid informatie met")
+Rel(TriptopApp, HorecaApi, "deelt data over verschillende horeca met")
+@enduml
