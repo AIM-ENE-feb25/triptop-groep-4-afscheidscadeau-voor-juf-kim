@@ -4,9 +4,9 @@
 SHOW_PERSON_OUTLINE()
 LAYOUT_WITH_LEGEND()
 
-Person(Reiziger, "Reiziger", "Een gebruiker die een reis zoekt en boekt")
+Person(Reiziger, "Reiziger", "Een gebruiker die reizen zoekt en boekt")
 
-System(TriptopApp, "Triptop", "Hiermee kunnen reizen ingezien en geplanned worden met bijbehorenden accomodaties.")
+System(TriptopApp, "Triptop", "Hiermee kunnen reizen worden bekeken en gepland inclusief bijbehorende accomodaties en eventuele bezienswaardigheden.")
 
 System_Ext(BookingAPI, "Booking API", "Hiermee kunnen reserveringen worden gemaakt op verschillende accomodaties, denk aan booking.com, RBNB.")
 
@@ -14,14 +14,14 @@ System_Ext(VervoerAPI, "Vervoer API", "Hiermee kan openbaar vervoer en vluchten 
 
 System_Ext(BezienswaardigheidAPI, "Bezienswaardigheden API", "Hiermee wordt informatie gedeeld over bezienswaardigheden (bijvoorbeeld museums), bijvoorbeeld Tripadvisor")
 
-System_Ext(HorecaApi, "Horeca API", "Hiermee kunnen intrassanten restaurants gevonden en gereserveerd worden.")
+System_Ext(HorecaAPI, "Horeca API", "Hiermee kunnen interessante restaurants gevonden en gereserveerd worden.")
 
 
 
 
 Rel(Reiziger, TriptopApp, "planned reizen met")
-Rel(TriptopApp, BookingAPI, "regelt booking met")
-Rel(TriptopApp, VervoerAPI, "deelt vervoers data met")
+Rel(TriptopApp, BookingAPI, "regelt booking via")
+Rel(TriptopApp, VervoerAPI, "deelt vervoersgegevens met")
 Rel(TriptopApp, BezienswaardigheidAPI, "deelt bezienswaardigheid informatie met")
-Rel(TriptopApp, HorecaApi, "deelt data over verschillende horeca met")
+Rel(TriptopApp, HorecaAPI, "deelt horecagegevens met")
 @enduml
