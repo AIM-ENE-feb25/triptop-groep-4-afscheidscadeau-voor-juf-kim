@@ -1,8 +1,13 @@
 @startuml C4_Elements
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
+title Systeem Context diagram voor "Triptop" reisplanner
+
 SHOW_PERSON_OUTLINE()
 LAYOUT_WITH_LEGEND()
+
+skinparam linetype ortho
+'skinparam ArrowStyle Dashed
 
 Person(Reiziger, "Reiziger", "Een gebruiker die reizen zoekt en boekt")
 
@@ -15,7 +20,6 @@ System_Ext(VervoerAPI, "Vervoer API", "Hiermee kan openbaar vervoer en vluchten 
 System_Ext(BezienswaardigheidAPI, "Bezienswaardigheden API", "Hiermee wordt informatie gedeeld over bezienswaardigheden (bijvoorbeeld museums), bijvoorbeeld Tripadvisor")
 
 System_Ext(HorecaAPI, "Horeca API", "Hiermee kunnen interessante restaurants gevonden en gereserveerd worden.")
-
 
 
 
