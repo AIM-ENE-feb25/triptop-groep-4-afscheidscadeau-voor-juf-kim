@@ -8,7 +8,7 @@ Dit software guidebook geeft een overzicht van de Triptop-applicatie. Het bevat 
 1. De architectuur van de infrastructuur en hoe de software kan worden geinstalleerd. 
 
 ## 2. Context
-
+![Context Diagram](../opdracht-diagrammen/ContextDiagram_triptop.png)
 > [!IMPORTANT]
 > Werk zelf dit hoofdstuk uit met context diagrammen en een beschrijving van de context van de software.
 
