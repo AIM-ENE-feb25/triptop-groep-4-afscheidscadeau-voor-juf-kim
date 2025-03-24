@@ -1,0 +1,66 @@
+@startuml C4_Elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+title Systeem Component diagram voor TripTop
+
+LAYOUT_WITH_LEGEND()
+
+
+'skinparam linetype ortho
+'skinparam ArrowStyle Dashed
+
+Container(Webapp, "'TripTop' Web applicatie", "JavaScript, React","Hiermee kunnen reizen geplanned worden")
+
+
+package "API-applicatie" <<Rectangle>> {
+    Component(loginController,"Login Controller","Spring Controller", "Maakt het mogelijk voor gebruikers in te loggen")
+    Component(bookingComponent, "Booking Controller", "Java, Spring", "Hiermee worden accomodaties gebooked")
+    Component(bookingService, "Booking Service", "Java, Spring", "Hier vindt het logische gedeelte van de booking plaats")
+    Component(bookingRepo, "Booking Repository", "Java, Spring", "Hier wordt booking data verwerkt")
+    Component(bookingComponent, "Booking Controller", "Java, Spring", "Hiermee worden accommodaties geboekt")
+    Component(bookingService, "Booking Service", "Java, Spring", "Hier vindt het logische gedeelte van de booking plaats")
+    Component(bookingRepo, "Booking Repository", "Java, Spring", "Hier wordt booking data verwerkt")
+    Component(notificatieService, "Notificatie Service", "Java, Spring", "Verstuurt meldingen naar gebruikers")
+    Component(mailComponent, "Mail Component", "Java, Spring", "Verstuurt e-mails voor bevestigingen en meldingen")
+    Component(betaalController, "Betaal Controller", "Java, Spring","")
+    Component(betaalComponent, "Betaal Component", "Java, Spring", "Verwerkt betalingen en transacties")
+    Component(betaalRepo, "Betaal Repository", "Java, Spring", "Slaat betalingsgegevens op in de database")
+    Component(authenticatieRepo, "Authenticatie Repository", "Spring Repository", "Hiermee worden queries voorbereid")
+    Component(beveiligingComponent, "Authenticatie Component", "Spring Bean", "Biedt functionaliteiten gerelateerd aan inloggen, waaronder opslaan en controleren van wachtwoorden.")
+}
+
+ContainerDb(Database, "Database", "Postgress", "Slaat gebruikers info op, waaronder gebruikersnaam, wachtwoord en betalingen")
+
+System_Ext(authAPI, "Authenticatie provider", "Regelt authenticatie")
+System_Ext(bookingAPI, "Booking API", "Booking.com")
+System_Ext(bezienswaardighedenAPI, "Bezienswaardigheden API", "TripAdvisor")
+System_Ext(vervoerAPI, "Vervoer API", "NS, KLM")
+System_Ext(horecaAPI, "Horeca API", "TheFork")
+
+
+Rel(Webapp, loginController, "Verstuurt login verzoek", "JSON/HTTPS")
+Rel(loginController, beveiligingComponent, "Gebruikt authenticatiecomponent")
+Rel(beveiligingComponent, authenticatieRepo, "Leest en schrijft naar authenticatiegegevens")
+Rel(authenticatieRepo, Database, "Leest en schrijft naar")
+
+Rel(Webapp, bookingComponent, "Verstuurt boekingsverzoek")
+Rel(bookingComponent, bookingService, "Gebruikt")
+Rel(bookingService, bookingRepo, "Stuurt boeking op naar database")
+Rel(bookingRepo, Database, "Leest en schrijft boekingsgegevens")
+
+Rel(bookingService, notificatieService, "Stuurt notificatie verzoek")
+Rel(notificatieService, mailComponent, "Stuurt e-mail voor bevestiging")
+Rel(mailComponent, Database, "Slaat verstuurde e-mails op")
+
+Rel(Webapp, betaalController, "Start betalingsproces")
+Rel(betaalController, betaalComponent, "Verwerkt betaling")
+Rel(betaalComponent, betaalRepo, "Slaat betalingsgegevens op")
+Rel(betaalRepo, Database, "Leest en schrijft betalingsgegevens")
+
+
+Rel(bookingService, bookingAPI, "Zoekt accommodatie")
+Rel(bookingService, bezienswaardighedenAPI, "Haalt bezienswaardigheden op")
+Rel(bookingService, vervoerAPI, "Zoekt vervoer opties")
+Rel(bookingService, horecaAPI, "Haalt restaurants op")
+Rel(beveiligingComponent, authAPI, "Authenticeert gebruiker")
+
+@enduml
