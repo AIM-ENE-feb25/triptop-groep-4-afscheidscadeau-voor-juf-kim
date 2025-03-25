@@ -4,7 +4,7 @@ title Systeem Component diagram voor TripTop
 
 LAYOUT_WITH_LEGEND()
 
-skinparam linetype ortho
+'skinparam linetype ortho
 'skinparam ArrowStyle Dashed
 
 Container(Webapp, "'TripTop' Web applicatie", "JavaScript, React", "Hiermee kunnen reizen gepland worden")
