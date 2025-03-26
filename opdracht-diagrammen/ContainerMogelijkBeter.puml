@@ -1,0 +1,33 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Container diagram van het Triptop systeem
+
+Person(user, "Reiziger", "Beheert en wijzigt zijn reis")
+
+System_Boundary(triptop, "Triptop Systeem") {
+
+Container(web, "Triptop Web App", "React (JavaScript/TypeScript)", "Biedt gebruikers de mogelijkheid om hun reis te beheren en wijzigingen aan te brengen")
+Container(api, "API Gateway", "Spring Boot (Java)", "Regelt autorisatie en request routing")
+Container(trip_manager, "Reisbeheer Service", "Node.js + Express", "Beheert reisoverzicht en wijzigingen van bouwstenen")
+ContainerDb(db, "Database", "PostgreSQL", "Opslag van reisdata, wijzigingen en gebruikersvoorkeuren")
+}
+
+System_Ext(booking, "Booking API", "Booking.com, Airbnb", "Opvragen en beheren van hotelboekingen")
+System_Ext(transport, "Vervoer API", "NS, KLM, Uber", "Houdt vervoersdata bij en signaleert wijzigingen")
+System_Ext(attractions, "Bezienswaardigheden API", "TripAdvisor, Google Places", "Excursies en attracties")
+System_Ext(horeca, "Horeca API", "TheFork, OpenTable", "Suggesties voor restaurants en cafés")
+Container(authService, "Authenticatie Service", "OAuth 2.0", "Regelt authenticatie via externe providers zoals Google")
+
+Rel(user, web, "Bekijkt en wijzigt reisgegevens\n(HTTP JSON)")
+Rel(web, api, "Stuurt wijzigingsaanvragen\n(HTTPS, REST API, JSON)")
+Rel(api, trip_manager, "Beheert wijzigingslogica en alternatieven\n(REST API, JSON)")
+Rel(trip_manager, authService, "Beheert authenticatie\n(HTTPS, REST API, JSON)")
+Rel(authService, web, "Authenticatie via externe provider\n(OAuth 2.0, JSON)")
+Rel(trip_manager, db, "Leest en slaat wijzigingen op\n(PostgreSQL, SQL Queries)")
+Rel(trip_manager, booking, "Checkt status hotelboekingen\n(REST API, JSON)")
+Rel(trip_manager, transport, "Checkt status transport\n(REST API, JSON)")
+Rel(trip_manager, attractions, "Checkt status attracties\n(REST API, JSON)")
+Rel(trip_manager, horeca, "Checkt status restaurantboekingen\n(REST API, JSON)")
+
+@enduml
