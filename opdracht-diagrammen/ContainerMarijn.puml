@@ -1,0 +1,44 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Dynamic.puml
+
+
+LAYOUT_WITH_LEGEND()
+
+
+Person(customer, Customer, "A customer")
+Person(employee, Employee, "A employee")
+System_Boundary(c1, "Customer Information") {
+    Container(app, "Customer Application", "Javascript, ?", "The frontend and the part the users will see")
+    Container(backend, "Backend", "Springboot", "Transport for business events")
+    ContainerDb(database, "Database", "MySQL", "Saves customer information and travel information")
+}
+    System_Ext(vervoerAPI, "Vervoer API", "Skyscanner", "Creates normalised data for reporting purposes")
+    System_Ext(bezienswaardighedenAPI, "Bezienswaardigheden API", "Trip advisor", "Provides Review from people and recomendations")
+    System_Ext(googleLogin, "Google auth", "Event Store", "Stores information about events that have happened")
+    System_Ext(betaalAPI, "Betaal API", "Stripe", "API to pay for the trip")
+    System_Ext(bookingAPI, "Booking API", "booking.com", "API to find bookings")
+    System_Ext(horecaAPI, "Horeca API", "The Fork", "API to find restourants")
+
+
+
+Rel_D(customer, app, "Makes a vacatioan using", "HTTPS")
+Rel_D(employee, app, "Helps the customer using", "HTTPS")
+
+Rel(app, backend, "Updates customer information using", "JSON/HTTPS")
+
+Rel_U(backend, app, "Confirm update to", "async", $index=LastIndex()-2)
+
+Rel_L(backend, vervoerAPI, "Sends customer update events to", "async", $index=Index()-1)
+Rel(backend, database, "Stores data in", $index=Index()-1)
+Rel(backend, betaalAPI, "Sends payment requests", $index=Index()-1)
+Rel(backend, "bookingAPI", "Redirects to booking API", $index=Index()-1)
+Rel(backend, "horecaAPI", "Redirects to the horeca API", $index=Index()-1)
+Rel(app, googleLogin, "Redirects to google login", $index=Index()-1)
+
+
+' $index cab be first arg too (like the old RelIndex... calls), as long it is written with $index=....
+Rel_R($index=SetIndex(5)-2, backend, bezienswaardighedenAPI, "Sends customer update events to", "async")
+Rel($index=Index()-2, backend, googleLogin, "Stores events in")
+
+SHOW_LEGEND()
+@enduml
