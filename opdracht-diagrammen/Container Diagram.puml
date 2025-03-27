@@ -18,15 +18,15 @@ System_Boundary(triptop, "Triptop Systeem") {
 
 }
 
-System_Ext(booking, "Booking API", "Booking.com, Airbnb", "Opvragen en beheren van hotelboekingen")
+System_Ext(booking, "Booking API", "Opvragen en beheren van hotelboekingen", "Booking.com, Airbnb")
 
-System_Ext(transport, "Vervoer API", "NS, KLM, Uber", "Houdt vervoersdata bij en signaleert wijzigingen")
+System_Ext(transport, "Vervoer API", "Houdt vervoersdata bij en signaleert wijzigingen", "NS, KLM, Uber")
 
-System_Ext(attractions, "Bezienswaardigheden API", "TripAdvisor, Google Places", "Excursies en attracties")
+System_Ext(attractions, "Bezienswaardigheden API", "Excursies en attracties", "TripAdvisor, Google Places")
 
-System_Ext(horeca, "Horeca API", "TheFork, OpenTable", "Suggesties voor restaurants en cafés")
+System_Ext(horeca, "Horeca API", "Suggesties voor restaurants en cafés", "TheFork, OpenTable")
 
-System_Ext(authService, "Authenticatie Service", "OAuth 2.0", "Regelt authenticatie via externe providers zoals Google")
+System_Ext(authService, "Authenticatie Service", "Authenticeert gebruikers en stuurt een authenticatie token terug", "OAuth 2.0", "OAuth 2.0")
 
 Rel(user, web, "Bekijkt en wijzigt reisgegevens\n(HTTPS, JSON)")
 Rel(web, trip_manager, "Maakt API verzoeken naar")
