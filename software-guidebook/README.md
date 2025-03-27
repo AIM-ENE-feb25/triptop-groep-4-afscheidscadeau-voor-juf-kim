@@ -81,9 +81,12 @@ Voordat deze casusomschrijving tot stand kwam, heeft de opdrachtgever de volgend
 
 > [!IMPORTANT]
 > Voeg toe: Container Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
-
+![SOEX_Triptop_Container.png](..%2Fopdracht-diagrammen%2FSOEX_Triptop_Container.png)
+![SOEX_DynamischDiagram_Inloggen.png](..%2Fopdracht-diagrammen%2FSOEX_DynamischDiagram_Inloggen.png)
+![SOEX_DynamischDiagram_Reisboeken.png](..%2Fopdracht-diagrammen%2FSOEX_DynamischDiagram_Reisboeken.png)
+ 
 ###     7.2. Components
-
+![SOEX_Componentdiagram.png](..%2Fopdracht-diagrammen%2FSOEX_Componentdiagram.png)
 > [!IMPORTANT]
 > Voeg toe: Component Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
 
