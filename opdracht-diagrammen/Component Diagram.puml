@@ -11,8 +11,12 @@ Container(Webapp, "'TripTop' Web applicatie", "JavaScript, React", "Hiermee kunn
 
 System_Boundary(triptop, "Triptop API Applicatie") {
     Component(loginController, "Login Controller", "Spring Controller", "Maakt het mogelijk voor gebruikers in te loggen")
-    Component(bookingComponent, "Booking Controller", "Java, Spring", "Hiermee worden accommodaties geboekt")
-    Component(bookingService, "Booking Service", "Java, Spring", "Hier vindt het logische gedeelte van de booking plaats")
+    Component(bookingController, "Booking Controller", "Java, Spring", "Hiermee worden accommodaties geboekt")
+    Component(bookingComponent, "Booking Component", "Java, Spring", "Hier vindt het logische gedeelte van de booking plaats")
+'    Component(accommodatieController, "Accommodatie Controller", "Java, Spring/ Controller", "Controller voor accommodaties")
+    Component(accommodatieBeheer, "Accommodatie Component", "Java, Spring", "Verwerkt accommodatie data")
+    Component(accommodatieRepo, "Accommodatie Repository", "Java, Spring Repo", "Mapped de data naar het gewenste formaat")
+    Component(bookingComService, "BookingComService", "Java, Spring", "Haalt data op uit bookingcomAPI")
     Component(bookingRepo, "Booking Repository", "Java, Spring", "Hier wordt booking data verwerkt")
 
     Component(notificatieService, "Notificatie Service", "Java, Spring", "Verstuurt meldingen naar gebruikers")
@@ -42,12 +46,12 @@ Rel(loginController, authAPI, "Authenticeert gebruiker")
 Rel(beveiligingComponent, authenticatieRepo, "Leest en schrijft naar authenticatiegegevens")
 Rel(authenticatieRepo, Database, "Leest en schrijft naar")
 
-Rel(Webapp, bookingComponent, "Verstuurt boekingsverzoek")
-Rel(bookingComponent, bookingService, "Gebruikt")
-Rel(bookingService, bookingRepo, "Stuurt boeking op naar database")
+Rel(Webapp, bookingController, "Verstuurt boekingsverzoek")
+Rel(bookingController, bookingComponent, "Gebruikt")
+Rel(bookingComponent, bookingRepo, "Stuurt boeking op naar database")
 Rel(bookingRepo, Database, "Leest en schrijft boekingsgegevens")
 
-Rel(bookingService, notificatieService, "Stuurt bevestigingsnotificatie")
+Rel(bookingComponent, notificatieService, "Stuurt bevestigingsnotificatie")
 Rel(notificatieService, mailComponent, "Stuurt e-mail voor bevestiging")
 
 Rel(Webapp, betaalController, "Start betalingsproces")
@@ -55,11 +59,15 @@ Rel(betaalController, betaalComponent, "Verwerkt betaling")
 Rel(betaalComponent, betaalRepo, "Slaat betalingsgegevens op")
 Rel(betaalRepo, Database, "Leest en schrijft betalingsgegevens")
 
-Rel(bookingService, bookingAPI, "Zoekt accommodatie")
-Rel(bookingService, bezienswaardighedenAPI, "Haalt bezienswaardigheden op")
-Rel(bookingService, vervoerAPI, "Zoekt vervoer opties")
-Rel(bookingService, horecaAPI, "Haalt restaurants op")
+Rel(bookingComponent, bezienswaardighedenAPI, "Haalt bezienswaardigheden op")
+Rel(bookingComponent, vervoerAPI, "Zoekt vervoer opties")
+Rel(bookingComponent, horecaAPI, "Haalt restaurants op")
 
 Rel(betaalComponent, betaalAPI, "Regelt betalingen")
+
+Rel(bookingComponent, accommodatieBeheer, "Haalt accommodatie op vanuit")
+Rel(accommodatieBeheer, bookingComService, "Haalt data op via")
+Rel(bookingComService, accommodatieRepo, "Haalt accommodatie op vanuit")
+Rel(accommodatieRepo, bookingAPI, "Haalt data op uit")
 
 @enduml
