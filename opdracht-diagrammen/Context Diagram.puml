@@ -1,0 +1,31 @@
+@startuml C4_Elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Systeem Context diagram voor "Triptop" reisplanner
+
+SHOW_PERSON_OUTLINE()
+LAYOUT_WITH_LEGEND()
+
+skinparam linetype ortho
+'skinparam ArrowStyle Dashed
+
+Person(Reiziger, "Reiziger", "Een gebruiker die reizen zoekt en boekt")
+
+System(TriptopApp, "Triptop", "Hiermee kunnen reizen worden bekeken en gepland inclusief bijbehorende accomodaties en eventuele bezienswaardigheden.")
+
+System_Ext(BookingAPI, "Booking API", "Hiermee kunnen reserveringen worden gemaakt op verschillende accomodaties, denk aan booking.com, RBNB.")
+
+System_Ext(VervoerAPI, "Vervoer API", "Hiermee kan openbaar vervoer en vluchten worden geplanned: routes kaartjes etc, denk aan NS.")
+
+System_Ext(BezienswaardigheidAPI, "Bezienswaardigheden API", "Hiermee wordt informatie gedeeld over bezienswaardigheden (bijvoorbeeld museums), bijvoorbeeld Tripadvisor")
+
+System_Ext(HorecaAPI, "Horeca API", "Hiermee kunnen interessante restaurants gevonden en gereserveerd worden.")
+
+
+
+Rel(Reiziger, TriptopApp, "planned reizen met")
+Rel(TriptopApp, BookingAPI, "regelt booking via")
+Rel(TriptopApp, VervoerAPI, "deelt vervoersgegevens met")
+Rel(TriptopApp, BezienswaardigheidAPI, "deelt bezienswaardigheid informatie met")
+Rel(TriptopApp, HorecaAPI, "deelt horecagegevens met")
+@enduml
