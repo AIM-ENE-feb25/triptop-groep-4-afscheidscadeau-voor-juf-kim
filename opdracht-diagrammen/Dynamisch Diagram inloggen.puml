@@ -21,7 +21,7 @@ System_Boundary(triptop, "Triptop Container") {
 
 }
 
-System_Ext(authService, "Authenticatie Service", "OAuth 2.0", "Regelt authenticatie via externe providers zoals Google")
+System_Ext(authService, "Authenticatie Service", "Regelt authenticatie via externe providers zoals Google", OAuth 2.0)
 
 Rel(user, web, "Gebruiker logt in")
 Rel(web, trip_manager, "Verzend inloggegevens naar", JSON/HTTPS)

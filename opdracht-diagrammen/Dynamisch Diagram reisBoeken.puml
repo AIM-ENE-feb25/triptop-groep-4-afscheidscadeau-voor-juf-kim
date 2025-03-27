@@ -5,7 +5,7 @@ title [Container] Triptop
 
 Person(user, "Reiziger", "Beheert en wijzigt zijn reis")
 
-System_Boundary(triptop, "n") {
+System_Boundary(triptop, "Reisboeken") {
 
     Container(web, "Triptop Web App", "React (JavaScript / react)", "Biedt gebruikers de mogelijkheid om hun reis te beheren en wijzigingen aan te brengen")
 
@@ -18,21 +18,22 @@ System_Boundary(triptop, "n") {
 }
 
 
-System_Ext(booking, "Booking API", "Booking.com, Airbnb", "Opvragen en beheren van hotelboekingen")
+System_Ext(booking, "Booking API", "Opvragen en beheren van hotelboekingen", "Booking.com, Airbnb")
 
-System_Ext(transport, "Vervoer API", "NS, KLM, Uber", "Houdt vervoersdata bij en signaleert wijzigingen")
+System_Ext(transport, "Vervoer API", "Houdt vervoersdata bij en signaleert wijzigingen", "NS, KLM, Uber")
 
-System_Ext(attractions, "Bezienswaardigheden API", "TripAdvisor, Google Places", "Excursies en attracties")
+System_Ext(attractions, "Bezienswaardigheden API", "Excursies en attracties", "TripAdvisor, Google Places")
 
-System_Ext(horeca, "Horeca API", "TheFork, OpenTable", "Suggesties voor restaurants en cafés")
+System_Ext(horeca, "Horeca API", "Suggesties voor restaurants en cafés", "TheFork, OpenTable")
 
-System_Ext(betaling, "Betalingsservice", "Stripe", "Betalingen regelen en geld innen")
+System_Ext(betaling, "Betalingsservice API", "Betalingen regelen en geld innen", "Stripe")
 
 Rel(user, web, "Gebruiker boekt reis")
 Rel(web, trip_manager, "Verzend reisgegevens naar", JSON/HTTPS)
 Rel(trip_manager, betaling, "Verzend reisgegevens met betrekking tot boeking naar")
 Rel(betaling, trip_manager, "Stuurt *transactie urls door naar")
 Rel(trip_manager, web, "Stuurt betalings methode terug")
+
 
 ' Connecting all APIs to Reisbeheer API applicatie
 Rel(trip_manager, booking, "Opvragen en beheren van hotelboekingen via")
