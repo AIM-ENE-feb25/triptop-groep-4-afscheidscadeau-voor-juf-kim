@@ -33,10 +33,10 @@ System_Boundary(triptop, "Triptop API Applicatie") {
 ContainerDb(Database, "Database", "Postgres", "Slaat gebruikersinfo op, waaronder gebruikersnaam, wachtwoord en betalingen")
 
 System_Ext(authAPI, "Authenticatie provider", "Regelt authenticatie")
-System_Ext(bookingAPI, "Booking API", "Booking.com")
+System_Ext(bookingAPI, "Booking API", "Bookingcom")
 System_Ext(bezienswaardighedenAPI, "Bezienswaardigheden API", "TripAdvisor")
 System_Ext(vervoerAPI, "Vervoer API", "NS, KLM")
-System_Ext(horecaAPI, "Horeca API", "TheFork")
+System_Ext(horecaAPI, "Horeca API", "The Fork The Spoon")
 System_Ext(betaalAPI, "Betaal API", "Stripe")
 
 
