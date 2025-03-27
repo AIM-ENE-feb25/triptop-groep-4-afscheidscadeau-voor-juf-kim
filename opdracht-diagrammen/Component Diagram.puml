@@ -9,7 +9,7 @@ LAYOUT_WITH_LEGEND()
 
 Container(Webapp, "'TripTop' Web applicatie", "JavaScript, React", "Hiermee kunnen reizen gepland worden")
 
-package "API-applicatie" <<Rectangle>> {
+System_Boundary(triptop, "Triptop Systeem") {
     Component(loginController, "Login Controller", "Spring Controller", "Maakt het mogelijk voor gebruikers in te loggen")
     Component(bookingComponent, "Booking Controller", "Java, Spring", "Hiermee worden accommodaties geboekt")
     Component(bookingService, "Booking Service", "Java, Spring", "Hier vindt het logische gedeelte van de booking plaats")
