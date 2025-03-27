@@ -1,73 +1,72 @@
 @startuml C4_Elements
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
-title Systeem Component diagram voor TripTop
+title Systeem Component Diagram voor TripTop
 
 LAYOUT_WITH_LEGEND()
 
 'skinparam linetype ortho
 'skinparam ArrowStyle Dashed
 
-Container(Webapp, "'TripTop' Web applicatie", "JavaScript, React", "Hiermee kunnen reizen gepland worden")
+Container(webapp, "'TripTop' Webapplicatie", "JavaScript, React", "Stelt gebruikers in staat om reizen te plannen en accommodaties te boeken.")
 
-System_Boundary(triptop, "Triptop API Applicatie") {
-    Component(loginController, "Login Controller", "Spring Controller", "Maakt het mogelijk voor gebruikers in te loggen")
-    Component(bookingController, "Booking Controller", "Java, Spring", "Hiermee worden accommodaties geboekt")
-    Component(bookingComponent, "Booking Component", "Java, Spring", "Hier vindt het logische gedeelte van de booking plaats")
-'    Component(accommodatieController, "Accommodatie Controller", "Java, Spring/ Controller", "Controller voor accommodaties")
-    Component(accommodatieBeheer, "Accommodatie Component", "Java, Spring", "Verwerkt accommodatie data")
-    Component(accommodatieRepo, "Accommodatie Repository", "Java, Spring Repo", "Mapped de data naar het gewenste formaat")
-    Component(bookingComService, "BookingComService", "Java, Spring", "Haalt data op uit bookingcomAPI")
-    Component(bookingRepo, "Booking Repository", "Java, Spring", "Hier wordt booking data verwerkt")
+System_Boundary(triptop, "TripTop API Applicatie") {
+    Component(loginController, "Login Controller", "Spring Controller", "Verwerkt gebruikersaanmeldingen en authenticatieverzoeken.")
+    Component(beveiligingComponent, "Beveiliging Component", "Spring Bean", "Beheert login-validatie en wachtwoordcontrole.")
+    Component(authenticatieRepo, "Authenticatie Repository", "Spring Repository", "Slaat gebruikersgegevens en authenticatiegegevens op.")
 
-    Component(notificatieService, "Notificatie Service", "Java, Spring", "Verstuurt meldingen naar gebruikers")
-    Component(mailComponent, "Mail Component", "Java, Spring", "Verstuurt e-mails voor bevestigingen en meldingen")
+    Component(bookingController, "Boeking Controller", "Java, Spring", "Behandelt boekingsverzoeken van gebruikers.")
+    Component(bookingComponent, "Boeking Component", "Java, Spring", "Bevat de bedrijfslogica voor het afhandelen van boekingen.")
+    Component(bookingRepo, "Boeking Repository", "Java, Spring", "Beheert opslag en ophalen van boekingsgegevens.")
 
-    Component(betaalController, "Betaal Controller", "Java, Spring", "Verwerkt betalingsverzoeken")
-    Component(betaalComponent, "Betaal Component", "Java, Spring", "Verwerkt betalingen en transacties")
-    Component(betaalRepo, "Betaal Repository", "Java, Spring", "Slaat betalingsgegevens op in de database")
+    Component(accommodatieBeheer, "Accommodatie Beheer", "Java, Spring", "Verwerkt en beheert accommodatiegegevens.")
+    Component(accommodatieRepo, "Accommodatie Repository", "Java, Spring Repo", "Slaat accommodatiedata op en mapped deze naar het gewenste formaat.")
+    Component(bookingComService, "BookingCom Service", "Java, Spring", "Interactie met de Booking.com API voor accommodatiegegevens.")
 
-    Component(authenticatieRepo, "Authenticatie Repository", "Spring Repository", "Hiermee worden queries voorbereid")
-    Component(beveiligingComponent, "Beveiliging Component", "Spring Bean", "Beheert inloggen en wachtwoordvalidatie")
+    Component(notificatieService, "Notificatie Service", "Java, Spring", "Verstuurt meldingen en bevestigingen naar gebruikers.")
+    Component(mailComponent, "Mail Component", "Java, Spring", "Verstuurt e-mails voor boekingsbevestigingen en notificaties.")
+
+    Component(betaalController, "Betaal Controller", "Java, Spring", "Start en verwerkt betalingsverzoeken.")
+    Component(betaalComponent, "Betaal Component", "Java, Spring", "Behandelt betalingen en financiële transacties.")
+    Component(betaalRepo, "Betaal Repository", "Java, Spring", "Slaat betalingsgegevens op en beheert transacties.")
 }
 
-ContainerDb(Database, "Database", "Postgres", "Slaat gebruikersinfo op, waaronder gebruikersnaam, wachtwoord en betalingen")
+ContainerDb(database, "Database", "Postgres", "Slaat gebruikersgegevens, boekingen en betalingen op.")
 
-System_Ext(authAPI, "Authenticatie provider", "Regelt authenticatie")
-System_Ext(bookingAPI, "Booking API", "Bookingcom")
-System_Ext(bezienswaardighedenAPI, "Bezienswaardigheden API", "TripAdvisor")
-System_Ext(vervoerAPI, "Vervoer API", "NS, KLM")
-System_Ext(horecaAPI, "Horeca API", "The Fork The Spoon")
-System_Ext(betaalAPI, "Betaal API", "Stripe")
+System_Ext(authAPI, "Authenticatie Provider", "Regelt gebruikersauthenticatie en autorisatie.")
+System_Ext(bookingAPI, "Booking API", "Biedt accommodatiegegevens via Booking.com.")
+System_Ext(bezienswaardighedenAPI, "Bezienswaardigheden API", "Levert toeristische informatie via TripAdvisor.")
+System_Ext(vervoerAPI, "Vervoer API", "Verstrekt transportgegevens via NS en KLM.")
+System_Ext(horecaAPI, "Horeca API", "Biedt restaurantinformatie via The Fork en The Spoon.")
+System_Ext(betaalAPI, "Betaal API", "Externe betalingsverwerker, zoals Stripe.")
 
+Rel(webapp, loginController, "Verstuurt login-verzoeken", "JSON/HTTPS")
+Rel(loginController, beveiligingComponent, "Behandelt inlogvalidatie")
+Rel(beveiligingComponent, authenticatieRepo, "Leest en schrijft authenticatiegegevens")
+Rel(authenticatieRepo, database, "Opslag van authenticatiegegevens")
+Rel(loginController, authAPI, "Valideert gebruiker via externe authenticatie")
 
-Rel(Webapp, loginController, "Verstuurt login verzoek", "JSON/HTTPS")
-Rel(loginController, beveiligingComponent, "Gebruikt authenticatiecomponent")
-Rel(loginController, authAPI, "Authenticeert gebruiker")
-Rel(beveiligingComponent, authenticatieRepo, "Leest en schrijft naar authenticatiegegevens")
-Rel(authenticatieRepo, Database, "Leest en schrijft naar")
+Rel(webapp, bookingController, "Verstuurt boekingsverzoeken", "JSON/HTTPS")
+Rel(bookingController, bookingComponent, "Verwerkt boekingslogica")
+Rel(bookingComponent, bookingRepo, "Beheert boekingsdata")
+Rel(bookingRepo, database, "Opslag en ophalen van boekingsgegevens")
 
-Rel(Webapp, bookingController, "Verstuurt boekingsverzoek")
-Rel(bookingController, bookingComponent, "Gebruikt")
-Rel(bookingComponent, bookingRepo, "Stuurt boeking op naar database")
-Rel(bookingRepo, Database, "Leest en schrijft boekingsgegevens")
+Rel(bookingComponent, notificatieService, "Stuurt notificaties over boekingen")
+Rel(notificatieService, mailComponent, "Verstuurt boekingsbevestigingen via e-mail")
 
-Rel(bookingComponent, notificatieService, "Stuurt bevestigingsnotificatie")
-Rel(notificatieService, mailComponent, "Stuurt e-mail voor bevestiging")
+Rel(webapp, betaalController, "Start betalingsproces")
+Rel(betaalController, betaalComponent, "Verwerkt betalingstransacties")
+Rel(betaalComponent, betaalRepo, "Beheert betalingsgegevens")
+Rel(betaalRepo, database, "Opslag van betalingsgegevens")
+Rel(betaalComponent, betaalAPI, "Verstuurt betalingsverzoek naar externe provider")
 
-Rel(Webapp, betaalController, "Start betalingsproces")
-Rel(betaalController, betaalComponent, "Verwerkt betaling")
-Rel(betaalComponent, betaalRepo, "Slaat betalingsgegevens op")
-Rel(betaalRepo, Database, "Leest en schrijft betalingsgegevens")
+Rel(bookingComponent, bezienswaardighedenAPI, "Haalt toeristische informatie op")
+Rel(bookingComponent, vervoerAPI, "Opvraagt vervoersdata")
+Rel(bookingComponent, horecaAPI, "Zoekt beschikbare restaurants")
 
-Rel(bookingComponent, bezienswaardighedenAPI, "Haalt bezienswaardigheden op")
-Rel(bookingComponent, vervoerAPI, "Zoekt vervoer opties")
-Rel(bookingComponent, horecaAPI, "Haalt restaurants op")
-
-Rel(betaalComponent, betaalAPI, "Regelt betalingen")
-
-Rel(bookingComponent, accommodatieBeheer, "Haalt accommodatie op vanuit")
-Rel(accommodatieBeheer, bookingComService, "Haalt data op via")
-Rel(bookingComService, accommodatieRepo, "Haalt accommodatie op vanuit")
-Rel(accommodatieRepo, bookingAPI, "Haalt data op uit")
+Rel(bookingComponent, accommodatieBeheer, "Behandelt accommodatiegegevens")
+Rel(accommodatieBeheer, accommodatieRepo, "Interactie met database voor accommodatiegegevens")
+Rel(accommodatieRepo, bookingComService, "Haalt accommodatiegegevens op")
+Rel(accommodatieRepo, database, "Opslag van accommodatiegegevens")
+Rel(bookingComService, bookingAPI, "Ophalen van accommodatie-informatie via Booking.com scraper")
 
 @enduml
