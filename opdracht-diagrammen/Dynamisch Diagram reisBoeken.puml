@@ -1,7 +1,6 @@
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Dynamic.puml
 
-
 title [Container] Triptop
 
 Person(user, "Reiziger", "Beheert en wijzigt zijn reis")
@@ -27,9 +26,7 @@ System_Ext(attractions, "Bezienswaardigheden API", "TripAdvisor, Google Places",
 
 System_Ext(horeca, "Horeca API", "TheFork, OpenTable", "Suggesties voor restaurants en cafés")
 
-System_Ext(betaling, "Betalingsservice", "iets", "nog iets")
-
-
+System_Ext(betaling, "Betalingsservice", "Stripe", "Betalingen regelen en geld innen")
 
 Rel(user, web, "Gebruiker boekt reis")
 Rel(web, trip_manager, "Verzend reisgegevens naar", JSON/HTTPS)
@@ -37,6 +34,10 @@ Rel(trip_manager, betaling, "Verzend reisgegevens met betrekking tot boeking naa
 Rel(betaling, trip_manager, "Stuurt *transactie urls door naar")
 Rel(trip_manager, web, "Stuurt betalings methode terug")
 
+' Connecting all APIs to Reisbeheer API applicatie
+Rel(trip_manager, booking, "Opvragen en beheren van hotelboekingen via")
+Rel(trip_manager, transport, "Houdt vervoersdata bij en signaleert wijzigingen via")
+Rel(trip_manager, attractions, "Beheren excursies en attracties via")
+Rel(trip_manager, horeca, "Suggesties voor restaurants en cafés via")
 
-
-@enduml```
+@enduml
