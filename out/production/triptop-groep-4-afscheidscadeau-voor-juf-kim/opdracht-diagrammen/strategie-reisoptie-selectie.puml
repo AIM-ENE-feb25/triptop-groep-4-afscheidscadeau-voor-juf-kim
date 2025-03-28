@@ -1,0 +1,42 @@
+@startuml
+title Strategy Pattern - Reisoptie Selectie (Triptop)
+
+interface SelectieStrategie {
+    + selecteer(opties: List<ReisOptie>) : List<ReisOptie>
+}
+
+class ReisOptie {
+    - naam : String
+    - prijs : double
+    - reistijdInMinuten : int
+    - beschikbaar : boolean
+    + getPrijs() : double
+    + getReistijd() : int
+    + isBeschikbaar() : boolean
+    + getNaam() : String
+}
+
+class GoedkoopsteStrategie {
+    + selecteer(opties: List<ReisOptie>) : List<ReisOptie>
+}
+
+class SnelsteStrategie {
+    + selecteer(opties: List<ReisOptie>) : List<ReisOptie>
+}
+
+class BeschikbaarheidStrategie {
+    + selecteer(opties: List<ReisOptie>) : List<ReisOptie>
+}
+
+class ReisplannerService {
+    - strategie : SelectieStrategie
+    + setStrategie(s: SelectieStrategie) : void
+    + filterReisopties(opties: List<ReisOptie>) : List<ReisOptie>
+}
+
+SelectieStrategie <|.. GoedkoopsteStrategie
+SelectieStrategie <|.. SnelsteStrategie
+SelectieStrategie <|.. BeschikbaarheidStrategie
+
+ReisplannerService --> SelectieStrategie : gebruikt
+@enduml
