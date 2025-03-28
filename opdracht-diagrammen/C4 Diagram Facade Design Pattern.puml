@@ -1,0 +1,64 @@
+@startuml
+!theme plain
+skinparam linetype polyline
+
+title Payment System Architecture
+
+package "Frontend" {
+    class "Frontend Client" as Frontend
+}
+
+package "Payment Controller Layer" {
+    interface PaymentController {
+        + handlePayment(request: PaymentRequest): PaymentResponse
+    }
+    class PaymentControllerImpl {
+        + handlePayment(request: PaymentRequest): PaymentResponse
+    }
+}
+
+package "Payment Component Layer" {
+    interface PaymentComponent {
+        + processPayment(request: PaymentRequest): PaymentResponse
+    }
+    class PaymentComponentImpl {
+        + processPayment(request: PaymentRequest): PaymentResponse
+    }
+}
+
+package "Payment Repository Layer" {
+    interface PaymentRepository {
+        + savePayment(payment: Payment)
+        + updatePaymentStatus(paymentId: String, status: PaymentStatus)
+        + getPayment(paymentId: String): Payment
+    }
+    class PaymentRepositoryImpl {
+        + savePayment(payment: Payment)
+        + updatePaymentStatus(paymentId: String, status: PaymentStatus)
+        + getPayment(paymentId: String): Payment
+    }
+}
+
+package "Payment API Layer" {
+    interface PaymentAPIComponent {
+        + executePayment(request: PaymentRequest): PaymentResponse
+    }
+    class PaymentAPIComponentImpl {
+        + executePayment(request: PaymentRequest): PaymentResponse
+    }
+}
+
+' Relationships
+Frontend --> PaymentController : sends payment request
+PaymentController --> PaymentComponent : delegates payment processing
+PaymentComponent --> PaymentRepository : logs and updates payment
+PaymentComponent --> PaymentAPIComponent : executes payment
+PaymentAPIComponent --> "External Payment\nProviders" : connects to
+
+note right of PaymentComponent
+  Facade pattern:
+  Coordinates payment
+  processing workflow
+end note
+
+@enduml

@@ -11,6 +11,8 @@ Dit software guidebook geeft een overzicht van de Triptop-applicatie. Het bevat 
 ![Context Diagram](../opdracht-diagrammen/ContextDiagram_triptop.png)
 > [!IMPORTANT]
 > Werk zelf dit hoofdstuk uit met context diagrammen en een beschrijving van de context van de software.
+> ![Dynamic Diagram](../opdracht-diagrammen/SOEX_DynamischDiagram_Inloggen.png)
+> ![Dynamic Diagram](../opdracht-diagrammen/Dynamisch Diagram reisBoeken.png)
 
 Toelichting op de context van de software inclusief System Context Diagram:
 * Functionaliteit
