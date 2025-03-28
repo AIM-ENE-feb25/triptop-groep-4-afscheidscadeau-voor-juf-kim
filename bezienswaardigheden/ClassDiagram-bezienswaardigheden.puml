@@ -1,0 +1,61 @@
+@startuml
+
+interface AttractionAdapter {
+    +List<Attraction> getAttractions(String location)
+    +String getName()
+}
+
+class Attraction {
+    +String name
+    +String address
+    +Double rating
+}
+
+class AttractionService {
+    -List<AttractionAdapter> providers
+    +fetchAttractions(String location)
+}
+
+class BookingComAdapter {
+    -BookingComApi bookingComApi
+    +getAttractions(String location)
+    +getName()
+}
+
+class BookingComApi {
+    +List<BookingComAttraction> retrieveAttractions(String location)
+}
+
+class BookingComAttraction {
+    +String name
+    +String location
+    +double rating
+}
+
+class TripAdvisorAdapter {
+    -TripAdvisorApi tripAdvisorApi
+    +getAttractions(String location)
+    +getName()
+}
+
+class TripAdvisorApi {
+    +List<TripadvisorAttraction> fetchAttractions(String location)
+}
+
+class TripadvisorAttraction {
+    +String title
+    +String address
+    +double score
+}
+
+AttractionAdapter <|.. BookingComAdapter
+AttractionAdapter <|.. TripAdvisorAdapter
+AttractionService o-- AttractionAdapter
+BookingComAdapter o-- BookingComApi
+TripAdvisorAdapter o-- TripAdvisorApi
+BookingComApi o-- BookingComAttraction
+TripAdvisorApi o-- TripadvisorAttraction
+Attraction <|-- BookingComAttraction
+Attraction <|-- TripadvisorAttraction
+
+@enduml
