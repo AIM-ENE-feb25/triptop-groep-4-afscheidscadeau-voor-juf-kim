@@ -1,55 +1,37 @@
-# ADR: Keuze voor PostgreSQL als databasesysteem
+# ADR: Keuze voor Pattern binnen TripTop
 
-**Datum:** 21-03-2025  
-**Status:**   ACCEPTED
+**Datum:** 28-03-2025  
+**Status:**  ACCEPTED
 
 ---
 
 ##  Context
 
-Voor het TripTop-project moeten we een databasesysteem kiezen dat voldoet aan onze eisen op het gebied van:
+Binnen het TripTop-project willen we op een flexibele manier kunnen omgaan met verchillende logica bij bijvoorbeeld het kiezen van reisopties of betalingsverwerking.
+Er zijn meerdere patterns beschikbaar om dit bereiken. Daarom hebben we vier bekende design patterns overwogen
 
-- Data consistentie en integriteit
-- Schaalbaarheid en prestaties
-- Flexibiliteit in datamodellering
-- Ondersteuning voor complexe queries
-- Onderhoud en beheer
-
-We hebben vier systemen vergeleken: **PostgreSQL**, **MongoDB**, **CouchDB** en **Neo4J**.
 
 ---
 
-## Overwogen opties
-
-| Kracht                                | PostgreSQL | MongoDB | CouchDB | Neo4J |
-|---------------------------------------|------------|---------|---------|--------|
-| **Data Consistentie en Integriteit**  | ++         | 0       | 0       | +      |
-| **Schaalbaarheid en Prestaties**      | 0          | +       | -       | +      |
-| **Flexibiliteit in Data Modellering** | 0          | +       | +       | ++     |
-| **Ondersteuning voor Complexe Query's** | ++       | ++      | -       | +      |
-| **Onderhoud en Beheer**               | ++         | ++      | +       | +      |
-| **Leercurve**                         | +          | +       | -       | 0      |
+##  Mogelijke opties
+- **Strategy Pattern**
+- **State Pattern**
+- **Adapter Pattern**
+- **Facade Pattern**
 
 ---
 
-## Beslissing
+##  Beslissing
 
-We kiezen voor **PostgreSQL** als databaseoplossing voor TripTop, op basis van de volgende overwegingen:
-
-### Data Consistentie en Integriteit
-Voor een reisboekingssysteem is betrouwbaarheid cruciaal. PostgreSQL biedt volledige ACID-compliance, wat voorkomt dat boekingsdata verloren of corrupt raakt.
-
-### Ondersteuning voor Complexe Queries
-Omdat TripTop veel datarelaties bevat (bijv. tussen boekingen, gebruikers, locaties, voorkeuren), is geavanceerde query-ondersteuning nodig. PostgreSQL biedt hierin robuuste SQL-functionaliteiten.
+De facade design pattern zorgt er voor dat code niet onderling afhanekelijk is en dat alles via een methde gaat.
+dit zorgt er voor dat de code heel overzichtelijk blijft en debuggen ook makkelijker wordt.
+dit is dus een goede design pattern die wij in ons project meer willen gebruiken.
 
 ---
 
 ##  Gevolgen
 
 ###  Voordelen
-- **Betrouwbare transacties:** PostgreSQL is ACID-compliant, wat essentieel is voor betrouwbare boekingen.
-- **Sterke query-ondersteuning:** Complexe data-opvragingen en analyses zijn goed mogelijk.
-- **Actieve community:** Veel ondersteuning en documentatie beschikbaar.
-
+- De code is heel overzichtelijk omdat methoden niet onderling van elkaar dingen kunnen vragen
 ###  Nadelen
-- **Minder flexibel bij ongestructureerde data** dan NoSQL-oplossingen.
+- De code die alle de depencendies tussen methodes regelt kan heel groot worden

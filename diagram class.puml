@@ -1,0 +1,48 @@
+@startuml
+title Klasse Diagram voor Betaalsysteem
+
+class PaymentController {
+    -paymentComponent: PaymentComponent
+    +PaymentController(paymentComponent: PaymentComponent)
+    +handlePayment(request: PaymentRequest): void
+}
+
+class PaymentComponent {
+    -paymentRepository: PaymentRepository
+    -stripeAPI: PaymentAPIComponentStripe
+    -aydenAPI: PaymentAPIComponentAyden
+    +PaymentComponent(paymentRepository: PaymentRepository, stripeAPI: PaymentAPIComponentStripe, aydenAPI: PaymentAPIComponentAyden)
+    +processPayment(request: PaymentRequest): void
+}
+
+class PaymentRepository {
+    +savePayment(payment: PaymentRequest): void
+    +updatePaymentStatus(paymentId: String, status: String): void
+    +getPayment(paymentId: String): PaymentRequest
+}
+
+class PaymentAPIComponentStripe {
+    +executePayment(request: PaymentRequest): String
+}
+
+class PaymentAPIComponentAyden {
+    +executePayment(request: PaymentRequest): String
+}
+
+class PaymentRequest {
+    -paymentId: String
+    -amount: double
+    -provider: String
+    +PaymentRequest(paymentId: String, amount: double, provider: String)
+    +getPaymentId(): String
+    +getAmount(): double
+    +getProvider(): String
+}
+
+PaymentController "1" *-- "1" PaymentComponent : heeft
+PaymentComponent "1" *-- "1" PaymentRepository : gebruikt
+PaymentComponent "1" *-- "1" PaymentAPIComponentStripe : gebruikt
+PaymentComponent "1" *-- "1" PaymentAPIComponentAyden : gebruikt
+PaymentRequest "1" -- "1" PaymentController : gebruikt
+
+@enduml

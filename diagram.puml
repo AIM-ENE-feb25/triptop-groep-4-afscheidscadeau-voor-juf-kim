@@ -1,0 +1,37 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Component Diagram voor de Payment container van het Betaalsysteem
+
+LAYOUT_WITH_LEGEND()
+
+actor "Gebruiker" as User
+
+System_Boundary(paymentSystem, "Payment API Applicatie") {
+    Component(PaymentController, "Payment Controller", "Java Spring", "Ontvangt betaalverzoeken van de frontend en stuurt deze door naar de PaymentComponent.")
+    Component(PaymentComponent, "Payment Component", "Java Spring", "Faciliteert betalingsverwerking door te communiceren met repository en API-componenten.")
+    Component(PaymentRepository, "Payment Repository", "Java Spring", "Beheert opslag van betalingen en hun statussen.")
+    Component(PaymentAPIComponentStripe, "Stripe Payment API Component", "Java Spring", "Communiceert met Stripe betaal-API om betalingen uit te voeren.")
+    Component(PaymentAPIComponentAyden, "Ayden Payment API Component", "Java Spring", "Communiceert met Ayden betaal-API om betalingen uit te voeren.")
+}
+
+ContainerDb(database, "Database", "Postgres", "Slaat betalingsgegevens en transacties op.")
+System_Ext(paymentAPIStripe, "Externe Betaal API", "REST API", " Stripe")
+System_Ext(paymentAPIAyden, "Externe Betaal API", "REST API", " Ayden")
+
+
+Rel(User, PaymentController, "Initieert betaling", "HTTPS/JSON")
+Rel(PaymentController, PaymentComponent, "Delegeert betaalverwerking")
+Rel(PaymentComponent, PaymentRepository, "Slaat betalingsgegevens op")
+Rel(PaymentComponent, PaymentAPIComponentStripe, "Roept externe betaal-API aan")
+Rel(PaymentComponent, PaymentAPIComponentAyden, "Roept externe betaal-API aan")
+Rel(PaymentAPIComponentStripe, paymentAPIStripe, "Verstuurt betalingsverzoek", "HTTPS/JSON")
+Rel(PaymentAPIComponentAyden, paymentAPIAyden, "Verstuurt betalingsverzoek", "HTTPS/JSON")
+Rel(paymentAPIStripe, PaymentAPIComponentStripe, "Retourneert betalingsresultaat", "HTTPS/JSON")
+Rel(paymentAPIAyden, PaymentAPIComponentAyden, "Retourneert betalingsresultaat", "HTTPS/JSON")
+Rel(PaymentComponent, PaymentRepository, "Werkt betalingsstatus bij")
+Rel(PaymentComponent, PaymentController, "Geeft betalingsresultaat terug", "Java Method Call")
+Rel(PaymentController, User, "Geeft betalingsstatus weer", "HTTPS/JSON")
+Rel(PaymentRepository, database, "Beheert opslag van betalingsgegevens", "SQL")
+
+@enduml
