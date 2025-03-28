@@ -1,43 +1,37 @@
 @startuml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Dynamic.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
 
+title Component Diagram voor de Payment container van het Betaalsysteem
 
-title [Container] Triptop
+LAYOUT_WITH_LEGEND()
 
-Person(user, "Reiziger", "Beheert en wijzigt zijn reis")
+actor "Gebruiker" as User
 
-System_Boundary(triptop, "Triptop Container") {
-
-    Container(web, "Triptop Web App", "React (JavaScript / react)", "Biedt gebruikers de mogelijkheid om hun reis te beheren en wijzigingen aan te brengen")
-
-'    Nodig?
-'    Container(api, "API Gateway", "Java MVC", "")
-
-    Container(trip_manager, "Reisbeheer API-applicatie", "Java MVC", "Beheert reisoverzicht en wijzigingen van bouwstenen")
-
-    ContainerDb(db, "Database", "PostgreSQL", "Opslag van reisdata, wijzigingen en gebruikersvoorkeuren")
-
-    Container(authenticatie, "Authenticatie component", "Bevat functionaliteit voor het authenticeren van de gebruiker")
-
+System_Boundary(paymentSystem, "Payment API Applicatie") {
+    Component(PaymentController, "Payment Controller", "Java Spring", "Ontvangt betaalverzoeken van de frontend en stuurt deze door naar de PaymentComponent.")
+    Component(PaymentComponent, "Payment Component", "Java Spring", "Faciliteert betalingsverwerking door te communiceren met repository en API-componenten.")
+    Component(PaymentRepository, "Payment Repository", "Java Spring", "Beheert opslag van betalingen en hun statussen.")
+    Component(PaymentAPIComponentStripe, "Stripe Payment API Component", "Java Spring", "Communiceert met Stripe betaal-API om betalingen uit te voeren.")
+    Component(PaymentAPIComponentAyden, "Ayden Payment API Component", "Java Spring", "Communiceert met Ayden betaal-API om betalingen uit te voeren.")
 }
 
-System_Ext(authService, "Authenticatie Service", "Regelt authenticatie via externe providers zoals Google", OAuth 2.0)
-
-Rel(user, web, "Gebruiker logt in")
-Rel(web, trip_manager, "Verzend inloggegevens naar", JSON/HTTPS)
-
-Rel(trip_manager, authenticatie, "Authenticeert via")
-Rel(authenticatie, authService, "Authenticeert gebruiker als gebruiker via google inlogged")
-Rel(authService, trip_manager, "Stuurt authenticatie token door naar")
-
-Rel(authenticatie, db,"SELECT * FROM users WHERE username = ?", "SQL")
-Rel(db, authenticatie, "Stuurt opgehaalde gebruikers data terug naar")
-Rel(authenticatie, trip_manager, "Stuurt authenticatie token door naar")
-Rel(trip_manager, web, "Stuurt authenticatie token door naar", "JSON/HTTP")
+ContainerDb(database, "Database", "Postgres", "Slaat betalingsgegevens en transacties op.")
+System_Ext(paymentAPIStripe, "Externe Betaal API", "REST API", " Stripe")
+System_Ext(paymentAPIAyden, "Externe Betaal API", "REST API", " Ayden")
 
 
-
-@enduml```
-
+Rel(User, PaymentController, "Initieert betaling", "HTTPS/JSON")
+Rel(PaymentController, PaymentComponent, "Delegeert betaalverwerking")
+Rel(PaymentComponent, PaymentRepository, "Slaat betalingsgegevens op")
+Rel(PaymentComponent, PaymentAPIComponentStripe, "Roept externe betaal-API aan")
+Rel(PaymentComponent, PaymentAPIComponentAyden, "Roept externe betaal-API aan")
+Rel(PaymentAPIComponentStripe, paymentAPIStripe, "Verstuurt betalingsverzoek", "HTTPS/JSON")
+Rel(PaymentAPIComponentAyden, paymentAPIAyden, "Verstuurt betalingsverzoek", "HTTPS/JSON")
+Rel(paymentAPIStripe, PaymentAPIComponentStripe, "Retourneert betalingsresultaat", "HTTPS/JSON")
+Rel(paymentAPIAyden, PaymentAPIComponentAyden, "Retourneert betalingsresultaat", "HTTPS/JSON")
+Rel(PaymentComponent, PaymentRepository, "Werkt betalingsstatus bij")
+Rel(PaymentComponent, PaymentController, "Geeft betalingsresultaat terug", "Java Method Call")
+Rel(PaymentController, User, "Geeft betalingsstatus weer", "HTTPS/JSON")
+Rel(PaymentRepository, database, "Beheert opslag van betalingsgegevens", "SQL")
 
 @enduml
