@@ -1,11 +1,11 @@
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Dynamic.puml
 
-title [Container] Triptop
+title [Dynamisch Container] Triptop
 
 Person(user, "Reiziger", "Beheert en wijzigt zijn reis")
 
-System_Boundary(triptop, "Reisboeken") {
+System_Boundary(triptop, "Triptop") {
 
     Container(web, "Triptop Web App", "React (JavaScript / react)", "Biedt gebruikers de mogelijkheid om hun reis te beheren en wijzigingen aan te brengen")
 
@@ -13,8 +13,6 @@ System_Boundary(triptop, "Reisboeken") {
 '    Container(api, "API Gateway", "Java MVC", "")
 
     Container(trip_manager, "Reisbeheer API-applicatie", "Java MVC", "Beheert reisoverzicht en wijzigingen van bouwstenen")
-
-    ContainerDb(db, "Database", "PostgreSQL", "Opslag van reisdata, wijzigingen en gebruikersvoorkeuren")
 }
 
 
