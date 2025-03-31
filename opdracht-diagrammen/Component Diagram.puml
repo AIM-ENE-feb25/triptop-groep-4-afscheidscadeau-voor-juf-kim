@@ -1,6 +1,7 @@
 @startuml C4_Elements
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
-title Systeem Component Diagram voor TripTop
+
+title [Systeem Component Diagram] voor TripTop
 
 LAYOUT_WITH_LEGEND()
 
