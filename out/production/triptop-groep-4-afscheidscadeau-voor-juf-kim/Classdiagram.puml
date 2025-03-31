@@ -1,0 +1,57 @@
+@startuml
+
+interface State {
+    +void handle(Decider decider)
+}
+
+class Decider {
+    -State state
+    +void setState(State state)
+    +void start()
+}
+
+class Booking {
+    +void book()
+    +boolean getAvalibility()
+}
+
+class NoRoom {
+    +void noRoom()
+}
+
+class FindNewBooking {
+    +void bookingReplacement()
+}
+
+class BookingState {
+    +void handle(Decider decider)
+}
+
+class FindNewBookingState {
+    +void handle(Decider decider)
+}
+
+interface Bookings {
+    +void book()
+    +boolean getAvalibility()
+}
+
+interface BookingReplacement {
+    +void bookingReplacement()
+}
+
+State <|.. BookingState
+State <|.. FindNewBookingState
+
+Decider o-- State
+Decider ..> BookingState
+Decider ..> FindNewBookingState
+
+BookingState ..> Booking
+BookingState ..> NoRoom
+FindNewBookingState ..> FindNewBooking
+
+Booking ..|> Bookings
+FindNewBooking ..|> BookingReplacement
+
+@enduml

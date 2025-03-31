@@ -1,0 +1,26 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+title Systeem Component Diagram voor TripTop
+
+LAYOUT_WITH_LEGEND()
+
+Container(webapp, "'TripTop' Webapplicatie", "JavaScript, React", "Stelt gebruikers in staat om reizen te plannen en accommodaties te boeken.")
+
+System_Boundary(triptop, "TripTop API Applicatie") {
+
+    Component(bookingController, "Boeking Controller", "Java, Spring", "Behandelt boekingsverzoeken van gebruikers.")
+    Component(bookingComponent, "Boeking Component", "Java, Spring", "Bevat de bedrijfslogica voor het afhandelen van boekingen.")
+    Component(bookingRepo, "Boeking Repository", "Java, Spring", "Beheert opslag en ophalen van boekingsgegevens.")
+}
+
+ContainerDb(database, "Database", "Postgres", "Slaat gebruikersgegevens, boekingen en betalingen op.")
+
+System_Ext(bookingAPI, "Booking API", "Biedt accommodatiegegevens via Booking.com.")
+
+Rel(bookingAPI, bookingComponent, "3. Levert accommodatiegegevens", "JSON/HTTPS")
+Rel(webapp, bookingController, "1. Verstuurt boekingsverzoeken", "JSON/HTTPS")
+Rel(bookingController, bookingComponent, "2. Verwerkt boekingslogica")
+Rel(bookingComponent, bookingRepo, "4. Beheert boekingsdata")
+Rel(bookingRepo, database, "5. Opslag en ophalen van boekingsgegevens")
+
+@enduml

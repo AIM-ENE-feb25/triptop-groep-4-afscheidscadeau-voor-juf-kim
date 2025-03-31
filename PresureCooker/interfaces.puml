@@ -1,0 +1,33 @@
+@startuml
+interface BookingAPI {
+    List<Accommodation> getAccommodationDetails(String location, Date startDate, Date endDate)
+}
+
+interface WebApp {
+    BookingConfirmation sendBookingRequest(BookingRequest bookingDetails)
+}
+
+interface BookingController {
+    BookingConfirmation handleBookingRequest(BookingRequest bookingRequest)
+}
+
+interface BookingComponent {
+    BookingConfirmation processBooking(BookingRequest bookingRequest)
+}
+
+interface BookingRepository {
+    void saveBooking(Booking booking)
+    Booking fetchBookingDetails(String bookingId)
+}
+
+interface Database {
+    void storeData(String table, Map<String, Object> data)
+    List<Map<String, Object>> retrieveData(String query)
+}
+
+BookingAPI <|-- WebApp
+WebApp <|-- BookingController
+BookingController <|-- BookingComponent
+BookingComponent <|-- BookingRepository
+BookingRepository <|-- Database
+@enduml
