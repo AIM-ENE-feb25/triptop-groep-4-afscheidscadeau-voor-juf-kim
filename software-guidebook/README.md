@@ -82,6 +82,39 @@ Voordat deze casusomschrijving tot stand kwam, heeft de opdrachtgever de volgend
 > [!IMPORTANT]
 > Voeg toe: Container Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
 ![SOEX_Triptop_Container.png](..%2Fopdracht-diagrammen%2FSOEX_Triptop_Container.png)
+>Deze diagram is een Container Diagram van het TripTop-systeem en laat zien hoe de verschillende onderdelen (containers) van het systeem samenwerken, en hoe ze communiceren met externe systemen.
+
+>Acteur
+Reiziger: De eindgebruiker van het systeem. Deze persoon stelt reizen samen, boekt accommodaties en beheert zijn reis.
+
+>Binnen het TripTop systeem
+Triptop Web App (React):
+
+>Frontend van de applicatie.
+>Hier beheert de gebruiker zijn reis.
+Stuurt via JSON/HTTPS verzoeken naar de backend.
+
+>Reisbeheer API-applicatie (Java MVC):
+Backend van het systeem.
+Ontvangt API-verzoeken van de frontend.
+Verwerkt reisgegevens, regelt boekingen en beheert wijzigingen van de reis.
+
+>Database (PostgreSQL):
+Slaat alle gebruikersdata, voorkeuren, boekingen en wijzigingen op.
+Alleen toegankelijk voor de backend, niet voor de gebruiker of externe APIs.
+
+>Externe systemen (APIs)
+De backend communiceert met verschillende externe APIs om gegevens op te halen of acties uit te voeren:
+
+>Bookingcom API & Airbnb API: Voor het boeken van accommodaties.
+
+>NS API, KLM API & Uber API: Voor vervoersinformatie (trein, vlucht, taxi).
+
+>TripAdvisor API: Voor bezienswaardigheden en excursies.
+
+>TheFork API & OpenTable API: Voor horecagegevens, zoals restaurants en cafés.
+
+>Google Login (OAuth 2.0): Voor authenticatie van gebruikers.
 ![SOEX_DynamischDiagram_Inloggen.png](..%2Fopdracht-diagrammen%2FSOEX_DynamischDiagram_Inloggen.png)
 ![SOEX_DynamischDiagram_Reisboeken.png](..%2Fopdracht-diagrammen%2FSOEX_DynamischDiagram_Reisboeken.png)
  
