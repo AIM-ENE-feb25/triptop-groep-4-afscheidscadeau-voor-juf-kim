@@ -14,20 +14,21 @@ In TripTop willen we flexibel omgaan met keuzes van gebruikers. Denk aan dingen 
 
 Voor al die gevallen heb je verschillende strategieën om je gekozen doel te bereiken.
 
-### Onderzoeksvraag
-**Hoe ontwerp je een systeem waarbij verschillende vormen van gedrag (zoals reisopties of betaalproviders) flexibel en uitbreidbaar ondersteund worden, zodat nieuwe vormen eenvoudig kunnen worden toegevoegd zonder bestaande logica aan te passen?**
+### Ontwerp vraag
+**"Hoe zorg je voor een zo kort mogelijke reisroute waarbij gebruik gemaakt wordt van alle bouwstenen? 
+Hoe zorg je ervoor dat de reisroute makkelijk aangepast kan worden als reisafstand geen issue is?"**
 
 ---
 
-## Overwogen Aspecten - Strategy Pattern
+## Overwogen Aspecten – Strategy Pattern voor Routeplanning
 
-| Aspect                                    | Voordelen                                                                                  | Nadelen                                                                 |
-|-------------------------------------------|---------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| **Uitbreidbaarheid**                      | Nieuwe strategieën zijn makkelijk toe te voegen via aparte klassen           | Kan leiden tot veel losse klassen                                       |
-| **Losse koppeling (Separation of Concerns)** | Gedrag zit los van de rest van de applicatielogica                                         | Extra complexiteit als het niet goed gestructureerd wordt               |
-| **Wisselbaarheid op runtime**             | Strategieën zijn verwisselbaar tijdens uitvoering                                           | Strategie moet wel actief gekozen of geïnjecteerd worden                |
-| **Testbaarheid**                          | Elke strategie is afzonderlijk te testen                                                   | Geen directe nadelen, behalve onderhoud bij veel varianten             |
-| **Open/Closed Principle**                 | Bestaande code blijft onaangetast bij uitbreidingen                                        | Vereist consistent gebruik voor maximale winst                          |
+| Aspect                                      | Voordelen                                                                                       | Nadelen                                                                  |
+|---------------------------------------------|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| **Flexibele route-optimalisatie**           | Strategieën kunnen gebaseerd zijn op o.a. tijd, afstand, beschikbaarheid of voorkeuren           | Vereist meerdere strategieklassen voor elk type logica                   |
+| **Aanpasbaarheid op gebruikerswens**        | Gebruiker of systeem kan tijdens runtime bepalen welke route-logica gebruikt moet worden         | Meer logica om gebruikerskeuze om te zetten naar juiste strategie        |
+| **Scheidt routeberekening van logica**      | Route-algoritmes zitten los van de rest van de business logica (Separation of Concerns)          | Kans op duplicatie als niet goed gedeeld wordt tussen strategieën        |
+| **Uitbreidbaarheid met nieuwe scenario’s**  | Nieuwe soorten routevoorkeuren (bijv. “eco”, “sightseeing first”, “geen overnachtingen”) zijn makkelijk toe te voegen | Kan verwarrend worden als het aantal strategieën te groot wordt          |
+| **Testbaarheid van routestrategieën**       | Elke routestrategie is zelfstandig te testen, los van UI en andere systemen                     | Afhankelijk van mockdata of simulatie voor complete route-validatie      |
 
 ---
 
