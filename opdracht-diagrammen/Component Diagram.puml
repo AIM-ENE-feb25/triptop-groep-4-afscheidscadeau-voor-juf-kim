@@ -69,6 +69,7 @@ Rel(bookingComponent, KLMAPI, "vraagt vervoersdata op", "JSON/HTTPS")
 Rel(bookingComponent, UberAPI, "vraagt vervoersdata op", "JSON/HTTPS")
 Rel(bookingComponent, NSAPI, "vraagt vervoersdata op", "JSON/HTTPS")
 Rel(bookingComponent, AirbnbAPI, "vraagt huisjesdata op", "JSON/HTTPS")
+Rel(bookingComponent, BookingComAPI, "Haalt toeristische informatie op", "JSON/HTTPS")
 
 
 Rel(bookingComponent, TheForkAPI, "Zoekt beschikbare restaurants", "JSON/HTTPS")
