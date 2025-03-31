@@ -13,7 +13,7 @@ public class Main {
         strategy.ReisplannerService planner = new strategy.ReisplannerService(new strategy.GoedkoopsteStrategie());
         List<strategy.ReisOptie> gekozen = planner.filterReisopties(opties);
 
-        System.out.println("Gekozen optie(s):");
+        System.out.println("Gekozen optie:");
         gekozen.forEach(optie -> System.out.println(optie));
     }
 }
