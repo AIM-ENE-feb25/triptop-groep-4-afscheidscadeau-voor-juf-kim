@@ -7,7 +7,7 @@ LAYOUT_WITH_LEGEND()
 'skinparam linetype ortho
 'skinparam ArrowStyle Dashed
 
-Container(webapp, "'TripTop' Webapplicatie", "JavaScript, React", "Stelt gebruikers in staat om reizen te plannen en accommodaties te boeken.")
+Container(webapp, "TripTop Webapplicatie", "JavaScript, React", "Stelt gebruikers in staat om reizen te plannen en accommodaties te boeken.")
 
 System_Boundary(triptop, "Triptop Systeem") {
     Component(loginController, "Login Controller", "Java, Spring REST Controller", "Verwerkt gebruikersaanmeldingen en authenticatieverzoeken.")

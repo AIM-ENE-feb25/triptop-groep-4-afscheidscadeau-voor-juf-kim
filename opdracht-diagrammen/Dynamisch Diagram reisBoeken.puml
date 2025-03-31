@@ -1,7 +1,7 @@
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Dynamic.puml
 
-title [Dynamisch Container] Triptop
+title Dynamisch Container voor het TripTop systeem
 
 Person(user, "Reiziger", "Beheert en wijzigt zijn reis")
 

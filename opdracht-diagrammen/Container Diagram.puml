@@ -1,7 +1,7 @@
 ```@startuml
 !includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
-title Container diagram Voor "Triptop" Systeem
+title Container diagram Voor TripTop Systeem
 
 Person(user, "Reiziger", "Beheert en wijzigt zijn reis")
 
