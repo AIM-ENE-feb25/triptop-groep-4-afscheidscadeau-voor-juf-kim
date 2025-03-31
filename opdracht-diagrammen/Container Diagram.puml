@@ -37,7 +37,7 @@ Rel(user, web, "Bekijkt en wijzigt reisgegevens\n(HTTPS, JSON)")
 Rel(web, trip_manager, "Maakt API verzoeken naar")
 
 Rel(trip_manager, BookingComAPI, "Haalt boeking en bezienswaardigheden op via")
-Rel(trip_manager, AirbnbAPI, "Haalt boeking data op via"
+Rel(trip_manager, AirbnbAPI, "Haalt boeking data op via")
 Rel(trip_manager, NSAPI, "Haalt vervoer data op via")
 Rel(trip_manager, KLMAPI, "Haalt vervoer data op via")
 Rel(trip_manager, UberAPI, "Haalt vervoer data op via")
