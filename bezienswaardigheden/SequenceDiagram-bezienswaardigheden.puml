@@ -1,0 +1,25 @@
+@startuml
+actor User
+entity "AttractionService" as AttractionService
+entity "BookingComAdapter" as BookingComAdapter
+entity "TripAdvisorAdapter" as TripAdvisorAdapter
+entity "BookingComApi" as BookingComApi
+entity "TripAdvisorApi" as TripAdvisorApi
+
+User -> AttractionService : fetchAttractions(location)
+'Nog applicatie tussen?
+AttractionService -> BookingComAdapter : getAttractions(location)
+BookingComAdapter -> BookingComApi : retrieveAttractions(location)
+BookingComApi -> BookingComApi : fetch data
+BookingComApi --> BookingComAdapter : return BookingComAttraction list
+BookingComAdapter --> AttractionService : return BookingComAttraction list
+
+AttractionService -> TripAdvisorAdapter : getAttractions(location)
+TripAdvisorAdapter -> TripAdvisorApi : fetchAttractions(location)
+TripAdvisorApi -> TripAdvisorApi : fetch data
+TripAdvisorApi --> TripAdvisorAdapter : return TripadvisorAttraction list
+TripAdvisorAdapter --> AttractionService : return TripadvisorAttraction list
+
+AttractionService -> AttractionService : merge and format data
+AttractionService --> User : return unified list of attractions
+@enduml
