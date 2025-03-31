@@ -19,7 +19,7 @@ System_Boundary(triptop, "Triptop Systeem") {
 }
 
 
-System_Ext(BookingComAPI, "Booking.com API", "Reserveren van accommodaties via Booking.com")
+System_Ext(BookingComAPI, "Bookingcom API", "Reserveren van accommodaties via Booking.com")
 System_Ext(AirbnbAPI, "Airbnb API", "Reserveren van accommodaties via Airbnb")
 
 System_Ext(NSAPI, "NS API", "Voor treinroutes en OV informatie binnen Nederland")

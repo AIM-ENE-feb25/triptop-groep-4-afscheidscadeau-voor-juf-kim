@@ -26,6 +26,21 @@ System_Ext(horeca, "Horeca API", "Suggesties voor restaurants en cafés", "TheFo
 
 System_Ext(betaling, "Betalingsservice API", "Betalingen regelen en geld innen", "Stripe")
 
+
+
+System_Ext(BookingComAPI, "Bookingcom API", "Reserveren van accommodaties via Booking.com")
+System_Ext(AirbnbAPI, "Airbnb API", "Reserveren van accommodaties via Airbnb")
+
+System_Ext(NSAPI, "NS API", "Voor treinroutes en OV informatie binnen Nederland")
+System_Ext(KLMAPI, "KLM API", "Voor vluchtinformatie en boekingen")
+System_Ext(UberAPI, "Uber API", "Voor lokale taxiritten")
+
+System_Ext(TripAdvisorAPI, "TripAdvisor API", "Voor toeristische informatie en excursies")
+
+System_Ext(TheForkAPI, "TheFork API", "Voor het vinden van restaurants en maken van reserveringen")
+System_Ext(OpenTableAPI, "OpenTable API", "Voor reserveren bij cafés en eetgelegenheden")
+
+
 Rel(user, web, "Gebruiker boekt reis")
 Rel(web, trip_manager, "Verzend reisgegevens naar", JSON/HTTPS)
 Rel(trip_manager, betaling, "Verzend reisgegevens met betrekking tot boeking naar")
@@ -34,9 +49,13 @@ Rel(trip_manager, web, "Stuurt betalings methode terug")
 
 
 ' Connecting all APIs to Reisbeheer API applicatie
-Rel(trip_manager, booking, "Opvragen en beheren van hotelboekingen via")
-Rel(trip_manager, transport, "Houdt vervoersdata bij en signaleert wijzigingen via")
-Rel(trip_manager, attractions, "Beheren excursies en attracties via")
-Rel(trip_manager, horeca, "Suggesties voor restaurants en cafés via")
+Rel(trip_manager, BookingComAPI, "Opvragen en beheren van hotelboekingen via")
+Rel(trip_manager, UberAPI, "Houdt vervoersdata bij en signaleert wijzigingen via")
+Rel(trip_manager, KLMAPI, "Houdt vervoersdata bij en signaleert wijzigingen via")
+Rel(trip_manager, NSAPI, "Houdt vervoersdata bij en signaleert wijzigingen via")
+Rel(trip_manager, TripAdvisorAPI, "Beheren excursies en attracties via")
+Rel(trip_manager, TheForkAPI, "Suggesties voor restaurants en cafés via")
+Rel(trip_manager, OpenTableAPI, "Suggesties voor restaurants en cafés via")
+
 
 @enduml
