@@ -1,6 +1,6 @@
 # ADR: Keuze voor Pattern binnen TripTop
 
-**Datum:** 28-03-2025  
+**Datum:** 31-03-2025  
 **Status:**  ACCEPTED
 
 ---
@@ -8,17 +8,15 @@
 ##  Context
 
 Binnen het TripTop-project willen we op een flexibele manier kunnen omgaan met verchillende logica bij bijvoorbeeld het kiezen van reisopties of betalingsverwerking. 
-Er zijn meerdere patterns beschikbaar om dit bereiken. Daarom hebben we vier bekende design patterns overwogen:
+Er zijn meerdere patterns beschikbaar om dit bereiken. Daarom hebben we vier bekende design patterns overwogen, Deze patterns moesten we toepassen als prototype:
 
 
 
 ##  Beslissing
-Het nadeel met state is dat je het op een paar minder usecases in dit project kan geburuiken waar het redelijk op werkt maar het is niet groot genoeg om echt een verschil te kunnen maken. Hierom lijkt het mij niet handig om State te gaan gebuirken voor dit prject
-Als je een project heb wat meer stapsgeweis werkt dan is het heel handig om state te gebruiken want voor elke stap of mogelijkheid kan je een state maken.
-
+Bij mijn designvraag werkte de pattern erg goed. Ik kon hiermee snel hetgene maken wat ik wilde en de state werd fijn beigehouden vanuit andere classes. De pattern paste goed bij mijn vraag en ik kon hierom snel veder. hetgeen wat ik wel moeilijk vond aan dit onderdeel is dat state een beetje overkill was 
 
 ---
 
 ##  Gevolgen
-State gaat minder gebruikt worden in bij ons. Hierdoor kunnen we niet gebruikmaken van de "Simplicitijd" die state kan bieden in een project. State kan zeker gebruikt worden voor dit project en een voordeel hebben, maar er zijn patterns die meer voordelen kunnen bieden
+Er worden meer states gebruikt en klasse worden aangeroepen gebasseerd op wat er aan de state word terug gegeven. Dit is fijn want er is een soort van centrale plek die over de onderdelen gaat. Het nadeel is wel dat het allemaal stap voor stap gaat en het pas niet goed bij elk onderdeel.
 
