@@ -34,19 +34,19 @@ System_Ext(OpenTableAPI, "OpenTable API", "Voor reserveren bij cafés en eetgele
 System_Ext(GoogleLogin, "Google Login (OAuth 2.0)", "Authenticatie van gebruikers via Google")
 
 Rel(user, web, "Bekijkt en wijzigt reisgegevens\n(HTTPS, JSON)")
-Rel(web, trip_manager, "Maakt API verzoeken naar")
+Rel(web, trip_manager, "Maakt API verzoeken naar", "JSON/HTTPS")
 
-Rel(trip_manager, BookingComAPI, "Haalt boeking en bezienswaardigheden op via")
-Rel(trip_manager, AirbnbAPI, "Haalt boeking data op via")
-Rel(trip_manager, NSAPI, "Haalt vervoer data op via")
-Rel(trip_manager, KLMAPI, "Haalt vervoer data op via")
-Rel(trip_manager, UberAPI, "Haalt vervoer data op via")
+Rel(trip_manager, BookingComAPI, "Haalt boeking en bezienswaardigheden op via", "JSON/HTTPS")
+Rel(trip_manager, AirbnbAPI, "Haalt boeking data op via", "JSON/HTTPS")
+Rel(trip_manager, NSAPI, "Haalt vervoer data op via","JSON/HTTPS")
+Rel(trip_manager, KLMAPI, "Haalt vervoer data op via","JSON/HTTPS")
+Rel(trip_manager, UberAPI, "Haalt vervoer data op via","JSON/HTTPS")
 
-Rel(trip_manager, TheForkAPI, "Haalt horeca gegevens op via")
-Rel(trip_manager, OpenTableAPI,"Haalt horeca gegevens op via")
-Rel(trip_manager, GoogleLogin, "Authenticeert via")
-Rel(trip_manager, db,"Leest van en schrijft naar")
-Rel(trip_manager, TripAdvisorAPI, "Haalt bezienswaardigheden op via")
+Rel(trip_manager, TheForkAPI, "Haalt horeca gegevens op via", "JSON/HTTPS")
+Rel(trip_manager, OpenTableAPI,"Haalt horeca gegevens op via","JSON/HTTPS")
+Rel(trip_manager, GoogleLogin, "Authenticeert via","JSON/HTTPS")
+Rel(trip_manager, db,"Leest van en schrijft naar","SQL")
+Rel(trip_manager, TripAdvisorAPI, "Haalt bezienswaardigheden op via","JSON/HTTPS")
 
 
 @enduml```
