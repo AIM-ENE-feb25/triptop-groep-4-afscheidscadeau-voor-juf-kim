@@ -6,13 +6,11 @@ participant "ReisplannerService" as Service
 participant "SelectieStrategie" as Strategie
 participant "Database" as DB
 participant "List<ReisOptie>" as Opties
-participant "List<ReisOptie>" as Gefilterd
+
 
 Gebruiker -> Service : setStrategie(Strategie)
 
 Gebruiker -> Service : filterReisopties()
-
-activate Service
 
 Service -> DB : getReisOpties()
 DB --> Service : lijst met ReisOptie
@@ -21,10 +19,7 @@ note right of DB : De lijst van beschikbare \nreisopties wordt opgehaald
 
 Service -> Opties : create
 note right of DB : De lijst van beschikbare \nreisopties wordt o
-activate Strategie
 Strategie --> Service : gefilterdeOpties
-deactivate Strategie
-\
 Service --> Gebruiker : gefilterdeOpties
 deactivate Service
 
