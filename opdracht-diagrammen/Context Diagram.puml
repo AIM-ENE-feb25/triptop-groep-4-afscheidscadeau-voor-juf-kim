@@ -6,6 +6,8 @@ title Context Diagram voor "Triptop" systeem
 SHOW_PERSON_OUTLINE()
 LAYOUT_WITH_LEGEND()
 
+Person(ReisAgent, "ReisAgent", "Een gebruiker die de reiziger kan helpen met het boeken en plannen van reizen")
+
 Person(Reiziger, "Reiziger", "Een gebruiker die reizen zoekt, boekt en beheert")
 
 System(TriptopApp, "Triptop", "Een online reisplanner waarmee gebruikers zelf hun reis kunnen samenstellen, boeken en beheren")
@@ -25,6 +27,7 @@ System_Ext(OpenTableAPI, "OpenTable API", "Voor reserveren bij cafés en eetgele
 System_Ext(GoogleLogin, "Google Login (OAuth 2.0)", "Authenticatie van gebruikers via Google")
 
 Rel(Reiziger, TriptopApp, "Plant, boekt en beheert reizen met")
+Rel(ReisAgent, TriptopApp, "Helpt samenstellen van reizen met")
 Rel(TriptopApp, BookingComAPI, "Boekt accommodaties via")
 Rel(TriptopApp, AirbnbAPI, "Boekt accommodaties via")
 Rel(TriptopApp, NSAPI, "Haalt OV-routes op via")
