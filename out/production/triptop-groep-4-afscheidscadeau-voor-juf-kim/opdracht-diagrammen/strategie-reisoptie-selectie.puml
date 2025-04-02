@@ -39,4 +39,5 @@ SelectieStrategie <|.. SnelsteStrategie
 SelectieStrategie <|.. BeschikbaarheidStrategie
 
 ReisplannerService --> SelectieStrategie : gebruikt
+ReisplannerService <-- ReisOptie : bevat
 @enduml
