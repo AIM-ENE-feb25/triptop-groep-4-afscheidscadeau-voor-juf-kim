@@ -8,7 +8,7 @@ Dit software guidebook geeft een overzicht van de Triptop-applicatie. Het bevat 
 1. De architectuur van de infrastructuur en hoe de software kan worden geinstalleerd. 
 
 ## 2. Context
-![contextDiagram.png](..%2Fafb%2FcontextDiagram.png)![Context Diagram](../opdracht-diagrammen/ContextDiagram_triptop.png)
+![contextDiagram.png](..%2Fafb%2FcontextDiagram.png)
 > [!IMPORTANT]
 > Werk zelf dit hoofdstuk uit met context diagrammen en een beschrijving van de context van de software.
 
@@ -79,46 +79,45 @@ Voordat deze casusomschrijving tot stand kwam, heeft de opdrachtgever de volgend
 
 ###     7.1. Containers
 
-> [!IMPORTANT]
-> Voeg toe: Container Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
-![containerDiagram.png](..%2Fafb%2FcontainerDiagram.png)![SOEX_Triptop_Container.png](..%2Fopdracht-diagrammen%2FSOEX_Triptop_Container.png)
->Dit diagram is een Container Diagram van het TripTop-systeem en laat zien hoe de verschillende onderdelen (containers) van het systeem samenwerken, en hoe ze communiceren met externe systemen.
+ [!IMPORTANT]
+Voeg toe: Container Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
+![containerDiagram.png](..%2Fafb%2FcontainerDiagram.png)
+Dit diagram is een Container Diagram van het TripTop-systeem en laat zien hoe de verschillende onderdelen (containers) van het systeem samenwerken, en hoe ze communiceren met externe systemen.
 
->Acteur
+Acteur
 Reiziger: De eindgebruiker van het systeem. Deze persoon stelt reizen samen, boekt accommodaties en beheert zijn reis.
 
->Binnen het TripTop systeem
+Binnen het TripTop systeem
 Triptop Web App (React):
 Frontend van de applicatie.
 Hier beheert de gebruiker zijn reis.
 Stuurt via JSON/HTTPS verzoeken naar de backend.
 
->Reisbeheer API-applicatie (Java MVC):
+Reisbeheer API-applicatie (Java MVC):
 Backend van het systeem.
 Ontvangt API-verzoeken van de frontend.
 Verwerkt reisgegevens, regelt boekingen en beheert wijzigingen van de reis.
 
->Database (PostgreSQL):
+Database (PostgreSQL):
 Slaat alle gebruikersdata, voorkeuren, boekingen en wijzigingen op.
 Alleen toegankelijk voor de backend, niet voor de gebruiker of externe APIs.
 
->Externe systemen (APIs)
+Externe systemen (APIs)
 
->De backend communiceert met verschillende externe APIs om gegevens op te halen of acties uit te voeren:
+De backend communiceert met verschillende externe APIs om gegevens op te halen of acties uit te voeren:
 Bookingcom API & Airbnb API: Voor het boeken van accommodaties.
 
->NS API, KLM API & Uber API: Voor vervoersinformatie (trein, vlucht, taxi).
+NS API, KLM API & Uber API: Voor vervoersinformatie (trein, vlucht, taxi).
 
->TripAdvisor API: Voor bezienswaardigheden en excursies.
+TripAdvisor API: Voor bezienswaardigheden en excursies.
 
->TheFork API & OpenTable API: Voor horecagegevens, zoals restaurants en cafés.
+TheFork API & OpenTable API: Voor horecagegevens, zoals restaurants en cafés.
 
->Google Login (OAuth 2.0): Voor authenticatie van gebruikers.Frontend van de applicatie.
+Google Login (OAuth 2.0): Voor authenticatie van gebruikers.Frontend van de applicatie.
 Hier beheert de gebruiker zijn reis.
 Stuurt via JSON/HTTPS verzoeken naar de backend.
-![dynamischContainerInloggen.png](..%2Fafb%2FdynamischContainerInloggen.png)![SOEX_DynamischDiagram_Inloggen.png](..%2Fopdracht-diagrammen%2FSOEX_DynamischDiagram_Inloggen.png)
-![dynamischeContainerReisBoeken.png](..%2Fafb%2FdynamischeContainerReisBoeken.png)![SOEX_DynamischDiagram_Reisboeken.png](..%2Fopdracht-diagrammen%2FSOEX_DynamischDiagram_Reisboeken.png)
- 
+![dynamischContainerInloggen.png](..%2Fafb%2FdynamischContainerInloggen.png)
+![dynamischeContainerReisBoeken.png](..%2Fafb%2FdynamischeContainerReisBoeken.png)
 ###     7.2. Components
 ![componentDiagram.png](..%2Fafb%2FcomponentDiagram.png)![SOEX_Componentdiagram.png](..%2Fopdracht-diagrammen%2FSOEX_Componentdiagram.png)
 > [!IMPORTANT]
