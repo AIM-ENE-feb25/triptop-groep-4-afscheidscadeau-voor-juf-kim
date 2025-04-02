@@ -2,7 +2,7 @@
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Dynamic.puml
 
 
-title [Container] Triptop
+title Dynamisch Container voor TripTop systeem
 
 Person(user, "Reiziger", "Beheert en wijzigt zijn reis")
 
@@ -16,9 +16,6 @@ System_Boundary(triptop, "Triptop Container") {
     Container(trip_manager, "Reisbeheer API-applicatie", "Java MVC", "Beheert reisoverzicht en wijzigingen van bouwstenen")
 
     ContainerDb(db, "Database", "PostgreSQL", "Opslag van reisdata, wijzigingen en gebruikersvoorkeuren")
-
-    Container(authenticatie, "Authenticatie component", "Bevat functionaliteit voor het authenticeren van de gebruiker")
-
 }
 
 System_Ext(authService, "Authenticatie Service", "Regelt authenticatie via externe providers zoals Google", OAuth 2.0)
@@ -26,18 +23,14 @@ System_Ext(authService, "Authenticatie Service", "Regelt authenticatie via exter
 Rel(user, web, "Gebruiker logt in")
 Rel(web, trip_manager, "Verzend inloggegevens naar", JSON/HTTPS)
 
-Rel(trip_manager, authenticatie, "Authenticeert via")
-Rel(authenticatie, authService, "Authenticeert gebruiker als gebruiker via google inlogged")
-Rel(authService, trip_manager, "Stuurt authenticatie token door naar")
+Rel(trip_manager, authService, "Authenticeert via", $index = 3a)
+Rel(authService, trip_manager, "Stuurt authenticatie token door naar", $index = 4a )
 
-Rel(authenticatie, db,"SELECT * FROM users WHERE username = ?", "SQL")
-Rel(db, authenticatie, "Stuurt opgehaalde gebruikers data terug naar")
-Rel(authenticatie, trip_manager, "Stuurt authenticatie token door naar")
+Rel(trip_manager, db,"SELECT * FROM users WHERE username = ?", "SQL")
+Rel(db, trip_manager, "Stuurt opgehaalde gebruikers data terug naar")
 Rel(trip_manager, web, "Stuurt authenticatie token door naar", "JSON/HTTP")
 
 
 
 @enduml```
 
-
-@enduml
