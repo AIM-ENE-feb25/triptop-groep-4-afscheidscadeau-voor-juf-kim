@@ -102,7 +102,7 @@ Interface Segregation Principle (ISP)
 * We maken gebruik van het ISP design principe, om het ophalen van data zo eenvoudig mogelijk te maken. We maken gebruik
   van het adapter pattern
 
-Open/Closed Principle (OCP)
+Open/Closed Principle (OCP) --> Misschien niet
 
 * Het OCP principe wordt gebruikt om zo het implementeren en toevoegen van externe services (API's) zo makkelijk
   mogelijk te maken. Door er voor te zorgen dat er eigenlijk geen aanpassingen hoeven te worden gemaakt aan de bestaande
@@ -169,6 +169,27 @@ Stuurt via JSON/HTTPS verzoeken naar de backend.
 > [!IMPORTANT]
 > Voeg toe: Per ontwerpvraag een Class Diagram plus een Sequence Diagram van een aantal scenario's inclusief
 > begeleidende tekst.
+
+Het Adapter pattern helpt bij het beantwoorden van de volgende onderzoeksvragen:
+
+* Hoe zorg je ervoor dat je bij een wijziging in de datastructuur van een externe service niet de hele applicatie hoeft
+  aan te passen?
+* Hoe zorg je ervoor dat je makkelijk een nieuwe externe service kan toevoegen?
+
+Het onderstaande klasse diagram laat zien hoe in de applicatie het adapter pattern wordt toegepast in specifiek met
+betrekking tot bezienswaardigheden (Attractions), naast bezienswaardigheden is dit ook wordt deze ook toegepats op
+accommodaties zoals te zien is in het component diagram. De "AttractionAdapter" interface abstraheert het gedrag van de
+verschillende bezienswaardigheden providers, in dit geval BookingCom en TripAdvisor. Door deze interface te gebruiken is
+het mogelijk om verschillende data providers toe te voegen / aan te passen, zonder de hele serviceklasse aan te hoeven
+passen.
+
+![img.png](../bezienswaardigheden/Class%20Diagram%20Adapater.png)
+
+Hieronder staat het component diagram met toevoeging van de adapters voor accommodaties en bezienswaardigheden.
+![img_1.png](../bezienswaardigheden/Component%20Diagram%20Adapter.png)
+
+Hieronder sequentie diagram.
+![img_2.png](../bezienswaardigheden/Sequence%20Diagram%20Adapter.png)
 
 ## 8. Architectural Decision Records
 
