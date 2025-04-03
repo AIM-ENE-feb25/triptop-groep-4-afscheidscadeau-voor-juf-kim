@@ -160,15 +160,10 @@ Stuurt via JSON/HTTPS verzoeken naar de backend.
 
 ### 7.2. Components
 
-![componentDiagram.png](..%2Fafb%2FcomponentDiagram.png)![SOEX_Componentdiagram.png](..%2Fopdracht-diagrammen%2FSOEX_Componentdiagram.png)
 > [!IMPORTANT]
 > Voeg toe: Component Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
 
 ### 7.3. Design & Code
-
-> [!IMPORTANT]
-> Voeg toe: Per ontwerpvraag een Class Diagram plus een Sequence Diagram van een aantal scenario's inclusief
-> begeleidende tekst.
 
 Het Adapter pattern helpt bij het beantwoorden van de volgende onderzoeksvragen:
 
@@ -176,19 +171,47 @@ Het Adapter pattern helpt bij het beantwoorden van de volgende onderzoeksvragen:
   aan te passen?
 * Hoe zorg je ervoor dat je makkelijk een nieuwe externe service kan toevoegen?
 
-Het onderstaande klasse diagram laat zien hoe in de applicatie het adapter pattern wordt toegepast in specifiek met
-betrekking tot bezienswaardigheden (Attractions), naast bezienswaardigheden is dit ook wordt deze ook toegepats op
+#### Component Diagram:
+
+Het onderstaande component diagram weergeeft de complete integratie van het adapter patroon in het Triptop systeem.
+Hierin is zijn de adapter uitwerkingen van zowel van bezienswaardigheden als accommodaties te zien. Er is gekozen om
+hier het adapter patroon te gebruiken om zo mogelijk uitbreidingen (meer externe platformen) gemakkelijker te maken.
+![img_1.png](../bezienswaardigheden/Component%20Diagram%20Adapter.png)
+
+#### Klasse diagram:
+
+Het onderstaande klassen diagram laat zien hoe in de applicatie het adapter pattern wordt toegepast, specifiek met
+betrekking tot bezienswaardigheden (Attractions). Naast bezienswaardigheden is wordt dit ook toegepast op
 accommodaties zoals te zien is in het component diagram. De "AttractionAdapter" interface abstraheert het gedrag van de
 verschillende bezienswaardigheden providers, in dit geval BookingCom en TripAdvisor. Door deze interface te gebruiken is
-het mogelijk om verschillende data providers toe te voegen / aan te passen, zonder de hele serviceklasse aan te hoeven
-passen.
+het mogelijk om verschillende data providers toe te voegen en aan te passen, zonder de hele serviceklasse te hoeven
+veranderen.
+
+Het klassen diagram hieronder weergeeft de architectuur van hoe het Adapter pattern wordt gebruikt om data van
+verschillende bezienswaardigheid providers te verwerken.
+
+Toelichting:
+
+* AttractionAdapter interface: Deze interface defineerd de methodes getAttractions() om de verschillende
+  bezienswaardigheid data op te halen en getName() om de naam van de provider op te halen. Deze interface maakt het
+  mogelijk om voor verschillende data providers adapters te maken die dezelfde methode implementeren.
+* AttractionService: Deze klasse zorgt ervoor dat de data uit de verschillende bezienswaardigheid adapters samen wordt
+  gevoegd tot een lijst voor een overzicht van alle mogelijk bezienswaardigheden op de gegeven locatie.
 
 ![img.png](../bezienswaardigheden/Class%20Diagram%20Adapater.png)
 
-Hieronder staat het component diagram met toevoeging van de adapters voor accommodaties en bezienswaardigheden.
-![img_1.png](../bezienswaardigheden/Component%20Diagram%20Adapter.png)
+#### Sequentie Diagram
 
-Hieronder sequentie diagram.
+Het sequentie diagram hieronder toont hoe de bezienswaardigheidsadapter verloopt.
+
+Toelichting:
+
+1. De gebruiker vraagt bezienswaardigheden voor een specifieke locatie op, dit gaat via AttractionService.
+2. AttractionService vraagt de data op van BookingComAdapter.
+3. De adapter haalt de raw data op van de BookingComApi klasse.
+4. Hetzelfde process wordt herhaald voor de TripAdvisorAdapter.
+5. Als beide lijsten van bezienswaardigheden zijn  opgehaald, worden deze samengevoegd tot een lijst.
+
 ![img_2.png](../bezienswaardigheden/Sequence%20Diagram%20Adapter.png)
 
 ## 8. Architectural Decision Records
