@@ -1,0 +1,65 @@
+@startuml
+!define RECTANGLE class
+!define COMPONENT component
+
+title C4 Component Diagram for Booking Application
+
+' Define the system boundary
+package "Booking Application" {
+
+    ' Define the main components
+    COMPONENT(Main) {
+        Main : Spring Boot Application
+    }
+
+    COMPONENT(BookingController) {
+        BookingController : REST Controller
+    }
+
+    COMPONENT(Decider) {
+        Decider : State Management
+    }
+
+    COMPONENT(BookingState) {
+        BookingState : State
+    }
+
+    COMPONENT(FindNewBookingState) {
+        FindNewBookingState : State
+    }
+
+    COMPONENT(Booking) {
+        Booking : Booking Service
+    }
+
+    COMPONENT(FindNewBooking) {
+        FindNewBooking : Booking Replacement Service
+    }
+
+    COMPONENT(NoRoom) {
+        NoRoom : No Room Handler
+    }
+
+    COMPONENT(State) {
+        State : State Interface
+    }
+
+    ' Define external systems
+    COMPONENT(BookingAPI) {
+        BookingAPI : External Booking API
+    }
+
+    ' Define relationships
+    Main --> BookingController : "Starts"
+    BookingController --> BookingAPI : "Calls"
+    BookingController --> Decider : "Uses"
+    Decider --> BookingState : "Sets State"
+    Decider --> FindNewBookingState : "Sets State"
+    BookingState --> Booking : "Uses"
+    BookingState --> NoRoom : "Uses"
+    FindNewBookingState --> FindNewBooking : "Uses"
+    State <|-- BookingState
+    State <|-- FindNewBookingState
+}
+
+@enduml
