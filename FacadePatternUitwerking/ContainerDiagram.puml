@@ -1,33 +1,37 @@
-@startuml
+```@startuml
 !includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
-title Container Diagram van TripTop voor Reis plan System
+title [Container] Triptop
 
-Person(user, "Reiziger", "Vraagt een route aan")
+Person(user, "Reiziger", "Beheert en wijzigt zijn reis")
 
-System_Boundary(travel_system, "TripTop route systeem") {
+System_Boundary(triptop, "Triptop Systeem") {
 
-    Container(web, "Travel Web App", "React (JavaScript/React)", "Biedt gebruikers de mogelijkheid om hun reis te boeken")
+    Container(web, "Triptop Web App", "React (JavaScript / react)", "Biedt gebruikers de mogelijkheid om hun reis te beheren en wijzigingen aan te brengen")
 
-    Container(travel_controller, "Travel Controller", "Java MVC", "Geeft request door van frontend naar service")
+'    Nodig?
+'    Container(api, "API Gateway", "Java MVC", "")
 
-    Container(travel_service, "Travel Service", "Java MVC", "voert logica uit op gekregen data om het nuttig te maken")
+    Container(trip_manager, "Reisbeheer API-applicatie", "Java MVC", "Beheert reisoverzicht en wijzigingen van bouwstenen")
 
-    Container(travel_facade, "Travel Facade", "Java MVC", "integreert meedere API's en geeft een lijst met alle routes terug in een bruikbaar formaat")
 
 }
 
-System_Ext(NSAPI, "NS API", "Geeft trein route data")
-System_Ext(KLMAPI, "KLM API", "Geeft vlucht data")
-System_Ext(UberAPI, "Uber API", "Geeft Uber data")
 
-Rel(user, web, "vraagt route aan")
-Rel(web, travel_controller, "doet request", "HTTPS/JSON")
-Rel(travel_controller, travel_service, "geeft request door", "HTTPS/JSON")
-Rel(travel_service, travel_facade, "vraagt relevante data", "HTTPS/JSON")
+System_Ext(NS, "NSAPI", "Houdt vervoersdata bij en signaleert wijzigingen")
+System_Ext(KLM, "KLMAPI", "Houdt vervoersdata bij en signaleert wijzigingen")
+System_Ext(Uber, "UberAPI", "Houdt vervoersdata bij en signaleert wijzigingen")
 
-Rel(travel_facade, NSAPI, "Vraagt trein route data", "JSON/HTTPS")
-Rel(travel_facade, KLMAPI, "Vraagt vlucht route data", "JSON/HTTPS")
-Rel(travel_facade, UberAPI, "Vraagt Uber route data", "JSON/HTTPS")
 
-@enduml
+
+
+Rel(user, web, "Bekijkt en wijzigt reisgegevens")
+Rel(web, trip_manager, "Maakt API verzoeken naar", "HTTPS/JSON")
+
+Rel(trip_manager, NS, "Haalt vervoer data op via", "HTTPS/JSON")
+Rel(trip_manager, KLM, "Haalt vervoer data op via", "HTTPS/JSON")
+Rel(trip_manager, Uber, "Haalt vervoer data op via", "HTTPS/JSON")
+
+
+
+@enduml```

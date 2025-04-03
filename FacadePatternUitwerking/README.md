@@ -8,5 +8,11 @@ De fascade zorgt er voor dat alle data die een API meegeeft eerst wordt opgescho
 code die dit nodig heeft, hierdoor kunnen API's ook makkelijk worden toegevoegd zonder dat er grote aanpassingen gemaakt 
 hoeven te worden aan de back- of front-end code zelf.
 
+De facade geeft altijd een lijst met alle mogelijke reizen op een bruikbare manier terug aan de service. dit zorgt er 
+voor dat er in princiepe 0 aanpassingen gemaakt hoeven te worden aan de backend code, de code wordt namelijk al in de 
+facade opgeschoond en in de lijst gezet met de andere API's
 
 
+##  Context
+
+##  Overwogen opties
