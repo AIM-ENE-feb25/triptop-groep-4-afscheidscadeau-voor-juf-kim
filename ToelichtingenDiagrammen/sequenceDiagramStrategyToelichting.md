@@ -36,8 +36,3 @@ Dit sequence diagram laat stap voor stap zien wat er gebeurt wanneer een gebruik
 - **Duidelijke volgorde**: Door het sequence diagram zie je precies wie wat doet, in welke volgorde.
 - **Losse verantwoordelijkheden**: Elke stap is goed gescheiden — ophalen, strategie toepassen, resultaat terugsturen.
 - **Goed uitbreidbaar**: Als je een nieuwe strategie maakt (bijv. "eco-vriendelijk"), hoef je alleen die extra stap toe te voegen in het bestaande patroon.
-
----
-
-Dit diagram geeft inzicht in hoe gebruikersinteracties via de frontend doorvloeien naar de backend, en hoe met behulp van het Strategy Pattern flexibel en herbruikbaar gefilterd wordt op reisopties.
-
