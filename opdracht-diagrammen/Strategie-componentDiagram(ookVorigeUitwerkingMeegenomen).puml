@@ -1,0 +1,91 @@
+@startuml C4_Elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Component Diagram voor de backend container van TripTop systeem
+
+LAYOUT_WITH_LEGEND()
+
+Container(webapp, "TripTop Webapplicatie", "JavaScript, React", "Stelt gebruikers in staat om reizen te plannen en accommodaties te boeken.")
+
+System_Boundary(triptop, "Triptop Systeem") {
+    Component(loginController, "Login Controller", "Java, Spring REST Controller", "Verwerkt gebruikersaanmeldingen en authenticatieverzoeken.")
+    Component(beveiligingComponent, "Beveiliging Component", "Java, Spring", "Beheert login-validatie en wachtwoordcontrole.")
+    Component(authenticatieRepo, "Authenticatie Repository", "Java, Spring", "Slaat gebruikersgegevens en authenticatiegegevens op.")
+
+    Component(bookingController, "Boeking Controller", "Java, Spring", "Behandelt boekingsverzoeken van gebruikers.")
+    Component(bookingComponent, "Boeking Component", "Java, Spring", "Bevat de bedrijfslogica voor het afhandelen van boekingen.")
+    Component(bookingRepo, "Boeking Repository", "Java, Spring", "Beheert opslag en ophalen van boekingsgegevens.")
+
+    Component(accommodatieBeheer, "Accommodatie Beheer", "Java, Spring", "Verwerkt en beheert accommodatiegegevens.")
+    Component(accommodatieRepo, "Accommodatie Repository", "Java, Spring", "Slaat accommodatiedata op en mapped deze naar het gewenste formaat.")
+    Component(bookingComService, "BookingCom Service", "Java, Spring", "Interactie met de Booking.com API voor accommodatiegegevens.")
+
+    Component(notificatieService, "Notificatie Service", "Java, Spring", "Verstuurt meldingen en bevestigingen naar gebruikers.")
+    Component(mailComponent, "Mail Component", "Java, MailPit, Spring", "Verstuurt e-mails voor boekingsbevestigingen en notificaties.")
+
+    Component(betaalController, "Betaal Controller", "Java, Spring", "Start betaalverzoeken.", "JSON/HTTPS")
+    Component(betaalComponent, "Betaal Component", "Java, Spring", "Behandelt betalingen en financiële transacties.")
+    Component(betaalRepo, "Betaal Repository", "Java, Spring", "Slaat betalingsgegevens en betaal logs op.")
+
+    ' Strategy pattern uitbreiding
+    Component(reisPlannerController, "ReisPlanner Controller", "Java, Spring", "Ontvangt filterverzoeken met strategiekeuze van de gebruiker.")
+    Component(reisplannerService, "Reisplanner Service", "Java, Spring", "Bevat de strategie-logica voor het selecteren van reisopties.")
+    Component(snelsteStrategie, "Snelste Strategie", "Java", "Selecteert de snelste optie uit een lijst van reisopties.")
+    Component(goedkoopsteStrategie, "Goedkoopste Strategie", "Java", "Selecteert de goedkoopste optie uit een lijst van reisopties.")
+    Component(beschikbaarheidStrategie, "Beschikbaarheid Strategie", "Java", "Filtert op alleen beschikbare reisopties.")
+}
+
+ContainerDb(database, "Database", "Postgres", "Slaat gebruikersgegevens, boekingen en betalingen op.")
+
+System_Ext(GoogleLogin, "Google Login (OAuth 2.0)", "Authenticatie van gebruikers via Google")
+System_Ext(NSAPI, "NS API", "Voor treinroutes en OV informatie binnen Nederland")
+System_Ext(KLMAPI, "KLM API", "Voor vluchtinformatie en boekingen")
+System_Ext(UberAPI, "Uber API", "Voor lokale taxiritten")
+System_Ext(BookingComAPI, "BookingCom API", "Reserveren van accommodaties via Booking.com")
+System_Ext(TripAdvisorAPI, "TripAdvisor API", "Voor toeristische informatie en excursies")
+System_Ext(TheForkAPI, "TheFork API", "Voor het vinden van restaurants en maken van reserveringen")
+System_Ext(OpenTableAPI, "OpenTable API", "Voor reserveren bij cafés en eetgelegenheden")
+System_Ext(AirbnbAPI, "Airbnb API", "Reserveren van accommodaties via Airbnb")
+System_Ext(StripeAPI, "Stripe API", "Externe betalingsverwerker van Stripe.")
+
+Rel(webapp, loginController, "Verstuurt login-verzoeken", "JSON/HTTPS")
+Rel(loginController, beveiligingComponent, "Behandelt inlogvalidatie")
+Rel(beveiligingComponent, authenticatieRepo, "Leest en schrijft authenticatiegegevens")
+Rel(authenticatieRepo, database, "Opslag van authenticatiegegevens", "SQL")
+Rel(loginController, GoogleLogin, "Valideert gebruiker via externe authenticatie", "JSON/HTTPS")
+
+Rel(webapp, bookingController, "Verstuurt boekingsverzoeken", "JSON/HTTPS")
+Rel(bookingController, bookingComponent, "Verwerkt boekingslogica")
+Rel(bookingComponent, bookingRepo, "Beheert boekingsdata")
+Rel(bookingRepo, database, "Opslag en ophalen van boekingsgegevens", "SQL")
+
+Rel(bookingComponent, notificatieService, "Stuurt notificaties over boekingen")
+Rel(notificatieService, mailComponent, "Verstuurt boekingsbevestigingen via e-mail")
+
+Rel(webapp, betaalController, "Start betalingsproces", "JSON/ HTTPS")
+Rel(betaalController, betaalComponent, "Verwerkt betalingstransacties")
+Rel(betaalComponent, betaalRepo, "Beheert betalingsgegevens")
+Rel(betaalRepo, database, "Opslag van betalingsgegevens", "SQL")
+Rel(betaalComponent, StripeAPI, "Verstuurt betalingsverzoek naar externe provider", "JSON/HTTPS")
+
+Rel(bookingComponent, TripAdvisorAPI, "Haalt toeristische informatie op",  "JSON/HTTPS")
+Rel(bookingComponent, KLMAPI, "vraagt vervoersdata op", "JSON/HTTPS")
+Rel(bookingComponent, UberAPI, "vraagt vervoersdata op", "JSON/HTTPS")
+Rel(bookingComponent, NSAPI, "vraagt vervoersdata op", "JSON/HTTPS")
+Rel(bookingComponent, AirbnbAPI, "vraagt huisjesdata op", "JSON/HTTPS")
+Rel(bookingComponent, BookingComAPI, "Haalt toeristische informatie op", "JSON/HTTPS")
+Rel(bookingComponent, TheForkAPI, "Zoekt beschikbare restaurants", "JSON/HTTPS")
+Rel(bookingComponent, OpenTableAPI, "Zoekt beschikbare restaurants", "JSON/HTTPS")
+
+Rel(bookingComponent, accommodatieBeheer, "Behandelt accommodatiegegevens")
+Rel(accommodatieBeheer, accommodatieRepo, "Interactie met database voor accommodatiegegevens")
+Rel(accommodatieRepo, database, "Opslag van accommodatiegegevens", "SQL")
+Rel(accommodatieRepo, bookingComService, "Haalt accommodatiegegevens op")
+Rel(bookingComService, BookingComAPI, "Ophalen van accommodatie-informatie via Booking.com scraper", "JSON/HTTPS")
+
+Rel(webapp, reisPlannerController, "Verstuurt strategie-filter verzoek", "JSON/HTTPS")
+Rel(reisPlannerController, reisplannerService, "Past strategie toe op reisopties")
+Rel(reisplannerService, snelsteStrategie, "Gebruikt strategie")
+Rel(reisplannerService, goedkoopsteStrategie, "Gebruikt strategie")
+Rel(reisplannerService, beschikbaarheidStrategie, "Gebruikt strategie")
+@enduml
