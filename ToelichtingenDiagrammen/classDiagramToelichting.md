@@ -5,8 +5,6 @@ Dit diagram laat zien hoe we binnen het TripTop-project verschillende manieren h
 Hiervoor gebruiken we het **Strategy Pattern**, wat eigenlijk gewoon betekent:
 > "We stoppen elke manier van selecteren in z’n eigen stukje code, zodat we makkelijk kunnen wisselen."
 
----
-
 ## Wat zie je allemaal in het diagram?
 
 ### SelectieStrategie (interface)
