@@ -1,0 +1,52 @@
+```@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Container diagram Voor TripTop Systeem
+
+Person(user, "Reiziger", "Beheert en wijzigt zijn reis")
+
+System_Boundary(triptop, "Triptop Systeem") {
+
+    Container(web, "Triptop Web App", "React (JavaScript / react)", "Biedt gebruikers de mogelijkheid om hun reis te beheren en wijzigingen aan te brengen")
+
+'    Nodig?
+'    Container(api, "API Gateway", "Java MVC", "")
+
+    Container(trip_manager, "Reisbeheer API-applicatie", "Java MVC", "Beheert reisoverzicht en wijzigingen van bouwstenen")
+
+    ContainerDb(db, "Database", "PostgreSQL", "Opslag van reisdata, wijzigingen en gebruikersvoorkeuren")
+
+}
+
+
+System_Ext(BookingComAPI, "Bookingcom API", "Reserveren van accommodaties via Booking.com")
+System_Ext(AirbnbAPI, "Airbnb API", "Reserveren van accommodaties via Airbnb")
+
+System_Ext(NSAPI, "NS API", "Voor treinroutes en OV informatie binnen Nederland")
+System_Ext(KLMAPI, "KLM API", "Voor vluchtinformatie en boekingen")
+System_Ext(UberAPI, "Uber API", "Voor lokale taxiritten")
+
+System_Ext(TripAdvisorAPI, "TripAdvisor API", "Voor toeristische informatie en excursies")
+
+System_Ext(TheForkAPI, "TheFork API", "Voor het vinden van restaurants en maken van reserveringen")
+System_Ext(OpenTableAPI, "OpenTable API", "Voor reserveren bij cafés en eetgelegenheden")
+
+System_Ext(GoogleLogin, "Google Login (OAuth 2.0)", "Authenticatie van gebruikers via Google")
+
+Rel(user, web, "Bekijkt en wijzigt reisgegevens\n(HTTPS, JSON)")
+Rel(web, trip_manager, "Maakt API verzoeken naar", "JSON/HTTPS")
+
+Rel(trip_manager, BookingComAPI, "Haalt boeking en bezienswaardigheden op via", "JSON/HTTPS")
+Rel(trip_manager, AirbnbAPI, "Haalt boeking data op via", "JSON/HTTPS")
+Rel(trip_manager, NSAPI, "Haalt vervoer data op via","JSON/HTTPS")
+Rel(trip_manager, KLMAPI, "Haalt vervoer data op via","JSON/HTTPS")
+Rel(trip_manager, UberAPI, "Haalt vervoer data op via","JSON/HTTPS")
+
+Rel(trip_manager, TheForkAPI, "Haalt horeca gegevens op via", "JSON/HTTPS")
+Rel(trip_manager, OpenTableAPI,"Haalt horeca gegevens op via","JSON/HTTPS")
+Rel(trip_manager, GoogleLogin, "Authenticeert via","JSON/HTTPS")
+Rel(trip_manager, db,"Leest van en schrijft naar","SQL")
+Rel(trip_manager, TripAdvisorAPI, "Haalt bezienswaardigheden op via","JSON/HTTPS")
+
+
+@enduml```
