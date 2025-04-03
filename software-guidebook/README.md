@@ -11,37 +11,70 @@ Dit software guidebook geeft een overzicht van de Triptop-applicatie. Het bevat 
 
 ## 2. Context
 
-De Triptop reis planner web-applicatie biedt gebruikers de mogelijkheid om een reis te plannen en boeken met
-accommodaties, vervoer en bezienswaardigheden. Het systeem maakt gebruik van verschillende externe API's, om zo alle
-reis en boek data op te halen. Waaronder een boeking platform (bookingcom), een bezienswaardigheden platform (
-tripadvisor) en een horeca platform (the fork). Om zo met de meest recente data een trip te kunnen plannen.
-*Bouwstenen
-![Context Diagram](../opdracht-diagrammen/ContextDiagram_triptop.png)
+De Triptop reis planner web-applicatie biedt gebruikers een platform om hun reizen te plannen, accommodaties te boeken,
+vervoer te regelen en bezienswaardigheden te ontdekken, met behulp van externe API's.
+Dit systeem verzamelt de actuele data van verschillende boekings, vervoer, restaurant en bezienswaardigheidssites om zo
+gebruikers te voorzien van de meest recent data voor hun reis. De applicatie maakt gebruik van de volgende
+API-providers: BookingCom (scraper), TripAdvisor (scraper), TheFork, *Open Table en Stripe voor betalingen.
 
 ### Context Diagram
 
+![Context Diagram](../opdracht-diagrammen/ContextDiagram_triptop.png)
+
 Gebruiker (Reiziger)
 
-De reiziger is de voornaamste gebruiker van de TripTop applicatie. Ze gebruiken de applicatie om hun reizen te
-plannen, verschillende reis, accommodatie, vervoer en bezienswaardigheden te zien en te boeken.
+De reiziger is de primaire gebruiker van de TripTop applicatie. Ze gebruiken de applicatie om:
+
+* Reizen te plannen via gegeven bouwstenen.
+* Verschillende reisopties, accommodaties, vervoersmogelijkheden en bezienswaardigheden te bekijken.
+* Reizen te boeken en beheren.
+
+De reiziger kan samen met hulp van de reisagent de reis boeken en ook hulp krijgen bij het plannen.
+
+Reisagent
+De reisagent ondersteunt de reiziger bij het samenstellen en boeken van hun reizen. Zo kan de reiziger via de reisagent
+een voorstel krijgen van een reisplan aan de hand van hun persoonlijke belangen.
 
 Triptop App
 
-De Triptop applicatie is het centrale systeem dat alle externe API's en services verbindt. De app maakt het mogelijk
-voor gebruikers om via de website reisen te maken en beheren.
+De Triptop applicatie is het centrale systeem dat de interactie tussen de gebruiker en verschillende externe systemen
+mogelijk maakt. Het systeem doet het volgende:
+
+* Maakt het mogelijk voor de reiziger om hun reizen te plannen, accommodaties te boeken en bijbehorend vervoer te
+  regelen.
+* Verbindt met externe platforms via API's om zo de meest recente informatie te krijgen over de verschillende
+  reisinformatie.
+* Beheert boeking en maakt het eenvoudig voor de gebruiker om reizen te plannen.
 
 Externe Systemen
 
 Booking API (BookingCom)
 
-BookingCom is de externe API van waaruit alle data over accommodaties wordt opgehaald. 
+* BookingCom is de externe API van waaruit alle data over accommodaties wordt opgehaald.
 
-Vervoer API
+Airbnb API
+
+* Alternatief voor het boeken van accommodaties.
+
+Vervoer API's
+
+* NS API: Voor het ophalen van de data over het openbaar vervoer (bussen en treinen) binnen Nederland.
+* KLM API: Biedt vlucht informatie, waaronder tijden, prijzen en beschikbaarheid.
+* Uber API: Geeft gegevens over lokale taxi's, om zo makkelijk en goedkoper te kunnen reizen.
 
 Bezienswaardigheden API
 
+* TripAdvisor API: Biedt informatie over bezienswaardigheden en activiteiten, als musea, parken en excursies.
+* BookingCom API: Deze biedt daarnaast ook nog verschillende attractie data.
+
 Restaurant API
 
+* TheFork API: Voor het ophalen van restaurant data.
+* OpenTable API: Alternatief voor het ophalen van data, voor een grotere selectie eetgelegenheden.
+
+GoogleLogin (OAuth 2.0)
+
+* Voor het eenvoudig authenticeren van de gebruikers via Google, als alternatief van de login uit het systeem zelf.
 
 Relaties
 
@@ -128,143 +161,148 @@ als belangrijk:
 > [!IMPORTANT]
 > Voeg toe: Container Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
 ![SOEX_Triptop_Container.png](..%2Fopdracht-diagrammen%2FSOEX_Triptop_Container.png)
->Deze afbeelding toont een C4 Container Diagram van het systeem genaamd Triptop. Het doel van dit diagram is om te laten zien uit welke softwareonderdelen (containers) het systeem bestaat, hoe ze met elkaar samenwerken, en met welke externe systemen ze communiceren. Hieronder geef ik een heldere uitleg per onderdeel.
+> Deze afbeelding toont een C4 Container Diagram van het systeem genaamd Triptop. Het doel van dit diagram is om te
+> laten zien uit welke softwareonderdelen (containers) het systeem bestaat, hoe ze met elkaar samenwerken, en met welke
+> externe systemen ze communiceren. Hieronder geef ik een heldere uitleg per onderdeel.
 
->Reiziger (persoon)
-Beschrijving: De gebruiker van de applicatie.
->Actie: Beheert en wijzigt zijn reis via de webapplicatie.
-Communiceert met de Triptop Web App.
->Triptop Web App (container)
-Technologie: React
->Functie: De frontend van het systeem; dit is wat de gebruiker ziet en gebruikt.
->Rol: Geeft gebruikers de mogelijkheid hun reizen te beheren en te wijzigen
+> Reiziger (persoon)
+> Beschrijving: De gebruiker van de applicatie.
+> Actie: Beheert en wijzigt zijn reis via de webapplicatie.
+> Communiceert met de Triptop Web App.
+> Triptop Web App (container)
+> Technologie: React
+> Functie: De frontend van het systeem; dit is wat de gebruiker ziet en gebruikt.
+> Rol: Geeft gebruikers de mogelijkheid hun reizen te beheren en te wijzigen
 
->Reisbeheer API-applicatie (container)
-Technologie: Java MVC
->Functie: Dit is de backend.
->Rol: Beheert de reisdata en communicatie met externe systemen.
->Belangrijk: De frontend stuurt hier API-verzoeken naartoe.
+> Reisbeheer API-applicatie (container)
+> Technologie: Java MVC
+> Functie: Dit is de backend.
+> Rol: Beheert de reisdata en communicatie met externe systemen.
+> Belangrijk: De frontend stuurt hier API-verzoeken naartoe.
 
->Database (container)
-Technologie: PostgreSQL
->Functie: Opslag van:
->Reisdata
->Gebruikersvoorkeuren
->Wijzigingen
->Relatie: Alleen de API-applicatie praat met de database.
->Hoe verloopt de interactie?
-De gebruiker opent de Triptop Web App.
->De Web App stuurt een API-verzoek naar de Reisbeheer API-applicatie.
+> Database (container)
+> Technologie: PostgreSQL
+> Functie: Opslag van:
+> Reisdata
+> Gebruikersvoorkeuren
+> Wijzigingen
+> Relatie: Alleen de API-applicatie praat met de database.
+> Hoe verloopt de interactie?
+> De gebruiker opent de Triptop Web App.
+> De Web App stuurt een API-verzoek naar de Reisbeheer API-applicatie.
 
->Deze applicatie:
->Vraagt gegevens op van externe systemen (zoals Booking.com of NS),
->laat info op of leest deze uit de database,
->Verwerkt logica en stuurt info terug naar de Web App.
->De Web App toont de informatie aan de gebruiker.
+> Deze applicatie:
+> Vraagt gegevens op van externe systemen (zoals Booking.com of NS),
+> laat info op of leest deze uit de database,
+> Verwerkt logica en stuurt info terug naar de Web App.
+> De Web App toont de informatie aan de gebruiker.
 
 ![SOEX_DynamischDiagram_Inloggen.png](..%2Fopdracht-diagrammen%2FSOEX_DynamischDiagram_Inloggen.png)
->Deze afbeelding toont een C4 Container Diagram dat zich specifiek richt op het inlogproces van Triptop. 
-Het laat zien welke containers betrokken zijn bij authenticatie, en hoe gegevens van de gebruiker worden verwerkt.
+> Deze afbeelding toont een C4 Container Diagram dat zich specifiek richt op het inlogproces van Triptop.
+> Het laat zien welke containers betrokken zijn bij authenticatie, en hoe gegevens van de gebruiker worden verwerkt.
 
->  Reiziger (persoon)
-Gebruiker van Triptop.
->Start het proces door in te loggen via de webapp.
+> Reiziger (persoon)
+> Gebruiker van Triptop.
+> Start het proces door in te loggen via de webapp.
 
 > Triptop Web App (React)
-Frontend (de webinterface).
->Verstuurt de inloggegevens van de gebruiker naar de backend.
+> Frontend (de webinterface).
+> Verstuurt de inloggegevens van de gebruiker naar de backend.
 
->Reisbeheer API-applicatie (Java MVC)
-Ontvangt de inloggegevens en start het authenticatieproces.
-Stuurt uiteindelijk het gekregen token terug naar de webapp. 
+> Reisbeheer API-applicatie (Java MVC)
+> Ontvangt de inloggegevens en start het authenticatieproces.
+> Stuurt uiteindelijk het gekregen token terug naar de webapp.
 
->Authenticatiecomponent
-Bevat de logica voor authenticatie binnen het systeem.
-Controleert gebruikersgegevens in de database, of schakelt externe providers in.
+> Authenticatiecomponent
+> Bevat de logica voor authenticatie binnen het systeem.
+> Controleert gebruikersgegevens in de database, of schakelt externe providers in.
 
->Database (PostgreSQL)
-Bevat gebruikersgegevens.
-Wordt geraadpleegd om gebruikers op te zoeken op basis van hun gebruikersnaam en wachtwoord.
+> Database (PostgreSQL)
+> Bevat gebruikersgegevens.
+> Wordt geraadpleegd om gebruikers op te zoeken op basis van hun gebruikersnaam en wachtwoord.
 
 > Externe Authenticatie Service (OAuth 2.0)
-Bijv. Google login.
-Wordt ingeschakeld wanneer een gebruiker via een externe provider wil inloggen.
+> Bijv. Google login.
+> Wordt ingeschakeld wanneer een gebruiker via een externe provider wil inloggen.
 
->Kort overzicht van de flow:
+> Kort overzicht van de flow:
 
->De gebruiker logt in via de webapp.
+> De gebruiker logt in via de webapp.
 
->Inloggegevens worden naar de backend gestuurd.
+> Inloggegevens worden naar de backend gestuurd.
 
->De backend vraagt authenticatie aan de authenticatiecomponent.
+> De backend vraagt authenticatie aan de authenticatiecomponent.
 
->Deze stuurt de gebruiker (indien nodig) door naar de externe OAuth-provider.
- 
->De provider stuurt een token terug.
+> Deze stuurt de gebruiker (indien nodig) door naar de externe OAuth-provider.
 
->Intern wordt gecontroleerd of deze gebruiker bestaat in de database.
+> De provider stuurt een token terug.
 
->Gebruikersdata wordt opgehaald.
+> Intern wordt gecontroleerd of deze gebruiker bestaat in de database.
 
->De authenticatiecomponent geeft het token door aan de backend.
+> Gebruikersdata wordt opgehaald.
 
->De backend stuurt dit token uiteindelijk naar de webapp.
+> De authenticatiecomponent geeft het token door aan de backend.
+
+> De backend stuurt dit token uiteindelijk naar de webapp.
 
 ![SOEX_DynamischDiagram_Reisboeken.png](..%2Fopdracht-diagrammen%2FSOEX_DynamischDiagram_Reisboeken.png)
->Deze afbeelding toont een C4 Container Diagram, 
-maar dan specifiek voor de "reis boeken"-feature van het Triptop-systeem. Het laat zien welke containers betrokken zijn bij het boeken van een reis en hoe de communicatie met externe APIs verloopt.
+> Deze afbeelding toont een C4 Container Diagram,
+> maar dan specifiek voor de "reis boeken"-feature van het Triptop-systeem. Het laat zien welke containers betrokken
+> zijn
+> bij het boeken van een reis en hoe de communicatie met externe APIs verloopt.
 
->Reiziger (persoon)
-De gebruiker van de Triptop-applicatie.
-Start dit proces door een reis te boeken.
+> Reiziger (persoon)
+> De gebruiker van de Triptop-applicatie.
+> Start dit proces door een reis te boeken.
 
 > Triptop Web App (frontend)
-Technologie: React (JavaScript)
-Rol: Laat de gebruiker zijn reis samenstellen en verstuurt die info naar de backend.
-Gebruiker boekt een reis.
-Ontvangt uiteindelijk de betaallink of methode terug.
+> Technologie: React (JavaScript)
+> Rol: Laat de gebruiker zijn reis samenstellen en verstuurt die info naar de backend.
+> Gebruiker boekt een reis.
+> Ontvangt uiteindelijk de betaallink of methode terug.
 
->Reisbeheer API-applicatie (backend)
-Rol: Verwerkt alle logica rondom het boeken van een reis.
-Ontvangt de boekingsgegevens en handelt alles verder af met externe systemen en de database.
+> Reisbeheer API-applicatie (backend)
+> Rol: Verwerkt alle logica rondom het boeken van een reis.
+> Ontvangt de boekingsgegevens en handelt alles verder af met externe systemen en de database.
 
->Database (PostgreSQL)
-Slaat alle reisdata, wijzigingen en voorkeuren van de gebruiker op.
-Wordt gebruikt tijdens en na het boekingsproces.
+> Database (PostgreSQL)
+> Slaat alle reisdata, wijzigingen en voorkeuren van de gebruiker op.
+> Wordt gebruikt tijdens en na het boekingsproces.
 
->Externe Systemen die de API aanroept
+> Externe Systemen die de API aanroept
 
->Booking API (bijv. Booking.com, Airbnb)
-Voor het boeken van accommodaties.
-Boeking gerelateerde gegevens worden verstuurd.
+> Booking API (bijv. Booking.com, Airbnb)
+> Voor het boeken van accommodaties.
+> Boeking gerelateerde gegevens worden verstuurd.
 
->Vervoer API (NS, KLM, Uber)
-Voor het regelen van vervoer.
-Houdt vervoersdata bij en verwerkt wijzigingen.
+> Vervoer API (NS, KLM, Uber)
+> Voor het regelen van vervoer.
+> Houdt vervoersdata bij en verwerkt wijzigingen.
 
->Bezienswaardigheden API (TripAdvisor, Google Places)
-Voor excursies en toeristische informatie.
-Ophalen en beheren van attracties.
+> Bezienswaardigheden API (TripAdvisor, Google Places)
+> Voor excursies en toeristische informatie.
+> Ophalen en beheren van attracties.
 
->Horeca API (TheFork, OpenTable)
-Voor suggesties van restaurants en cafés.
-Gebruikt om horeca-informatie op te halen.
+> Horeca API (TheFork, OpenTable)
+> Voor suggesties van restaurants en cafés.
+> Gebruikt om horeca-informatie op te halen.
 
->Betalingsservice API (bijv. Stripe, Mollie)
-API stuurt betaallinks/transacties terug naar backend.
-De backend geeft die weer door naar de frontend.
+> Betalingsservice API (bijv. Stripe, Mollie)
+> API stuurt betaallinks/transacties terug naar backend.
+> De backend geeft die weer door naar de frontend.
 
->Kort overzicht van de flow:
+> Kort overzicht van de flow:
 
->De gebruiker boekt een reis.
+> De gebruiker boekt een reis.
 
->Web App stuurt de reisgegevens naar de backend.
+> Web App stuurt de reisgegevens naar de backend.
 
->Backend boekt hotels via Booking API.
+> Backend boekt hotels via Booking API.
 
->Backend vraagt betaling aan bij de betalingsservice.
+> Backend vraagt betaling aan bij de betalingsservice.
 
->Frontend ontvangt link om te betalen. 6–9. Backend verwerkt extra reisdata via andere externe APIs (vervoer, bezienswaardigheden, horeca). 
+> Frontend ontvangt link om te betalen. 6–9. Backend verwerkt extra reisdata via andere externe APIs (vervoer,
+> bezienswaardigheden, horeca).
 
 ### 7.2. Components
 
