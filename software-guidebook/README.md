@@ -131,23 +131,16 @@ Ons proof of concept word gemaakt met java en springboot
  Data word overgedragen via HTTP/JSON
  De aplicatie moet een webaplicatie worden
  
-> [!IMPORTANT]
-> Beschrijf zelf de beperkingen die op voorhand bekend zijn die invloed hebben op keuzes die wel of niet gemaakt kunnen of mogen worden.
 
 ## 6. Principles
  
  
-
-> [!IMPORTANT]
-> Beschrijf zelf de belangrijkste architecturele en design principes die zijn toegepast in de software.
 
 
 ## 7. Software Architecture
 
 ###     7.1. Containers
 
- [!IMPORTANT]
-Voeg toe: Container Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
 ![containerDiagram.png](..%2Fafb%2FcontainerDiagram.png)
 Dit diagram is een Container Diagram van het TripTop-systeem en laat zien hoe de verschillende onderdelen (containers) van het systeem samenwerken, en hoe ze communiceren met externe systemen.
 
@@ -186,7 +179,9 @@ Stuurt via JSON/HTTPS verzoeken naar de backend.
 ![dynamischContainerInloggen.png](..%2Fafb%2FdynamischContainerInloggen.png)
 ![dynamischeContainerReisBoeken.png](..%2Fafb%2FdynamischeContainerReisBoeken.png)
 ###     7.2. Components
-![componentDiagram.png](..%2Fafb%2FcomponentDiagram.png)![SOEX_Componentdiagram.png](..%2Fopdracht-diagrammen%2FSOEX_Componentdiagram.png)
+
+Afbeelding n Component Diagram 
+![Component Diagram Compleet.png](..%2Fafb%2FComponent%20Diagram%20Compleet.png)
 
 Wat zien we hier?
 TripTop Webapplicatie (React)
