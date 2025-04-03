@@ -178,6 +178,8 @@ Het Adapter helpt bij het beantwoorden van de volgende onderzoeksvragen:
 Het onderstaande component diagram weergeeft de complete integratie van het adapter patroon in het Triptop systeem.
 Hierin is zijn de adapter uitwerkingen van zowel van bezienswaardigheden als accommodaties te zien. Er is gekozen om
 hier het adapter patroon te gebruiken om zo mogelijk uitbreidingen (meer externe platformen) gemakkelijker te maken.
+
+Afbeelding n Component Diagram Adapter Patroon
 ![img_1.png](../bezienswaardigheden/Component%20Diagram%20Adapter.png)
 
 ##### Klasse diagram:
@@ -200,6 +202,7 @@ Toelichting:
 * AttractionService: Deze klasse zorgt ervoor dat de data uit de verschillende bezienswaardigheid adapters samen wordt
   gevoegd tot een lijst voor een overzicht van alle mogelijk bezienswaardigheden op de gegeven locatie.
 
+Afbeelding n Klasse Diagram Adapter Patroon
 ![img.png](../bezienswaardigheden/Class%20Diagram%20Adapater.png)
 
 ##### Sequentie Diagram
@@ -214,6 +217,7 @@ Toelichting:
 4. Hetzelfde proces wordt herhaald voor de TripAdvisorAdapter.
 5. Als beide lijsten van bezienswaardigheden zijn opgehaald, worden deze samengevoegd tot een lijst.
 
+Afbeelding n Sequentie Diagram Adapter Patroon
 ![img_2.png](../bezienswaardigheden/Sequence%20Diagram%20Adapter.png)
 
 
