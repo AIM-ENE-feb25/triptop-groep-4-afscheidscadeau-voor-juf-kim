@@ -127,9 +127,15 @@ Voordat deze casusomschrijving tot stand kwam, heeft de opdrachtgever de volgend
 
 ## 5. Constraints
 
-Ons proof of concept word gemaakt met java en springboot
- Data word overgedragen via HTTP/JSON
- De aplicatie moet een webaplicatie worden
+- Ons proof of concept wordt gemaakt met Java en Spring Boot  
+  Omdat we hier het meeste kennis van hebben en het voor ons duidelijkst is hoe we dingen moeten aanpassen.
+- De applicatie moet een REST API zijn  
+  Hier hebben we als groep het meeste ervaring mee en kunnen daarom het proof of concept het beste uitwerken als een REST API.
+- Data wordt overgedragen via HTTP/JSON  
+  In onze ervaring past dit het beste bij een REST API.
+- De applicatie moet een webapplicatie worden  
+  Deze keuze hebben we gemaakt omdat de applicatie waar we de frontend op baseren ook een webapplicatie is.
+
  
 
 ## 6. Principles
