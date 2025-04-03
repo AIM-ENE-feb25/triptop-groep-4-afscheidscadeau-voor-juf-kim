@@ -161,7 +161,7 @@ Accommodatie Beheer verwerkt de data.
 
 Accommodatie Repository slaat het lokaal op.
 
-BookingCom Service haalt het op van Booking.com.
+BookingCom Service haalt het op van Bookingcom.
 
 Externe API’s: BookingCom API, Airbnb API.
 
@@ -213,10 +213,10 @@ Duidelijke scheiding van verantwoordelijkheden
 In plaats van dat de Booking Component direct zelf queries doet of weet hoe accommodaties opgeslagen moeten worden, laat je dat over aan Accommodatie Beheer. Daardoor blijft de Booking Component puur gefocust op logica zoals: "welke accommodatie past bij deze reis?" en niet "hoe sla ik deze in de database?"
 
 Makkelijker uitbreiden
-Stel dat je straks ook accommodaties uit een andere externe API wilt halen (zoals een eigen TripTop CMS of een Booking.com scraper), dan kun je dat in de Accommodatie Beheer toevoegen zonder dat je de Booking Component hoeft te wijzigen. Dat houdt je code modulair.
+Stel dat je straks ook accommodaties uit een andere externe API wilt halen (zoals een eigen TripTop CMS of een Bookingcom scraper), dan kun je dat in de Accommodatie Beheer toevoegen zonder dat je de Booking Component hoeft te wijzigen. Dat houdt je code modulair.
 
 Data transformatie
-Deze tussenlaag kan data formatteren of omzetten voordat het de database ingaat of eruit komt. Bijvoorbeeld: data van de Booking.com API omzetten naar het juiste interne model voordat het wordt opgeslagen.
+Deze tussenlaag kan data formatteren of omzetten voordat het de database ingaat of eruit komt. Bijvoorbeeld: data van de Bookingcom API omzetten naar het juiste interne model voordat het wordt opgeslagen.
 
 Herbruikbaarheid
 Als meerdere onderdelen van je backend (bijv. een admin dashboard of een scraper) toegang willen tot accommodaties, dan kunnen ze allemaal de Accommodatie Beheer aanspreken — zonder zelf database-kennis te hoeven hebben.
