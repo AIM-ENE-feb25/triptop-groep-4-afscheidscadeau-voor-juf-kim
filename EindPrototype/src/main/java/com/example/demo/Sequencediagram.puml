@@ -1,15 +1,16 @@
 @startuml
 actor User
 participant BookingController
-participant Unirest
+participant Bookingcom
 participant JSONObject
 participant Decider
 participant FindNewBookingState
 participant FindNewBooking
+participant Booking
 
 User -> BookingController: checkAvailability(hotelId, checkin, checkout)
-BookingController -> Unirest: get(url)
-Unirest -> BookingController: HttpResponse<String>
+BookingController -> Bookingcom: get(url)
+Bookingcom -> BookingController: HttpResponse<String>
 BookingController -> JSONObject: new JSONObject(response.getBody())
 BookingController -> JSONObject: getJSONObject("data")
 BookingController -> JSONObject: getJSONArray("avDates")
@@ -23,8 +24,11 @@ alt avDates is null or empty
     BookingController -> User: "No availability found"
 else
     BookingController -> Decider: start(true)
+    Decider -> BookingState: handle(decider, true)
+    BookingState -> Booking: book()
+    Booking -> BookingState: "Booking a room"
+    BookingState -> Decider: setState(null)
     BookingController -> User: avDates.toString()
 end
 
-BookingController -> User: "Internal Server Error: " + e.getMessage() (if exception occurs)
 @enduml
