@@ -1,65 +1,24 @@
 @startuml
-!define RECTANGLE class
-!define COMPONENT component
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+title Systeem Component Diagram voor TripTop
 
-title C4 Component Diagram for Booking Application
+LAYOUT_WITH_LEGEND()
 
-' Define the system boundary
-package "Booking Application" {
+Container(webapp, "'TripTop' Webapplicatie", "JavaScript, React", "Stelt gebruikers in staat om reizen te plannen en accommodaties te boeken.")
 
-    ' Define the main components
-    COMPONENT(Main) {
-        Main : Spring Boot Application
-    }
+System_Boundary(triptop, "TripTop API Applicatie") {
 
-    COMPONENT(BookingController) {
-        BookingController : REST Controller
-    }
-
-    COMPONENT(Decider) {
-        Decider : State Management
-    }
-
-    COMPONENT(BookingState) {
-        BookingState : State
-    }
-
-    COMPONENT(FindNewBookingState) {
-        FindNewBookingState : State
-    }
-
-    COMPONENT(Booking) {
-        Booking : Booking Service
-    }
-
-    COMPONENT(FindNewBooking) {
-        FindNewBooking : Booking Replacement Service
-    }
-
-    COMPONENT(NoRoom) {
-        NoRoom : No Room Handler
-    }
-
-    COMPONENT(State) {
-        State : State Interface
-    }
-
-    ' Define external systems
-    COMPONENT(BookingAPI) {
-        BookingAPI : External Booking API
-    }
-
-    ' Define relationships
-    Main --> BookingController : "Starts"
-    BookingController --> BookingAPI : "Calls"
-    BookingController --> Decider : "Uses"
-    Decider --> BookingState : "Sets State"
-    Decider --> FindNewBookingState : "Sets State"
-    BookingState --> Booking : "Uses"
-    BookingState --> NoRoom : "Uses"
-    FindNewBookingState --> FindNewBooking : "Uses"
-    State <|-- BookingState
-    State <|-- FindNewBookingState
+    Component(bookingController, "Boeking Controller", "Java, Spring", "Behandelt boekingsverzoeken van gebruikers.")
+    Component(bookingComponent, "Boeking Component", "Java, Spring", "Bevat de bedrijfslogica voor het afhandelen van boekingen.")
+    Component(decider, "Decider", "Java, Spring", "Bevat de bedrijfslogica om de state af te handelen")
 }
+
+
+System_Ext(bookingAPI, "Booking API", "Biedt accommodatiegegevens via Bookingcom.")
+
+Rel(bookingAPI, bookingController, "2. Levert accommodatiegegevens", "JSON/HTTPS")
+Rel(webapp, bookingController, "1. Verstuurt boekingsverzoeken", "JSON/HTTPS")
+Rel(bookingController, decider, "3. Levert accommodatiegegevens", "JSON/HTTPS")
+Rel(decider, bookingComponent, "4. Verwerkt boekingslogica")
 
 @enduml
