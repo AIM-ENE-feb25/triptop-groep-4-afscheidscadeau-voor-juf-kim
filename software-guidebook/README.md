@@ -67,13 +67,20 @@ Voordat deze casusomschrijving tot stand kwam, heeft de opdrachtgever de volgend
 
 ## 5. Constraints
 
+Ons proof of concept word gemaakt met java en springboot
+ Data word overgedragen via HTTP/JSON
+ De aplicatie moet een webaplicatie worden
+ 
 > [!IMPORTANT]
 > Beschrijf zelf de beperkingen die op voorhand bekend zijn die invloed hebben op keuzes die wel of niet gemaakt kunnen of mogen worden.
 
 ## 6. Principles
+ 
+ 
 
 > [!IMPORTANT]
 > Beschrijf zelf de belangrijkste architecturele en design principes die zijn toegepast in de software.
+
 
 ## 7. Software Architecture
 
