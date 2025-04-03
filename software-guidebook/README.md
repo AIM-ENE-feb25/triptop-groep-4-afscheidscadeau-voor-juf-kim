@@ -127,8 +127,103 @@ Stuurt via JSON/HTTPS verzoeken naar de backend.
 ![dynamischeContainerReisBoeken.png](..%2Fafb%2FdynamischeContainerReisBoeken.png)
 ###     7.2. Components
 ![componentDiagram.png](..%2Fafb%2FcomponentDiagram.png)![SOEX_Componentdiagram.png](..%2Fopdracht-diagrammen%2FSOEX_Componentdiagram.png)
+
+Wat zien we hier?
+TripTop Webapplicatie (React)
+De gebruiker gebruikt deze frontend om z’n reis samen te stellen. Alles wat hij invoert (reisvoorkeuren, boekingen, etc.) wordt doorgestuurd naar de backend.
+
+Belangrijke componenten in de backend
+Login + Beveiliging
+Login Controller verwerkt inlogpogingen.
+
+Beveiliging Component controleert wachtwoorden etc.
+
+Authenticatie Repository slaat gebruikersgegevens op.
+
+Boeking Functionaliteit
+Boeking Controller regelt inkomende boekingsverzoeken.
+
+Boeking Component doet de logica erachter.
+
+Boeking Repository regelt het ophalen en opslaan in de database.
+
+Betalingen
+Betaal Controller start het betaalproces.
+
+Betaal Component verwerkt dat.
+
+Betaal Repository slaat het op.
+
+Via Stripe API wordt de betaling extern geregeld.
+
+Accommodaties
+Accommodatie Beheer verwerkt de data.
+
+Accommodatie Repository slaat het lokaal op.
+
+BookingCom Service haalt het op van Booking.com.
+
+Externe API’s: BookingCom API, Airbnb API.
+
+Notificaties
+Notificatie Service stuurt meldingen.
+
+Mail Component verstuurt e-mails (via MailPit bijv.).
+
+Nieuw toegevoegde componenten — Jouw bijdrage
+Strategiegebaseerde Selectie (Strategy Pattern)
+ReisplannerService: kiest de juiste strategie (bijv. snelste route).
+
+ReisPlannerController: ontvangt het verzoek van de gebruiker met hun voorkeur.
+
+Strategie Klassen:
+
+GoedkoopsteStrategie
+
+SnelsteStrategie
+
+BeschikbaarheidStrategie
+
+SelectieStrategie is de interface die dit allemaal verbindt.
+
+ReisOptie is het model dat al die info bevat (zoals prijs, reistijd, beschikbaarheid).
+
+Deze onderdelen zorgen ervoor dat het systeem op basis van gebruikersvoorkeuren zelf kan bepalen welke reisoptie het beste past.
+
+Externe API’s
+Hier haalt TripTop data vandaan over vervoersopties, verblijfplaatsen en restaurants:
+
+TripAdvisor API → info over excursies
+
+NS API, KLM API, Uber API → vervoer
+
+BookingCom API, Airbnb API → overnachtingen
+
+TheFork API, OpenTable API → horeca
+
+Toelichting:
+De Accommodatie Beheer component vormt een soort tussenlaag tussen:
+
+Business logica (Booking Component)
+
+Database interactie (Accommodatie Repository)
+
+Waarom is dat handig?
+Duidelijke scheiding van verantwoordelijkheden
+In plaats van dat de Booking Component direct zelf queries doet of weet hoe accommodaties opgeslagen moeten worden, laat je dat over aan Accommodatie Beheer. Daardoor blijft de Booking Component puur gefocust op logica zoals: "welke accommodatie past bij deze reis?" en niet "hoe sla ik deze in de database?"
+
+Makkelijker uitbreiden
+Stel dat je straks ook accommodaties uit een andere externe API wilt halen (zoals een eigen TripTop CMS of een Booking.com scraper), dan kun je dat in de Accommodatie Beheer toevoegen zonder dat je de Booking Component hoeft te wijzigen. Dat houdt je code modulair.
+
+Data transformatie
+Deze tussenlaag kan data formatteren of omzetten voordat het de database ingaat of eruit komt. Bijvoorbeeld: data van de Booking.com API omzetten naar het juiste interne model voordat het wordt opgeslagen.
+
+Herbruikbaarheid
+Als meerdere onderdelen van je backend (bijv. een admin dashboard of een scraper) toegang willen tot accommodaties, dan kunnen ze allemaal de Accommodatie Beheer aanspreken — zonder zelf database-kennis te hoeven hebben.
+
 > [!IMPORTANT]
 > Voeg toe: Component Diagram plus een Dynamic Diagram van een aantal scenario's inclusief begeleidende tekst.
+
 
 ###     7.3. Design & Code
 
