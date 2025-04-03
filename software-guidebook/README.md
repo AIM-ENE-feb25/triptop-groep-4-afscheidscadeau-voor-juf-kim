@@ -8,14 +8,74 @@ Dit software guidebook geeft een overzicht van de Triptop-applicatie. Het bevat 
 1. De architectuur van de infrastructuur en hoe de software kan worden geinstalleerd. 
 
 ## 2. Context
-![contextDiagram.png](..%2Fafb%2FcontextDiagram.png)
-> [!IMPORTANT]
-> Werk zelf dit hoofdstuk uit met context diagrammen en een beschrijving van de context van de software.
 
-Toelichting op de context van de software inclusief System Context Diagram:
-* Functionaliteit
-* Gebruikers
-* Externe systemen
+De Triptop reis planner web-applicatie biedt gebruikers een platform om hun reizen te plannen, accommodaties te boeken,
+vervoer te regelen en bezienswaardigheden te ontdekken, met behulp van externe API's.
+Dit systeem verzamelt de actuele data van verschillende boekings, vervoer, restaurant en bezienswaardigheidssites om zo
+gebruikers te voorzien van de meest recent data voor hun reis. De applicatie maakt gebruik van de volgende
+API-providers: BookingCom (scraper), TripAdvisor (scraper), TheFork, Open Table en Stripe voor betalingen.
+
+### Context Diagram
+
+Afbeelding 1 Context Diagram
+![contextDiagram.png](..%2Fafb%2FcontextDiagram.png)
+
+#### Toelichting:
+
+Gebruiker (Reiziger)
+
+De reiziger is de primaire gebruiker van de TripTop applicatie. Ze gebruiken de applicatie om:
+
+* Reizen te plannen via gegeven bouwstenen.
+* Verschillende reisopties, accommodaties, vervoersmogelijkheden en bezienswaardigheden te bekijken.
+* Reizen te boeken en beheren.
+
+De reiziger kan samen met hulp van de reisagent de reis boeken en ook hulp krijgen bij het plannen.
+
+Reisagent
+De reisagent ondersteunt de reiziger bij het samenstellen en boeken van hun reizen. Zo kan de reiziger via de reisagent
+een voorstel krijgen van een reisplan aan de hand van hun persoonlijke belangen.
+
+Triptop App
+
+De Triptop applicatie is het centrale systeem dat de interactie tussen de gebruiker en verschillende externe systemen
+mogelijk maakt. Het systeem doet het volgende:
+
+* Maakt het mogelijk voor de reiziger om hun reizen te plannen, accommodaties te boeken en bijbehorend vervoer te
+  regelen.
+* Verbindt met externe platforms via API's om zo de meest recente informatie te krijgen over de verschillende
+  reisinformatie.
+* Beheert boeking en maakt het eenvoudig voor de gebruiker om reizen te plannen.
+
+Externe Systemen
+
+Booking API (BookingCom)
+
+* BookingCom is de externe API van waaruit alle data over accommodaties wordt opgehaald.
+
+Airbnb API
+
+* Alternatief voor het boeken van accommodaties.
+
+Vervoer API's
+
+* NS API: Voor het ophalen van de data over het openbaar vervoer (bussen en treinen) binnen Nederland.
+* KLM API: Biedt vlucht informatie, waaronder tijden, prijzen en beschikbaarheid.
+* Uber API: Geeft gegevens over lokale taxi's, om zo makkelijk en goedkoper te kunnen reizen.
+
+Bezienswaardigheden API
+
+* TripAdvisor API: Biedt informatie over bezienswaardigheden en activiteiten, als musea, parken en excursies.
+* BookingCom API: Deze biedt daarnaast ook nog verschillende attractie data.
+
+Restaurant API
+
+* TheFork API: Voor het ophalen van restaurant data.
+* OpenTable API: Alternatief voor het ophalen van data, voor een grotere selectie eetgelegenheden.
+
+GoogleLogin (OAuth 2.0)
+
+* Voor het eenvoudig authenticeren van de gebruikers via Google, als alternatief van de login uit het systeem zelf.
 
 ## 3. Functional Overview
 
