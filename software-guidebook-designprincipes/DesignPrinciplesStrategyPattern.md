@@ -55,7 +55,7 @@ Dit vermindert afhankelijkheden en verhoogt flexibiliteit.
 ---
 
 ### Liskov Substitution Principle (LSP), Interface Segregation Principle (ISP)
-Deze principes zijn minder relevant in deze specifieke context:
+Deze principes zijn minder relevant in deze context:
 - LSP is impliciet toegepast: alle strategieën zijn vervangbaar via polymorfisme, zonder fouten.
 - ISP is niet echt aan de orde, aangezien `SelectieStrategie` een simpele interface is met slechts één methode.
 
