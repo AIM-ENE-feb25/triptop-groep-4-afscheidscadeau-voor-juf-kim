@@ -1,42 +1,44 @@
-@startuml C4_Elements
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+```@startuml C4_Elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
 
-title Context Diagram voor "Triptop" systeem
+title Component Diagram - Strategiegebaseerde Reisoptie Selectie (TripTop)
 
-SHOW_PERSON_OUTLINE()
 LAYOUT_WITH_LEGEND()
 
-Person(ReisAgent, "ReisAgent", "Een gebruiker die de reiziger kan helpen met het boeken en plannen van reizen")
+Container(webapp, "TripTop Webapplicatie", "JavaScript, React", "Stelt gebruikers in staat om reizen te plannen en accommodaties te boeken.")
 
-Person(Reiziger, "Reiziger", "Een gebruiker die reizen zoekt, boekt en beheert")
+System_Boundary(triptop, "Triptop Systeem") {
+    Component(reisPlannerController, "ReisPlannerController", "Java, Spring REST Controller", "Ontvangt filterverzoeken van de gebruiker en past de gekozen filterstrategie toe.")
+    Component(reisplannerService, "ReisplannerService", "Java, Spring Service", "Bevat de logica voor het toepassen van selectie strategieÃ«n op reisopties.")
 
-System(TriptopApp, "Triptop", "Een online reisplanner waarmee gebruikers zelf hun reis kunnen samenstellen, boeken en beheren")
+    Component(goedkoopsteStrategie, "GoedkoopsteStrategie", "Java Klasse (Strategy)", "Implementeert SelectieStrategie voor goedkoopste optie.")
+    Component(snelsteStrategie, "SnelsteStrategie", "Java Klasse (Strategy)", "Implementeert SelectieStrategie voor snelste optie.")
+    Component(beschikbaarheidStrategie, "BeschikbaarheidStrategie", "Java Klasse (Strategy)", "Implementeert SelectieStrategie voor beschikbare opties.")
 
-System_Ext(BookingComAPI, "Booking.com API", "Reserveren van accommodaties via Booking.com")
-System_Ext(AirbnbAPI, "Airbnb API", "Reserveren van accommodaties via Airbnb")
+    Component(reisOptieModel, "ReisOptie", "Java Klasse (Model)", "Bevat data van een enkele reisoptie, zoals prijs, tijd en beschikbaarheid.")
+    Component(selectieStrategieInterface, "SelectieStrategie", "Java Interface", "Definieert de strategie-interface voor reisoptie selectie.")
+
+    Component(notificatieService, "Notificatie Service", "Java, Spring", "Verstuurt meldingen en bevestigingen naar gebruikers.")
+    Component(mailComponent, "Mail Component", "Java, MailPit, Spring", "Verstuurt e-mails voor boekingsbevestigingen en notificaties.")
+}
 
 System_Ext(NSAPI, "NS API", "Voor treinroutes en OV informatie binnen Nederland")
 System_Ext(KLMAPI, "KLM API", "Voor vluchtinformatie en boekingen")
 System_Ext(UberAPI, "Uber API", "Voor lokale taxiritten")
 
-System_Ext(TripAdvisorAPI, "TripAdvisor API", "Voor toeristische informatie en excursies")
+Rel(webapp, reisPlannerController, "Verstuurt selectie/verzoek met strategie", "JSON/HTTPS")
+Rel(reisPlannerController, reisplannerService, "Geeft reisopties en strategie door")
+Rel(reisplannerService, selectieStrategieInterface, "Gebruikt strategie interface")
+Rel(selectieStrategieInterface, goedkoopsteStrategie, "Implementeert")
+Rel(selectieStrategieInterface, snelsteStrategie, "Implementeert")
+Rel(selectieStrategieInterface, beschikbaarheidStrategie, "Implementeert")
+Rel(reisplannerService, reisOptieModel, "Past strategie toe op lijst van opties")
 
-System_Ext(TheForkAPI, "TheFork API", "Voor het vinden van restaurants en maken van reserveringen")
-System_Ext(OpenTableAPI, "OpenTable API", "Voor reserveren bij cafés en eetgelegenheden")
+Rel(reisplannerService, notificatieService, "Stuurt notificatie bij selectie")
+Rel(notificatieService, mailComponent, "Stuurt bevestiging via mail")
 
-System_Ext(GoogleLogin, "Google Login (OAuth 2.0)", "Authenticatie van gebruikers via Google")
+Rel(reisplannerService, NSAPI, "Vraagt OV opties op")
+Rel(reisplannerService, KLMAPI, "Vraagt vluchtschema's op")
+Rel(reisplannerService, UberAPI, "Vraagt taxiritopties op")
 
-Rel(Reiziger, TriptopApp, "Plant, boekt en beheert reizen met")
-Rel(ReisAgent, TriptopApp, "Helpt samenstellen van reizen met")
-Rel(TriptopApp, BookingComAPI, "Boekt accommodaties via")
-Rel(TriptopApp, AirbnbAPI, "Boekt accommodaties via")
-Rel(TriptopApp, NSAPI, "Haalt OV-routes op via")
-Rel(TriptopApp, KLMAPI, "Haalt vluchtopties op via")
-Rel(TriptopApp, UberAPI, "Haalt taxigegevens op via")
-Rel(TriptopApp, TripAdvisorAPI, "Toont bezienswaardigheden via")
-Rel(TriptopApp, TheForkAPI, "Vindt restaurants via")
-Rel(TriptopApp, OpenTableAPI, "Reserveert eetgelegenheden via")
-Rel(TriptopApp, GoogleLogin, "Regelt login via")
-
-@enduml
-
+@enduml```
