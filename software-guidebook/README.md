@@ -631,13 +631,24 @@ query-ondersteuning nodig. PostgreSQL biedt hierin robuuste SQL-functionaliteite
 
 #### Context
 
-We willen het adapter pattern gebruiken om de volgende ontwerpvragen te beantwoorden: 
+We willen de adapter pattern gebruiken om de volgende ontwerpvragen te beantwoorden: 
 * Hoe zorg je ervoor dat je bij een wijziging in de datastructuur van een externe service niet de hele applicatie hoeft aan te passen?
 * Hoe zorg je ervoor dat je makkelijk een nieuwe externe service kan toevoegen? 
 
 In dit geval om BookingCom en tripAdvisor te integreren. Deze API's leveren de data in verschillende formaten, waardoor het moeilijk is om de data
 consistent weer te gegeven binnen ons systeem.
 
+Daarnaast maakt dit ook gebruik van de volgende design principes: 
+Single Responsibility Principle (SRP) 
+
+* De adapter pattern isoleert de interactie tussen de verschillende API's. Door deze elk een eigen Adapter klasse te geven.
+* Deze isolering zorgt ervoor dat alleen deze klasse hoeven worden aangepast als er veranderingen zijn aan de API.
+  
+Interface Segregation Principle (ISP)
+* De Adapter interface voor bezienswaardigheden defineert alleen de benodigde methodes, dit zorgt ervoor dat klasse die dit implementeren geen irrelevant functionaliteiten hoeven te ondersteunen. 
+
+ Open/Closed Principle (OCP)
+ * Het adapter pattern zorgt ervoor dat er makkelijk nieuwe externe services kunnen worden toegevoegd zonder hiervoor een groot deel bestaande code te hoeven aanpassen.
 #### Overwogen Opties
 
 | Voordelen                                                                                                                                                              | Nadelen                                                                                                                                                                                 |
@@ -660,7 +671,7 @@ Geaccepteerd
 Dit pattern maakt het mogelijk om data van verschillende providers te integreren zonder hoofdfunctionaliteiten van het
 systeem aan te passen. Daarnaast zorgt het voor consistentie binnen de applicatie.
 
-### ADR: Waarom kiezen voor het Strategy Pattern
+### ADR-003 Waarom kiezen voor het Strategy Pattern
 
 **Datum:** 28-03-2025  
 **Status:** Geaccepteerd
