@@ -299,8 +299,8 @@ Het onderstaande component diagram weergeeft de complete integratie van het adap
 Hierin is zijn de adapter uitwerkingen van zowel van bezienswaardigheden als accommodaties te zien. Er is gekozen om
 hier het adapter-patroon te gebruiken om zo mogelijk uitbreidingen (meer externe platformen) gemakkelijker te maken.
 
-Afbeelding n Component Diagram Adapter Patroon
-![Component Diagram Adapter.png](..%2Fafb%2FComponent%20Diagram%20Adapter.png)
+Afbeelding n Component Diagram Adapter Patroon (Alleen de relevante componenten)
+![Component Diagram Adapater Pattern Ingezoomed.png](..%2Fafb%2FComponent%20Diagram%20Adapater%20Pattern%20Ingezoomed.png)
 
 ##### Klasse diagram:
 
