@@ -936,5 +936,33 @@ aangepast hoeven te worden, in dit geval de service.
 
 ## 9. Deployment, Operation and Support
 
-> [!TIP]
-> Zelf beschrijven van wat je moet doen om de software te installeren en te kunnen runnen.
+Adapter (Jeroen):GET http://localhost:8081/api/attractions/Nijmegen
+
+Strategy (Reno):POST http://localhost:8081/reisopties/filter
+- Body (raw): {
+"strategie": "snelste",
+"reisopties": [
+{
+"naam": "Auto",
+"prijs": 50.0,
+"reistijdInMinuten": 120,
+"beschikbaar": true
+},
+{
+"naam": "Trein",
+"prijs": 30.0,
+"reistijdInMinuten": 90,
+"beschikbaar": false
+},
+{
+"naam": "Bus",
+"prijs": 20.0,
+"reistijdInMinuten": 180,
+"beschikbaar": true
+}
+]
+}
+
+State (Marijn):GET http://localhost:8081/checkAvailability?checkin=2026-04-02&checkout=2026-04-05&hotelId=5218600&adults=1
+
+Facade (Bohdain):GET  http://localhost:8081/travel/routes?currentLocation=cuijk&destination=nijmegen
