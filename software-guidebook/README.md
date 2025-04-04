@@ -139,8 +139,18 @@ Voordat deze casusomschrijving tot stand kwam, heeft de opdrachtgever de volgend
  
 
 ## 6. Principles
- 
- 
+
+- Single Responsibility (SRP)
+- Ook zorgen we er voor de interfaces zo specifiek mogelijk zijn, zodat classes die deze implementeren alleen de relevante methode hoeven te implementeren en niet een groot aantal onnodige methodes.
+
+- waar
+  - wij hebben bij al onze code dit principe geprobeerd toe te passen. Wi hebben bijvoorbeeld voor het boeken gebruik gemaakt van een controller voor de communicatie met de front-end, de service om logica op gekregen data uit te voeren en een facade om data van een API op te schonen en door te geven
+- Hoe
+  - wij hebben dit principe toegepast door te kijken naar wat er gebeurt moet worden en deze op te splitsen. Bij het verwerken van data moet er data opgehaald worden, opgeschoond en bruikbaar gemaakt worden ,de data moet verwerkt worden, en dit moet ergens geplaatst worden. Dit zijn allemaal functies waarmee je de code op kan splitsen
+- waarom
+  - door de code op te splitsen op functionaliteit zorg je er voor dat er minder fout kan gaan, elke class draagt namelijk maar 1 verantwoordelijkheid. Daarnaast geeft dit ook meer overzichtelijkheid omdat je bij de code kan zoeken naar de functionaliteit die je aan wilt passen of wilt debuggen. als laatste zorgt dit er voor dat je beter over je code na moet denken omdat niet alles in een enkele class gedaan wordt, maar op een logische manier moet worden opgesplitst  
+
+
 
 
 ## 7. Software Architecture
@@ -357,6 +367,40 @@ Hiernaast word alles duidelijk in het diagram aangegeven
 Afbeelding n Sequentie Diagram State pattern
 ![Sequence Diagram State.png](../afb/Sequence%20Diagram%20State.png)
 
+#### Facade Pattern
+
+##### Component diagram
+component diagram voor reis-boek systeem met facade pattern
+![](../FacadePatternPrototypeBo/ComponentDiagram.png)
+Het component diagram laat zien welke componenten door het route systeem gebruikt gaan worden. Er wordt hier gebruik gemaakt van een facade om de response van de API te verwerken
+Er wordt hier gebruik gemaakt van een controller voor het krijgen van request van de front-end, een service om iets met de data te doen, een facade om alle API responces als lijst aan de service te geven,
+en als laatste 3 API's die mogelijke routes meegeven aan de facade.
+
+##### Class diagram
+class diagram voor reis-boek systeem met facade pattern
+![](../FacadePatternPrototypeBo/ClassDiagram.png)
+Dit diagram laat de classes zien die gebruikt worden voor het boeken van vervoer. Er wordt hier gebruik gemaakt van een facade om er voor te zorgen dat er zonder moeite API’s kunnen worden toegevoegd en dit naar door kan worden gegeven aan de service.
+Er wordt hier gebruik gemaakt van een controller voor het krijgen van request van de front-end, een service om iets met de data te doen, een facade om alle API responces als lijst aan de service te geven,
+en als laatste 3 API's die mogelijke routes meegeven aan de facade.
+
+##### Container diagram
+container diagram voor reis-boek systeem met gebruik van facade pattern
+![](../FacadePatternPrototypeBo/ContainerDiagram.png)
+Het container diagram laat de vervoer boek functionaliteit in hoofdlijnen zien. Hier wordt gebruik gemaakt van de front en backend, de actor en API’s relevant aan deze functionaliteit
+
+##### Sqeuence diagram
+sequence diagram voor reis-boek systeem met facade pattern
+![](../FacadePatternPrototypeBo/SequenceDiagram.png)
+Het sequentie diagram laat zien hoe er door de code heen gelopen worden. Hier worden alle componenten met de calls ertussen laten zien.
+- de gebruiker stuurt met de frontend een request naar de controller
+- de controller vraagt de informatie van de service aan
+- de service vraagt de API data van de facade
+- de facade gaat alle API's af een stuurt een lijst met data
+- de facade stuurt de data terug naar de service
+- de service stuurt de data naar de contoller
+- de gebruiker krijgt de data te zien
+
+
 
 ## 8. Architectural Decision Records
 
@@ -565,36 +609,52 @@ Bij mijn designvraag werkte de pattern erg goed. Ik kon hiermee snel hetgene mak
 Er worden meer states gebruikt en klasse worden aangeroepen gebasseerd op wat er aan de state word terug gegeven. Dit is fijn want er is een soort van centrale plek die over de onderdelen gaat. Het nadeel is wel dat het allemaal stap voor stap gaat en het pas niet goed bij elk onderdeel.
 
 
-### 8.5. ADR-005 TITLE
+### 8.5. ADR-005 Keuze design pattern makkelijk wijzigen van API
 
-> [!TIP]
-> These documents have names that are short noun phrases. For example, "ADR 1: Deployment on Ruby on Rails 3.0.10" or "ADR 9: LDAP for Multitenant Integration". The whole ADR should be one or two pages long. We will write each ADR as if it is a conversation with a future developer. This requires good writing style, with full sentences organized into paragraphs. Bullets are acceptable only for visual style, not as an excuse for writing sentence fragments. (Bullets kill people, even PowerPoint bullets.)
+**Datum:** 03-04-2025  
+**Status:**  ACCEPTED
 
-#### Context
+---
 
-> [!TIP]
-> This section describes the forces at play, including technological, political, social, and project local. These forces are probably in tension, and should be called out as such. The language in this section is value-neutral. It is simply describing facts about the problem we're facing and points out factors to take into account or to weigh when making the final decision.
+##  Context
+Hoe zorg je dat een wijziging in een of meerdere APIs niet leidt tot een grote wijziging in de applicatie?
+Specifieker: hoe zorg je ervoor dat een wijziging in de API van een externe service niet leidt tot
+een wijziging in de front-end maar flexibel kan worden opgevangen door de back-end?
 
-#### Considered Options
 
-> [!TIP]
-> This section describes the options that were considered, and gives some indication as to why the chosen option was selected.
+##  Overwogen opties
+- adapter pattern
 
-#### Decision
+### voordelen
+- overzichtelijkheid: een facade is een enkele klasse waarmee de opsgeschoonde data van de API kan worden doorgegeven
+- consistentie: de facade zorgt er voor dat alle logica voor het opschonen en formatteren van de request op een centrale plek staat
+- geen effect op andere code: de facade zorgt er voor dat alle requests bij elkaar komen en als een lijst worden teruggegeven.
+  het verwijderen of toevoegen van API's heeft dus geen effect op andere code.
 
-> [!TIP]
-> This section describes our response to the forces/problem. It is stated in full sentences, with active voice. "We will …"
+### Nadelen
+- minder bruikbaar voor andere, soortgelijke systemen: de facade pattern is specifiek voor een enkele use case en kan hier niet op worden aangepast
+- moeilijke te debuggen: alles logica voor het verzamelen en debuggen staat in een enkele klassen wat debuggen moeilijker kan maken
 
-#### Status
+## Beslissing
+De fascade zorgt er voor dat alle data die een API meegeeft eerst wordt opgeschoond voordat deze wordt doorgegeven aan
+code die dit nodig heeft, hierdoor kunnen API's ook makkelijk worden toegevoegd zonder dat er grote aanpassingen gemaakt
+hoeven te worden aan de back- of front-end code zelf.
 
-> [!TIP]
-> A decision may be "proposed" if the project stakeholders haven't agreed with it yet, or "accepted" once it is agreed. If a later ADR changes or reverses a decision, it may be marked as "deprecated" or "superseded" with a reference to its replacement.
+De facade geeft altijd een lijst met alle mogelijke reizen op een bruikbare manier terug aan de service. dit zorgt er
+voor dat er in princiepe 0 aanpassingen gemaakt hoeven te worden aan de backend code, de code wordt namelijk al in de
+facade opgeschoond en in de lijst gezet met de andere API's
 
-#### Consequences
+hoewel de facade veel voordelen met zich mee brengt heeft het alsnog ook zijn nadelen. Een groot nadeel is dat de code onoverzichtelijk wordt
+als er gebruik wordt gemaakt van te veel API's. dit kan als gevolg hebben dat de applicatie moeilijker wordt om te debuggen. in dit opzicht was de adapter pattern
+dus beter geweest.
 
-> [!TIP]
-> This section describes the resulting context, after applying the decision. All consequences should be listed here, not just the "positive" ones. A particular decision may have positive, negative, and neutral consequences, but all of them affect the team and project in the future.
+## Gevolgen
 
+Door gebruik te maken van de facade pattern krijgen relevante service classes een overzichtelijke lijst van alle mogelijke routes, van alle API's.
+dit zorgt er voor dat de service class het makkelijk kan verwerken en terug kan geven naar de gebruiker. Doordat er gebruik is gemaakt van een facade hoeft er geen
+gebruik gemaakt te worden van meerdere API's calls, alleen de facade hoeft aangeroepen te worden voor alle resultaten van alle reis API's.
+Dit heeft ook als effect dat aanpassingen in de API's geen gevolgen hebben voor de backend code waardoor er op dat vlak ook
+minder fout kan gaan.
 ## 9. Deployment, Operation and Support
 
 > [!TIP]
