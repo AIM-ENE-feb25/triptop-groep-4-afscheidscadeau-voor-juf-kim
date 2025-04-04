@@ -1,0 +1,33 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Container Diagram van TripTop voor Reis plan System
+
+Person(user, "Reiziger", "Vraagt een route aan")
+
+System_Boundary(travel_system, "TripTop route systeem") {
+
+    Container(web, "Travel Web App", "React (JavaScript/React)", "Biedt gebruikers de mogelijkheid om hun reis te boeken")
+
+    Container(travel_controller, "Travel Controller", "Java MVC", "Geeft request door van frontend naar service")
+
+    Container(travel_service, "Travel Service", "Java MVC", "voert logica uit op gekregen data om het nuttig te maken")
+
+    Container(travel_facade, "Travel Facade", "Java MVC", "integreert meedere API's en geeft een lijst met alle routes terug in een bruikbaar formaat")
+
+}
+
+System_Ext(NSAPI, "NS API", "Geeft trein route data")
+System_Ext(KLMAPI, "KLM API", "Geeft vlucht data")
+System_Ext(UberAPI, "Uber API", "Geeft Uber data")
+
+Rel(user, web, "vraagt route aan")
+Rel(web, travel_controller, "doet request", "HTTPS/JSON")
+Rel(travel_controller, travel_service, "geeft request door", "HTTPS/JSON")
+Rel(travel_service, travel_facade, "vraagt relevante data", "HTTPS/JSON")
+
+Rel(travel_facade, NSAPI, "Vraagt trein route data", "JSON/HTTPS")
+Rel(travel_facade, KLMAPI, "Vraagt vlucht route data", "JSON/HTTPS")
+Rel(travel_facade, UberAPI, "Vraagt Uber route data", "JSON/HTTPS")
+
+@enduml

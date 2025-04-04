@@ -1,0 +1,29 @@
+@startuml
+
+actor User
+
+participant "TravelController" as TC
+participant "TravelService" as TS
+participant "TravelFacade" as TF
+participant "NSAPI" as NS
+participant "KLMAPI" as KLM
+participant "UberAPI" as Uber
+
+User -> TC : fetchRoutes(currentLocation, destination)
+TC -> TS : fetchRoutes(currentLocation, destination)
+TS -> TF : fetchRoutes(currentLocation, destination)
+
+TF -> NS : retrieveRoutes(currentLocation, destination)
+NS --> TF : NSRoutes
+
+TF -> KLM : retrieveRoutes(currentLocation, destination)
+KLM --> TF : KLMRoutes
+
+TF -> Uber : retrieveRoutes(currentLocation, destination)
+Uber --> TF : UberRoutes
+
+TF --> TS : List<Routes>
+TS --> TC : List<Routes>
+TC --> User : List<Routes>
+
+@enduml
