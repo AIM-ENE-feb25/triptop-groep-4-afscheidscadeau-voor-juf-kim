@@ -345,6 +345,61 @@ Toelichting:
 Afbeelding n Sequentie Diagram Adapter Patroon
 ![Sequence Diagram Adapter.png](..%2Fafb%2FSequence%20Diagram%20Adapter.png)
 
+---
+
+#### Strategy Patroon
+
+Het Strategy Pattern is toegepast om gebruikers van TripTop flexibel te laten kiezen hoe hun reisopties worden gefilterd. Denk hierbij aan het selecteren van de **goedkoopste**, **snelste**, of gewoon **beschikbare** optie.
+
+Deze aanpak sluit aan bij de volgende ontwerpvraag:
+
+> **"Hoe zorg je voor een zo kort mogelijke reisroute waarbij gebruik gemaakt wordt van alle bouwstenen?  
+> Hoe zorg je ervoor dat de reisroute makkelijk aangepast kan worden als reisafstand geen issue is?"**
+
+Door strategieën los te trekken van de rest van het systeem, kunnen we gedrag eenvoudig wisselen, uitbreiden en testen.
+
+---
+
+#### Component Diagram 
+
+Het onderstaande component diagram laat zien hoe de verschillende onderdelen van de strategiegebaseerde reisoptie-selectie samenwerken binnen TripTop.
+
+De controller ontvangt het filterverzoek met de gekozen strategie (bijv. "snelste"), waarna de service de juiste strategie toepast op een lijst met reisopties. De strategieën zijn losgekoppeld en makkelijk uit te breiden of te vervangen.
+
+Afbeelding n Component Diagram Strategy Patroon (Alleen de relevante componenten)  
+![C4_Elements-Component_Diagram___Strategiegebaseerde_Reisoptie_Selectie__TripTop_.png](../StrategyPatternPrototype/opdrachtDiagrammen/C4_Elements-Component_Diagram___Strategiegebaseerde_Reisoptie_Selectie__TripTop_.png)
+
+##### Klasse diagram
+
+Het onderstaande klassen-diagram toont de structuur van het Strategy Pattern zoals toegepast op reisoptie-selectie.  
+De `SelectieStrategie` interface definieert de methode `selecteer()`, en elke concrete strategie implementeert deze met zijn eigen logica (bijv. goedkoopste, snelste of beschikbaarheid).
+
+De `ReisplannerService` maakt gebruik van deze strategie zonder te weten welke implementatie erachter zit. Dit maakt het makkelijk om nieuwe strategieën toe te voegen zonder bestaande code aan te passen.
+
+Toelichting:
+
+* **SelectieStrategie**: Interface die alle strategieën implementeren. Bepaalt hoe gefilterd wordt.
+* **GoedkoopsteStrategie / SnelsteStrategie / BeschikbaarheidStrategie**: Concrete strategieën met eigen filterlogica.
+* **ReisplannerService**: Verwerkt een lijst met opties en gebruikt de gekozen strategie om de juiste selectie terug te geven.
+
+Afbeelding n Klasse Diagram Strategy Patroon  
+![Strategie-reisoptie-classDiagram-Strategy_Pattern___Reisoptie_Selectie__Triptop_.png](../StrategyPatternPrototype/opdrachtDiagrammen/Strategie-reisoptie-classDiagram-Strategy_Pattern___Reisoptie_Selectie__Triptop_.png)
+
+##### Sequentie Diagram
+
+Het sequentie-diagram hieronder toont het verloop van een strategiegebaseerd filterverzoek.
+
+Toelichting:
+
+1. De gebruiker stuurt een filterverzoek met een strategie.
+2. De controller zet de strategie in de service.
+3. De service haalt reisopties op uit de database of ontvangt deze via het verzoek.
+4. De strategie wordt toegepast op de lijst met opties.
+5. De gefilterde opties worden teruggestuurd naar de gebruiker.
+
+Afbeelding n Sequentie Diagram Strategy Patroon  
+![Strategie-pattern-sequenceDiagram-Sequence_Diagram___Strategie_voor_Reisoptie_Selectie__Triptop_.png](../StrategyPatternPrototype/opdrachtDiagrammen/Strategie-pattern-sequenceDiagram-Sequence_Diagram___Strategie_voor_Reisoptie_Selectie__Triptop_.png)
+
 ## 8. Architectural Decision Records
 
 ### 8.1. ADR-001 Keuze voor PostgreSQL als databasesysteem
