@@ -385,8 +385,8 @@ bij het Open/Closed Principle zoals benoemd in het ADR.
 Daarnaast ondersteunt dit componentdiagram de ontwerpvraag uit het ADR:
 
 “Hoe zorg je ervoor dat de reisroute makkelijk aangepast kan worden als reisafstand geen issue is?”
-Afbeelding n Component Diagram Strategy Patroon (Alleen de relevante componenten)  
-!![ComponentDiagram.png](../StrategyPatternPrototype/opdrachtDiagrammen/ComponentDiagram.png)
+Afbeelding Component Diagram Strategy Patroon (Alleen de relevante componenten)  
+![ComponentDiagram.png](../StrategyPatternPrototype/opdrachtDiagrammen/ComponentDiagram.png)
 
 ##### Klasse diagram
 
@@ -406,7 +406,7 @@ De bestaande code onaangetast blijft bij toevoegingen of wijzigingen (Open/Close
 
 Gedrag eenvoudig te wijzigen is zonder afhankelijk te zijn van de concrete klassen (Dependency Inversion Principle).
 
-Afbeelding n Klasse Diagram Strategy Patroon  
+Afbeelding Klasse Diagram Strategy Patroon  
 ![ClassDiagramStrategy.png](../StrategyPatternPrototype/opdrachtDiagrammen/ClassDiagramStrategy.png)
 
 ##### Sequentie Diagram
