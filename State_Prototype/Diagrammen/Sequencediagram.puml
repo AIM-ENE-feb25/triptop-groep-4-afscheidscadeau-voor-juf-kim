@@ -1,0 +1,34 @@
+@startuml
+actor User
+participant BookingController
+participant Bookingcom
+participant JSONObject
+participant Decider
+participant FindNewBookingState
+participant FindNewBooking
+participant Booking
+
+User -> BookingController: checkAvailability(hotelId, checkin, checkout)
+BookingController -> Bookingcom: get(url)
+Bookingcom -> BookingController: HttpResponse<String>
+BookingController -> JSONObject: new JSONObject(response.getBody())
+BookingController -> JSONObject: getJSONObject("data")
+BookingController -> JSONObject: getJSONArray("avDates")
+
+alt avDates is null or empty
+    BookingController -> Decider: start(false)
+    Decider -> FindNewBookingState: handle(decider, false)
+    FindNewBookingState -> FindNewBooking: bookingReplacement()
+    FindNewBooking -> FindNewBookingState: "We found a new booking for you"
+    FindNewBookingState -> Decider: setState(null)
+    BookingController -> User: "No availability found"
+else
+    BookingController -> Decider: start(true)
+    Decider -> BookingState: handle(decider, true)
+    BookingState -> Booking: book()
+    Booking -> BookingState: "Booking a room"
+    BookingState -> Decider: setState(null)
+    BookingController -> User: avDates.toString()
+end
+
+@enduml

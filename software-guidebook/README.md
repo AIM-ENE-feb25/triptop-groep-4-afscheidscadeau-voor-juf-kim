@@ -301,7 +301,8 @@ Toelichting:
 Afbeelding n Klasse Diagram Adapter Patroon
 ![Class Diagram Adapter.png](..%2Fafb%2FClass%20Diagram%20Adapter.png)
 
-##### Sequentie Diagram
+##### Sequentie Diagram Adapter patroon
+
 
 Het sequentie-diagram hieronder toont hoe de bezienswaardigheidsadapter verloopt.
 
@@ -316,6 +317,49 @@ Toelichting:
 Afbeelding n Sequentie Diagram Adapter Patroon
 ![Sequence Diagram Adapter.png](..%2Fafb%2FSequence%20Diagram%20Adapter.png)
 
+
+#### State patroon
+
+Het State patroon helpt bij het beantwoorden van de volgende onderzoeksvragen:
+
+* Hoe bied je de gebruiker op basis van zelfgekozen bouwstenen alternatieve bouwstenen aan, bijvoorbeeld als een bepaalde overnachting niet beschikbaar is of om een keuze te geven tussen vervoer per auto, trein o
+
+##### Component Diagram:
+Alle logica van de aplicatie na de decider staat in
+Booking Component. Denk hierbij aan. Wat gebeurt er als er
+wel of geen kamers beschikbaar zijn
+
+Afbeelding n Component Diagram State
+![Component Diagram State.png](../afb/Component%20Diagram%20State.png)
+
+##### Klasse diagram:
+
+In dit klasse diagram kan je zien hoe ik de State pattern heb toegepast.
+Ik heb gekozen om dit uit te werken met de ontwerpvraag "Hoe bied je de gebruiker op basis van zelfgekozen bouwstenen alternatieve bouwstenen aan, bijvoorbeeld als een bepaalde overnachting niet beschikbaar is of om een keuze te geven tussen vervoer per auto, trein of bus?"
+Ik heb gekozen voor gekozen om voor
+een interface "State" gekozen omdat ik dit onderdeel vaker gebruik
+en het ook direct kan verbinden met de decider
+De parameters die de controller nodig heeft die komen vanuit bij het request via
+Postman
+
+
+Afbeelding n Klasse Diagram Pattern Patroon
+![Class Diagram State.png](../afb/Class%20Diagram%20State.png)
+
+
+
+##### Sequentie Diagram State patroon
+
+In dit diagram kan je duidelijk zien wat er wanneer geberut
+Er word veel vanuit de BookingController gedaan
+en pas daarna word er beslist wat er gebeurt.
+Hiernaast word alles duidelijk in het diagram aangegeven
+
+Afbeelding n Sequentie Diagram Adapter State
+![Sequence Diagram State.png](../afb/Sequence%20Diagram%20State.png)
+
+
+
 ## 8. Architectural Decision Records
 
 ### 8.1. ADR-001 Keuze voor PostgreSQL als databasesysteem
@@ -323,7 +367,34 @@ Afbeelding n Sequentie Diagram Adapter Patroon
 **Datum:** 21-03-2025  
 **Status:** Geaccepteerd
 
+---**Datum:** 31-03-2025  
+**Status:**  ACCEPTED
+
 ---
+
+##  Context
+
+Binnen het TripTop-project willen we op een flexibele manier kunnen omgaan met verchillende logica bij bijvoorbeeld het kiezen van reisopties of betalingsverwerking.
+Er zijn meerdere patterns beschikbaar om dit bereiken. Daarom hebben we vier bekende design patterns overwogen, Deze patterns moesten we toepassen als prototype:
+
+## Overwogen Opties
+
+| Voordelen                                                                                                                                                                           | Nadelen                                                                                                                                                                                                     |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Duidelijkheid:<br/>De verantwoordelijkheden worden duidelijk gescheden hierdoor is het goed en makkelijk om te zien welk onderdeel waarvoor verantwoordelijk is                     | Aantal klassen:<br/> Omdat elke state zijn eigen klasse is heb je erg veel extra klasse nodig omdat elk onderdeel of state zijn eigen klasse heeft                                                          |
+| Makkelijk uit te breiden:<br/> Wanneer je State gebruikt is het makkelijk om je project uit te breiden. Het enige wat je moet doen is een nieuwe state aan je project toe te voegen | Testen:<br/>Het is moeilijker om je code te Unit testen. Dit is omdat je ervoor moet zorgen dat de code die je wilt testen in de juiste state zit wanneer je deze test.                                     |
+| Makkelijk te debuggen:<br/> Aangezien elk onderdeel een duidelijke functie heeft is het makkelijk om te debuggen omdat het erg duidelijk is welk onderdeel wat doen.                | Niet goed voor kleine projecten:<br/>Dit pattern is niet goed om te gebruiken bij kleinere projecten. Hier kwam ik met mijn prototype achter. Het project werd alleen maar onnodig groter en ingewikkelder. |
+
+
+##  Beslissing
+Bij mijn designvraag werkte de pattern erg goed. Ik kon hiermee snel hetgene maken wat ik wilde en de state werd fijn beigehouden vanuit andere classes. De pattern paste goed bij mijn vraag en ik kon hierom snel veder. hetgeen wat ik wel moeilijk vond aan dit onderdeel is dat state een beetje overkill was
+
+---
+
+##  Gevolgen
+Er worden meer states gebruikt en klasse worden aangeroepen gebasseerd op wat er aan de state word terug gegeven. Dit is fijn want er is een soort van centrale plek die over de onderdelen gaat. Het nadeel is wel dat het allemaal stap voor stap gaat en het pas niet goed bij elk onderdeel.
+
+
 
 ####  Context
 
@@ -472,9 +543,11 @@ Kortom: met Strategy kunnen we flexibel gedrag netjes organiseren, zonder dat de
 ---
 
 ##  Context
-
 Binnen het TripTop-project willen we op een flexibele manier kunnen omgaan met verchillende logica bij bijvoorbeeld het kiezen van reisopties of betalingsverwerking.
 Er zijn meerdere patterns beschikbaar om dit bereiken. Daarom hebben we vier bekende design patterns overwogen, Deze patterns moesten we toepassen als prototype:
+
+## Ontwerpvraag
+Hoe bied je de gebruiker op basis van zelfgekozen bouwstenen alternatieve bouwstenen aan, bijvoorbeeld als een bepaalde overnachting niet beschikbaar is of om een keuze te geven tussen vervoer per auto, trein o
 
 ## Overwogen Opties
 
