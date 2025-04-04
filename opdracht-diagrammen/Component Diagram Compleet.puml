@@ -68,7 +68,7 @@ Rel(bookingComponent, bookingRepo, "Beheert boekingsdata")
 Rel(bookingRepo, database, "Opslag en ophalen van boekingsgegevens", "SQL")
 
 Rel(bookingComponent, notificatieService, "Stuurt notificaties over boekingen")
-Rel(notificatieService, mailComponent, "Verstuurt boekingsbevestigingen via e-mail")
+Rel(notificatieService, mailComponent, "Verstuurt o.a. boekingsbevestigingen, reisdata, betaal informatie via e-mail")
 
 Rel(webapp, betaalController, "Start betalingsproces", "JSON/ HTTPS")
 Rel(betaalController, betaalComponent, "Verwerkt betalingstransacties")
@@ -111,7 +111,6 @@ Rel(selectieStrategieInterface, beschikbaarheidStrategie, "Implementeert")
 Rel(reisplannerService, reisOptieModel, "Past strategie toe op lijst van opties")
 
 Rel(reisplannerService, notificatieService, "Stuurt notificatie bij selectie")
-Rel(notificatieService, mailComponent, "Stuurt bevestiging via mail")
 
 Rel(reisplannerService, NSAPI, "Vraagt OV opties op")
 Rel(reisplannerService, KLMAPI, "Vraagt vluchtschema's op")
