@@ -533,8 +533,11 @@ query-ondersteuning nodig. PostgreSQL biedt hierin robuuste SQL-functionaliteite
 
 #### Context
 
-Het probleem waarvoor we het Adapter Pattern kunnen gebruiken is, het integreren van verschillende API's, in dit geval
-BookingCom en tripAdvisor. Deze API's leveren de data in verschillende formaten, waardoor het moeilijk is om de data
+De problemen waarvoor we het Adapter Pattern kunnen gebruiken is: 
+* Hoe zorg je ervoor dat je bij een wijziging in de datastructuur van een externe service niet de hele applicatie hoeft aan te passen?
+* Hoe zorg je ervoor dat je makkelijk een nieuwe externe service kan toevoegen? 
+
+In dit geval om BookingCom en tripAdvisor te integreren. Deze API's leveren de data in verschillende formaten, waardoor het moeilijk is om de data
 consistent weer te gegeven binnen ons systeem.
 
 #### Overwogen Opties
