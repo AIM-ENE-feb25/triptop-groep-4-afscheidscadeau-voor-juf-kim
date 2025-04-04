@@ -161,40 +161,63 @@ als belangrijk:
 # Interface Segregation Principle (ISP)
 
 ### Waarom gebruiken we het ISP?
-Het Interface Segregation Principle helpt ons duidelijk te maken welk onderdeel welke verantwoordelijkheden heeft en welke interface daarbij hoort. Dit maakt het makkelijker om te zien welke klassen afhankelijk zijn van welke onderdelen, en zorgt ervoor dat klassen alleen afhankelijk zijn van de interfaces die ze daadwerkelijk gebruiken.
+
+Het Interface Segregation Principle helpt ons duidelijk te maken welk onderdeel welke verantwoordelijkheden heeft en
+welke interface daarbij hoort. Dit maakt het makkelijker om te zien welke klassen afhankelijk zijn van welke onderdelen,
+en zorgt ervoor dat klassen alleen afhankelijk zijn van de interfaces die ze daadwerkelijk gebruiken.
 
 ### Hoe past het ISP toe?
-In plaats van één interface met veel verantwoordelijkheden, splits je deze op in meerdere, gerichte interfaces. Hierdoor implementeren klassen alleen de methodes die relevant zijn voor hun specifieke taken.
+
+In plaats van één interface met veel verantwoordelijkheden, splits je deze op in meerdere, gerichte interfaces. Hierdoor
+implementeren klassen alleen de methodes die relevant zijn voor hun specifieke taken.
 
 ---
 
 # Single Responsibility Principle (SRP)
 
 ### Waarom gebruiken we het SRP?
-Het SRP zorgt ervoor dat de interfaces zo specifiek mogelijk zijn, zodat de klassen die deze implementeren alleen de relevante methodes hoeven te implementeren en niet een groot aantal onnodige methodes.
+
+Het SRP zorgt ervoor dat de interfaces zo specifiek mogelijk zijn, zodat de klassen die deze implementeren alleen de
+relevante methodes hoeven te implementeren en niet een groot aantal onnodige methodes.
 
 ### Hoe past het SRP toe?
-Bij onze code hebben we dit principe toegepast door taken op te splitsen. Bijvoorbeeld, voor het boeken hebben we een controller voor de communicatie met de front-end, een service voor de logica op de verkregen data, en een facade om data van een API op te schonen en door te geven.
+
+Bij onze code hebben we dit principe toegepast door taken op te splitsen. Bijvoorbeeld, voor het boeken hebben we een
+controller voor de communicatie met de front-end, een service voor de logica op de verkregen data, en een facade om data
+van een API op te schonen en door te geven.
 
 ### Waarom is het belangrijk?
-Door de code op te splitsen op basis van functionaliteit zorg je ervoor dat er minder fouten ontstaan, aangezien elke klasse slechts één verantwoordelijkheid draagt. Dit verhoogt de overzichtelijkheid, omdat je gericht kunt zoeken naar de functionaliteit die je wilt aanpassen of debuggen. Bovendien zorgt het ervoor dat je beter nadenkt over de structuur van je code, omdat niet alles in één enkele klasse wordt gedaan, maar op een logische en overzichtelijke manier is opgesplitst.
+
+Door de code op te splitsen op basis van functionaliteit zorg je ervoor dat er minder fouten ontstaan, aangezien elke
+klasse slechts één verantwoordelijkheid draagt. Dit verhoogt de overzichtelijkheid, omdat je gericht kunt zoeken naar de
+functionaliteit die je wilt aanpassen of debuggen. Bovendien zorgt het ervoor dat je beter nadenkt over de structuur van
+je code, omdat niet alles in één enkele klasse wordt gedaan, maar op een logische en overzichtelijke manier is
+opgesplitst.
 
 ---
 
 # Open Closed Principle (OCP)
 
 ### Waarom gebruiken we het OCP?
-Het Open Closed Principle stelt dat code open moet zijn voor uitbreiding, maar gesloten voor aanpassing. Dit betekent dat we nieuwe functionaliteiten kunnen toevoegen zonder de bestaande code te wijzigen, wat het risico op bugs vermindert.
+
+Het Open Closed Principle stelt dat code open moet zijn voor uitbreiding, maar gesloten voor aanpassing. Dit betekent
+dat we nieuwe functionaliteiten kunnen toevoegen zonder de bestaande code te wijzigen, wat het risico op bugs
+vermindert.
 
 ### Waarom is het belangrijk?
+
 - **Voorkomt bugs in bestaande code**
 - **Maakt het makkelijk om nieuwe functionaliteit toe te voegen**
 - **Verbetert onderhoud en testbaarheid**
 
 ### Voorbeeld (zoals bij TripTop):
-Als we een nieuwe filterstrategie willen toevoegen, kunnen we eenvoudig een nieuwe klasse toevoegen zonder de oude code aan te passen. Hierdoor blijft de bestaande functionaliteit intact en kunnen we de nieuwe functionaliteit uitbreiden zonder risico's.
+
+Als we een nieuwe filterstrategie willen toevoegen, kunnen we eenvoudig een nieuwe klasse toevoegen zonder de oude code
+aan te passen. Hierdoor blijft de bestaande functionaliteit intact en kunnen we de nieuwe functionaliteit uitbreiden
+zonder risico's.
 
 ### Kortom:
+
 Het OCP zorgt voor stabiele, uitbreidbare en onderhoudsvriendelijke software.
 
 ## 7. Software Architecture
@@ -206,29 +229,33 @@ Dit diagram is een Container Diagram van het TripTop-systeem en laat zien hoe de
 van het systeem samenwerken, en hoe ze communiceren met externe systemen.
 
 #### Toelichting
+
 Acteur
+
 * Reiziger: De eindgebruiker van het systeem. Deze persoon stelt reizen samen, boekt accommodaties en beheert zijn reis.
 
 Binnen het TripTop systeem
 
 * Triptop Web App (React)
-Frontend van de applicatie.
-Hier beheert de gebruiker zijn reis.
-Stuurt via JSON/HTTPS verzoeken naar de backend.
+  Frontend van de applicatie.
+  Hier beheert de gebruiker zijn reis.
+  Stuurt via JSON/HTTPS verzoeken naar de backend.
 
 Reisbeheer API-applicatie (Java MVC)
+
 * Backend van het systeem.
-Ontvangt API-verzoeken van de frontend.
-Verwerkt reisgegevens, regelt boekingen en beheert wijzigingen van de reis.
+  Ontvangt API-verzoeken van de frontend.
+  Verwerkt reisgegevens, regelt boekingen en beheert wijzigingen van de reis.
 
 Database (PostgreSQL):
+
 * Slaat alle gebruikersdata, voorkeuren, boekingen en wijzigingen op.
-Alleen toegankelijk voor de backend, niet voor de gebruiker of externe APIs.
+  Alleen toegankelijk voor de backend, niet voor de gebruiker of externe APIs.
 
 Externe systemen (APIs)
 
 * De backend communiceert met verschillende externe APIs om gegevens op te halen of acties uit te voeren:
-Bookingcom API & Airbnb API: Voor het boeken van accommodaties.
+  Bookingcom API & Airbnb API: Voor het boeken van accommodaties.
 
 * NS API, KLM API & Uber API: Voor vervoersinformatie (trein, vlucht, taxi).
 
@@ -237,11 +264,12 @@ Bookingcom API & Airbnb API: Voor het boeken van accommodaties.
 * TheFork API & OpenTable API: Voor horecagegevens, zoals restaurants en cafés.
 
 Google Login (OAuth 2.0)
+
 * Voor authenticatie van gebruikers.Frontend van de applicatie.
-Hier beheert de gebruiker zijn reis.
-Stuurt via JSON/HTTPS verzoeken naar de backend.
-![dynamischContainerInloggen.png](..%2Fafb%2FdynamischContainerInloggen.png)
-![dynamischeContainerReisBoeken.png](..%2Fafb%2FdynamischeContainerReisBoeken.png)
+  Hier beheert de gebruiker zijn reis.
+  Stuurt via JSON/HTTPS verzoeken naar de backend.
+  ![dynamischContainerInloggen.png](..%2Fafb%2FdynamischContainerInloggen.png)
+  ![dynamischeContainerReisBoeken.png](..%2Fafb%2FdynamischeContainerReisBoeken.png)
 
 ### 7.2. Components
 
@@ -295,7 +323,10 @@ Notificaties
 
 #### Adapter pattern
 
-Het gebruik van het Adapter pattern in TripTop is gebaseerd op het Architectural Decision Record - 002 Gebruik van Adapter Pattern met betrekking tot bezienswaardigheden, waarin is vastgesteld dat het adapter pattern de beste manier is om de integratie van externe services te beheren. Dit zorgt er namelijk voor dat het ophalen van de data uit de API's flexibel gaat en aanpassingen aan API niet leiden tot grote veranderingen in de applicatie.
+Het gebruik van het Adapter pattern in TripTop is gebaseerd op het Architectural Decision Record - 002 Gebruik van
+Adapter Pattern met betrekking tot bezienswaardigheden, waarin is vastgesteld dat het adapter pattern de beste manier is
+om de integratie van externe services te beheren. Dit zorgt er namelijk voor dat het ophalen van de data uit de API's
+flexibel gaat en aanpassingen aan API niet leiden tot grote veranderingen in de applicatie.
 
 Het Adapter pattern helpt bij het beantwoorden van de volgende onderzoeksvragen:
 
@@ -354,7 +385,8 @@ Afbeelding n Sequentie Diagram Adapter pattern
 
 #### Strategy Patroon
 
-Het Strategy Pattern is toegepast om gebruikers van TripTop flexibel te laten kiezen hoe hun reisopties worden gefilterd. Denk hierbij aan het selecteren van de **goedkoopste**, **snelste**, of gewoon **beschikbare** optie.
+Het Strategy Pattern is toegepast om gebruikers van TripTop flexibel te laten kiezen hoe hun reisopties worden
+gefilterd. Denk hierbij aan het selecteren van de **goedkoopste**, **snelste**, of gewoon **beschikbare** optie.
 
 Deze aanpak sluit aan bij de volgende ontwerpvraag:
 
@@ -367,7 +399,7 @@ Door strategieën los te trekken van de rest van het systeem, kunnen we gedrag e
 
 #### Component Diagram
 
-Het onderstaande component diagram laat zien hoe de strategiekeuze door de gebruiker via de controller wordt verwerkt en 
+Het onderstaande component diagram laat zien hoe de strategiekeuze door de gebruiker via de controller wordt verwerkt en
 doorgegeven aan de service. Deze past vervolgens de gekozen strategie toe op een lijst met reisopties.
 
 De drie concrete strategieën zijn:
@@ -378,8 +410,10 @@ SnelsteStrategie
 
 BeschikbaarheidStrategie
 
-Deze structuur sluit direct aan op het ADR-keuzen-in-strategy waarin gekozen is voor het Strategy Pattern om flexibele route-optimalisatie mogelijk te maken. 
-Door de strategie los te koppelen van de service (Separation of Concerns), kunnen we nieuwe strategieën toevoegen zonder bestaande code aan te passen — wat perfect aansluit 
+Deze structuur sluit direct aan op het ADR-keuzen-in-strategy waarin gekozen is voor het Strategy Pattern om flexibele
+route-optimalisatie mogelijk te maken.
+Door de strategie los te koppelen van de service (Separation of Concerns), kunnen we nieuwe strategieën toevoegen zonder
+bestaande code aan te passen — wat perfect aansluit
 bij het Open/Closed Principle zoals benoemd in het ADR.
 
 Daarnaast ondersteunt dit componentdiagram de ontwerpvraag uit het ADR:
@@ -392,11 +426,14 @@ Afbeelding Component Diagram Strategy Patroon (Alleen de relevante componenten)
 
 Het klassen-diagram hieronder toont hoe het Strategy Pattern is opgebouwd:
 
-De SelectieStrategie interface zorgt ervoor dat alle strategieklassen dezelfde methode selecteer() implementeren. Dit maakt het systeem flexibel en stelt de ReisplannerService in staat om tijdens runtime van gedrag te wisselen.
+De SelectieStrategie interface zorgt ervoor dat alle strategieklassen dezelfde methode selecteer() implementeren. Dit
+maakt het systeem flexibel en stelt de ReisplannerService in staat om tijdens runtime van gedrag te wisselen.
 
-Elke concrete strategie (zoals GoedkoopsteStrategie) bevat zijn eigen logica. Dit maakt elke strategie afzonderlijk testbaar, wat een belangrijk punt is uit het ADR.
+Elke concrete strategie (zoals GoedkoopsteStrategie) bevat zijn eigen logica. Dit maakt elke strategie afzonderlijk
+testbaar, wat een belangrijk punt is uit het ADR.
 
-De ReisplannerService werkt op de interface (SelectieStrategie) en niet op specifieke implementaties — dit is een directe toepassing van het principe “Program to interfaces, not implementations” zoals benoemd in het ADR.
+De ReisplannerService werkt op de interface (SelectieStrategie) en niet op specifieke implementaties — dit is een
+directe toepassing van het principe “Program to interfaces, not implementations” zoals benoemd in het ADR.
 
 Deze aanpak zorgt ervoor dat:
 
@@ -421,7 +458,9 @@ De service gebruikt de gekozen strategie om de lijst te filteren.
 
 De gebruiker ontvangt het resultaat.
 
-Deze flow maakt duidelijk dat de logica volledig verschoven is naar de strategieklassen. De controller en service blijven generiek en herbruikbaar. Dit is een concrete toepassing van het Separation of Concerns principe, wat als voordeel benoemd is in het ADR.
+Deze flow maakt duidelijk dat de logica volledig verschoven is naar de strategieklassen. De controller en service
+blijven generiek en herbruikbaar. Dit is een concrete toepassing van het Separation of Concerns principe, wat als
+voordeel benoemd is in het ADR.
 
 Daarnaast biedt dit ontwerp ruimte voor uitbreiding, zoals beschreven in het ADR:
 
@@ -446,7 +485,6 @@ Alle logica van de aplicatie na de decider staat in
 Booking Component. Denk hierbij aan. Wat gebeurt er als er
 wel of geen kamers beschikbaar zijn
 
-
 Afbeelding n Component Diagram State
 ![Component Diagram State.png](../afb/Component%20Diagram%20State.png)
 
@@ -461,8 +499,8 @@ een interface "State" gekozen omdat ik dit onderdeel vaker gebruik
 en het ook direct kan verbinden met de decider
 De parameters die de controller nodig heeft die komen vanuit bij het request via
 Postman.
-In het ADR geef ik als nadeel aan dat er extra classes gebruikt worden wanneer dit pattern gebruikt word en dit zoe je goed terug in mijn klasse diagram
-
+In het ADR geef ik als nadeel aan dat er extra classes gebruikt worden wanneer dit pattern gebruikt word en dit zoe je
+goed terug in mijn klasse diagram
 
 Afbeelding n Klasse Diagram State Pattern
 
@@ -481,7 +519,6 @@ Afbeelding n Sequentie Diagram State pattern
 
 ![Sequence Diagram State.png](../afb/Sequence%20Diagram%20State.png)
 
-
 #### Facade Pattern
 
 ##### Component diagram
@@ -492,7 +529,8 @@ Het component diagram laat zien welke componenten door het route systeem gebruik
 gemaakt van een facade om de response van de API te verwerken
 Er wordt hier gebruik gemaakt van een controller voor het krijgen van request van de front-end, een service om iets met
 de data te doen, een facade om alle API responces als lijst aan de service te geven,
-en als laatste 3 API's die mogelijke routes meegeven aan de facade. De keuze achter de facade wordt in ADR005 beredeneerd.
+en als laatste 3 API's die mogelijke routes meegeven aan de facade. De keuze achter de facade wordt in ADR005
+beredeneerd.
 
 ##### Class diagram
 
@@ -503,7 +541,8 @@ facade om er voor te zorgen dat er zonder moeite API’s kunnen worden toegevoeg
 de service.
 Er wordt hier gebruik gemaakt van een controller voor het krijgen van request van de front-end, een service om iets met
 de data te doen, een facade om alle API responces als lijst aan de service te geven,
-en als laatste 3 API's die mogelijke routes meegeven aan de facade. De keuze achter de facade wordt in ADR005 beredeneerd.
+en als laatste 3 API's die mogelijke routes meegeven aan de facade. De keuze achter de facade wordt in ADR005
+beredeneerd.
 
 ##### Container diagram
 
@@ -517,7 +556,8 @@ en backend, de actor en API’s relevant aan deze functionaliteit
 sequence diagram voor reis-boek systeem met facade pattern
 ![](../FacadePatternPrototype/SequenceDiagram.png)
 Het sequentie diagram laat zien hoe er door de code heen gelopen worden. Hier worden alle componenten met de calls
-ertussen laten zien. er wordt gebruik gemaakt van een facade om de api responces op te halen en schoon te maken voor gebruik voor de service.
+ertussen laten zien. er wordt gebruik gemaakt van een facade om de api responces op te halen en schoon te maken voor
+gebruik voor de service.
 De keuze achter de facade wordt in ADR005 beredeneerd.
 
 - de gebruiker stuurt met de frontend een request naar de controller
@@ -631,24 +671,33 @@ query-ondersteuning nodig. PostgreSQL biedt hierin robuuste SQL-functionaliteite
 
 #### Context
 
-We willen de adapter pattern gebruiken om de volgende ontwerpvragen te beantwoorden: 
-* Hoe zorg je ervoor dat je bij een wijziging in de datastructuur van een externe service niet de hele applicatie hoeft aan te passen?
-* Hoe zorg je ervoor dat je makkelijk een nieuwe externe service kan toevoegen? 
+We willen de adapter pattern gebruiken om de volgende ontwerpvragen te beantwoorden:
 
-In dit geval om BookingCom en tripAdvisor te integreren. Deze API's leveren de data in verschillende formaten, waardoor het moeilijk is om de data
+* Hoe zorg je ervoor dat je bij een wijziging in de datastructuur van een externe service niet de hele applicatie hoeft
+  aan te passen?
+* Hoe zorg je ervoor dat je makkelijk een nieuwe externe service kan toevoegen?
+
+In dit geval om BookingCom en tripAdvisor te integreren. Deze API's leveren de data in verschillende formaten, waardoor
+het moeilijk is om de data
 consistent weer te gegeven binnen ons systeem.
 
-Daarnaast maakt dit ook gebruik van de volgende design principes: 
-Single Responsibility Principle (SRP) 
+Daarnaast maakt dit ook gebruik van de volgende design principes:
+Single Responsibility Principle (SRP)
 
-* De adapter pattern isoleert de interactie tussen de verschillende API's. Door deze elk een eigen Adapter klasse te geven.
+* De adapter pattern isoleert de interactie tussen de verschillende API's. Door deze elk een eigen Adapter klasse te
+  geven.
 * Deze isolering zorgt ervoor dat alleen deze klasse hoeven worden aangepast als er veranderingen zijn aan de API.
-  
-Interface Segregation Principle (ISP)
-* De Adapter interface voor bezienswaardigheden defineert alleen de benodigde methodes, dit zorgt ervoor dat klasse die dit implementeren geen irrelevant functionaliteiten hoeven te ondersteunen. 
 
- Open/Closed Principle (OCP)
- * Het adapter pattern zorgt ervoor dat er makkelijk nieuwe externe services kunnen worden toegevoegd zonder hiervoor een groot deel bestaande code te hoeven aanpassen.
+Interface Segregation Principle (ISP)
+
+* De Adapter interface voor bezienswaardigheden defineert alleen de benodigde methodes, dit zorgt ervoor dat klasse die
+  dit implementeren geen irrelevant functionaliteiten hoeven te ondersteunen.
+
+Open/Closed Principle (OCP)
+
+* Het adapter pattern zorgt ervoor dat er makkelijk nieuwe externe services kunnen worden toegevoegd zonder hiervoor een
+  groot deel bestaande code te hoeven aanpassen.
+
 #### Overwogen Opties
 
 | Voordelen                                                                                                                                                              | Nadelen                                                                                                                                                                                 |
@@ -686,9 +735,11 @@ In TripTop willen we flexibel omgaan met keuzes van gebruikers. Denk aan dingen 
 - Moet er betaald worden via **Stripe**, **iDEAL**, of een andere provider?
 
 Voor al die gevallen heb je verschillende strategieën om je gekozen doel te bereiken.
-Ook zijn hierbij belangrijke designprincipes toegepast zoals Single Responsibility Principle (SRP) en Open Closed Principle (OCP).
+Ook zijn hierbij belangrijke designprincipes toegepast zoals Single Responsibility Principle (SRP) en Open Closed
+Principle (OCP).
 
 ### Ontwerp vraag
+
 **"Hoe zorg je voor een zo kort mogelijke reisroute waarbij gebruik gemaakt wordt van alle bouwstenen?
 Hoe zorg je ervoor dat de reisroute makkelijk aangepast kan worden als reisafstand geen issue is?"**
 
@@ -696,17 +747,18 @@ Hoe zorg je ervoor dat de reisroute makkelijk aangepast kan worden als reisafsta
 
 ### Overwogen Aspecten – Strategy Pattern voor Routeplanning
 
-| Aspect                                      | Voordelen                                                                                       | Nadelen                                                                  |
-|---------------------------------------------|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| **Flexibele route-optimalisatie**           | Strategieën kunnen gebaseerd zijn op o.a. tijd, afstand, beschikbaarheid of voorkeuren           | Vereist meerdere strategieklassen voor elk type logica                   |
-| **Aanpasbaarheid op gebruikerswens**        | Gebruiker of systeem kan tijdens runtime bepalen welke route-logica gebruikt moet worden         | Meer logica om gebruikerskeuze om te zetten naar juiste strategie        |
-| **Scheidt routeberekening van logica**      | Route-algoritmes zitten los van de rest van de business logica (Separation of Concerns)          | Kans op duplicatie als niet goed gedeeld wordt tussen strategieën        |
-| **Uitbreidbaarheid met nieuwe scenario’s**  | Nieuwe soorten routevoorkeuren (bijv. “eco”, “sightseeing first”, “geen overnachtingen”) zijn makkelijk toe te voegen | Kan verwarrend worden als het aantal strategieën te groot wordt          |
-| **Testbaarheid van routestrategieën**       | Elke routestrategie is zelfstandig te testen, los van UI en andere systemen                     | Afhankelijk van mockdata of simulatie voor complete route-validatie      |
+| Aspect                                     | Voordelen                                                                                                             | Nadelen                                                             |
+|--------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
+| **Flexibele route-optimalisatie**          | Strategieën kunnen gebaseerd zijn op o.a. tijd, afstand, beschikbaarheid of voorkeuren                                | Vereist meerdere strategieklassen voor elk type logica              |
+| **Aanpasbaarheid op gebruikerswens**       | Gebruiker of systeem kan tijdens runtime bepalen welke route-logica gebruikt moet worden                              | Meer logica om gebruikerskeuze om te zetten naar juiste strategie   |
+| **Scheidt routeberekening van logica**     | Route-algoritmes zitten los van de rest van de business logica (Separation of Concerns)                               | Kans op duplicatie als niet goed gedeeld wordt tussen strategieën   |
+| **Uitbreidbaarheid met nieuwe scenario’s** | Nieuwe soorten routevoorkeuren (bijv. “eco”, “sightseeing first”, “geen overnachtingen”) zijn makkelijk toe te voegen | Kan verwarrend worden als het aantal strategieën te groot wordt     |
+| **Testbaarheid van routestrategieën**      | Elke routestrategie is zelfstandig te testen, los van UI en andere systemen                                           | Afhankelijk van mockdata of simulatie voor complete route-validatie |
 
 ---
 
 ### Toegepaste Design Principles
+
 Single Responsibility Principle (SRP)
 Elke klasse heeft één duidelijke verantwoordelijkheid. Bijvoorbeeld:
 
@@ -716,11 +768,15 @@ De ReisplannerService verwerkt de reisopties.
 
 Elke strategieklasse doet precies één ding: bepalen op basis van een criterium wat de juiste reisoptie is.
 
-Voor externe APIs wordt een aparte facade gebruikt om data op te schonen en bruikbaar te maken voor de rest van het systeem.
+Voor externe APIs wordt een aparte facade gebruikt om data op te schonen en bruikbaar te maken voor de rest van het
+systeem.
 
-We hebben dit principe toegepast door eerst te analyseren welke stappen nodig zijn in een proces (zoals data ophalen, opschonen, verwerken en terugsturen), en deze logischerwijs op te splitsen in aparte klassen. Hierdoor is de code overzichtelijker, minder foutgevoelig en makkelijker te onderhouden of aan te passen.
+We hebben dit principe toegepast door eerst te analyseren welke stappen nodig zijn in een proces (zoals data ophalen,
+opschonen, verwerken en terugsturen), en deze logischerwijs op te splitsen in aparte klassen. Hierdoor is de code
+overzichtelijker, minder foutgevoelig en makkelijker te onderhouden of aan te passen.
 
 ### Open Closed Principle (OCP)
+
 De strategieklassen zijn hier een goed voorbeeld van OCP:
 
 Ze zijn open voor uitbreiding — je kunt altijd een nieuwe strategie toevoegen.
@@ -729,7 +785,8 @@ Maar ze zijn gesloten voor aanpassing — bestaande code hoeft niet gewijzigd te
 
 In de context van TripTop betekent dit:
 
-Wil je een nieuwe strategie (zoals een milieuvriendelijke optie)? Dan voeg je gewoon een nieuwe klasse toe die SelectieStrategie implementeert.
+Wil je een nieuwe strategie (zoals een milieuvriendelijke optie)? Dan voeg je gewoon een nieuwe klasse toe die
+SelectieStrategie implementeert.
 
 Geen wijzigingen in bestaande logica, dus minder kans op bugs.
 
@@ -741,7 +798,8 @@ Dit maakt de code testbaarder, uitbreidbaar en stabiel.
 
 Met deze overwegingen in gedachten gaan het strategy pattern toepassen op deze technologie.
 
-Dit patroon is handig als je hetzelfde probleem op meerdere manieren wilt oplossen. Je stopt elke manier in een losse klasse, en je kunt makkelijk wisselen
+Dit patroon is handig als je hetzelfde probleem op meerdere manieren wilt oplossen. Je stopt elke manier in een losse
+klasse, en je kunt makkelijk wisselen
 tussen die strategieën zonder dat je de rest van de code moet aanpassen.
 
 ---
@@ -750,7 +808,8 @@ tussen die strategieën zonder dat je de rest van de code moet aanpassen.
 
 ### Voordelen
 
-- Makkelijk uit te breiden: wil je in de toekomst een extra strategie (bijv. eco-vriendelijk reizen of iets anders raars)? Dan voeg je gewoon een nieuwe klasse toe.
+- Makkelijk uit te breiden: wil je in de toekomst een extra strategie (bijv. eco-vriendelijk reizen of iets anders
+  raars)? Dan voeg je gewoon een nieuwe klasse toe.
 - Je hoeft niet meer `if`-jes en `switch`es in te bouwen voor elk geval.
 - De logica zit vanaf nu netjes los van de rest van je code.
 - Je kunt het ook goed testen per strategie.
@@ -762,7 +821,8 @@ tussen die strategieën zonder dat je de rest van de code moet aanpassen.
 
 ---
 
-Kortom: met Strategy kunnen we flexibel gedrag netjes organiseren, zonder dat de code een rommeltje wordt. En dat past goed bij hoe TripTop in elkaar zit.
+Kortom: met Strategy kunnen we flexibel gedrag netjes organiseren, zonder dat de code een rommeltje wordt. En dat past
+goed bij hoe TripTop in elkaar zit.
 
 ### 8.4. ADR-004 Waarom kiezen voor het State pattern
 
@@ -870,7 +930,6 @@ In de code zelf wordt ook gebruik gemaakt van het single responsibility principl
 class maar 1 functie draagt. in dit geval is de functie die de facade draagt om de API responce op te schonen zodat deze
 probleemloos door de service gebruikt kan worden, zonder dat er door het aanpassen van 1 functie de functies elders
 aangepast hoeven te worden, in dit geval de service.
-
 
 ## 9. Deployment, Operation and Support
 
