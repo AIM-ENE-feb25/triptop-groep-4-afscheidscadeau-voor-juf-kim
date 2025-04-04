@@ -183,7 +183,25 @@ Google Login (OAuth 2.0): Voor authenticatie van gebruikers.Frontend van de appl
 Hier beheert de gebruiker zijn reis.
 Stuurt via JSON/HTTPS verzoeken naar de backend.
 ![dynamischContainerInloggen.png](..%2Fafb%2FdynamischContainerInloggen.png)
+Dit diagram gaat over de inlog functionaliteit van TripTop, er is hier besloten gebruik te maken een OAuth 2.0 service. Dit is de meest gebruikte authenticatie manier op dit moment. Wij maken daarnaast ook gebruik van onze eigen database. de reden hiervoor staat niet in het diagram zelf maar dit wordt gebruik om ook onze eigen authenticatie te kunnen regelen, zodat gebruikers niet verplicht een externe service moeten gebruiken.
+
+Er is hier gebruik gemaakt van de web app voor de gebruikers interface, de API applicatie voor het ophalen van requests van de webapp en teruggeven van relevante data, een database voor het ophalen en opslaan van users en de externa api om ook een externe login provider aan te kunnen bieden.
+
 ![dynamischeContainerReisBoeken.png](..%2Fafb%2FdynamischeContainerReisBoeken.png)
+Dit diagram gaat over de reis boek functionaliteit van TripTop. Voor het boeken van een reis maken wij gebruik van een simpele applicatie die data van meerdere API’s ophaalt, dit verwerkt en terug stuurt naar de gebruiker.
+
+Er is hier gebruik gemaakt van de web app voor de gebruikers interface, de API applicatie voor het ophalen van requests van de webapp, het opvragen van relevante data van externe API's en teruggeven van relevante data.
+Daarnaast is er ook gebruik gemaakt van de volgende externe API's:
+- BookingCom API: voor het reserveren van accomodaties via Booking.com
+- Airbnb API: voor het reserveren van accomodaties via Airbnb
+- NS API: voor het opzoeken, inzien en boeken van trein tickets
+- KLM API: voor het opzoeken, inzien en boeken van vluchten
+- Uber API: voor het boeken van uber ritten
+- TripAdvisor API: voor opvragen van toeristische informatie en excursies
+- Stripe API: voor betaalmogelijkheid binnen TripTop
+- TheFork API: voor het opzoeken en reserveren van restaurants
+- OpenTable API: voor het opzoeken en reserveren van restaurants
+
 ###     7.2. Components
 
 Afbeelding n Component Diagram 
@@ -494,36 +512,52 @@ Bij mijn designvraag werkte de pattern erg goed. Ik kon hiermee snel hetgene mak
 Er worden meer states gebruikt en klasse worden aangeroepen gebasseerd op wat er aan de state word terug gegeven. Dit is fijn want er is een soort van centrale plek die over de onderdelen gaat. Het nadeel is wel dat het allemaal stap voor stap gaat en het pas niet goed bij elk onderdeel.
 
 
-### 8.5. ADR-005 TITLE
+### 8.5. ADR-005 Keuze design pattern makkelijk wijzigen van API
 
-> [!TIP]
-> These documents have names that are short noun phrases. For example, "ADR 1: Deployment on Ruby on Rails 3.0.10" or "ADR 9: LDAP for Multitenant Integration". The whole ADR should be one or two pages long. We will write each ADR as if it is a conversation with a future developer. This requires good writing style, with full sentences organized into paragraphs. Bullets are acceptable only for visual style, not as an excuse for writing sentence fragments. (Bullets kill people, even PowerPoint bullets.)
+**Datum:** 03-04-2025  
+**Status:**  ACCEPTED
 
-#### Context
+---
 
-> [!TIP]
-> This section describes the forces at play, including technological, political, social, and project local. These forces are probably in tension, and should be called out as such. The language in this section is value-neutral. It is simply describing facts about the problem we're facing and points out factors to take into account or to weigh when making the final decision.
+##  Context
+Hoe zorg je dat een wijziging in een of meerdere APIs niet leidt tot een grote wijziging in de applicatie?
+Specifieker: hoe zorg je ervoor dat een wijziging in de API van een externe service niet leidt tot
+een wijziging in de front-end maar flexibel kan worden opgevangen door de back-end?
 
-#### Considered Options
 
-> [!TIP]
-> This section describes the options that were considered, and gives some indication as to why the chosen option was selected.
+##  Overwogen opties
+- adapter pattern
 
-#### Decision
+### voordelen
+- overzichtelijkheid: een facade is een enkele klasse waarmee de opsgeschoonde data van de API kan worden doorgegeven
+- consistentie: de facade zorgt er voor dat alle logica voor het opschonen en formatteren van de request op een centrale plek staat
+- geen effect op andere code: de facade zorgt er voor dat alle requests bij elkaar komen en als een lijst worden teruggegeven.
+  het verwijderen of toevoegen van API's heeft dus geen effect op andere code.
 
-> [!TIP]
-> This section describes our response to the forces/problem. It is stated in full sentences, with active voice. "We will …"
+### Nadelen
+- minder bruikbaar voor andere, soortgelijke systemen: de facade pattern is specifiek voor een enkele use case en kan hier niet op worden aangepast
+- moeilijke te debuggen: alles logica voor het verzamelen en debuggen staat in een enkele klassen wat debuggen moeilijker kan maken
 
-#### Status
+## Beslissing
+De fascade zorgt er voor dat alle data die een API meegeeft eerst wordt opgeschoond voordat deze wordt doorgegeven aan
+code die dit nodig heeft, hierdoor kunnen API's ook makkelijk worden toegevoegd zonder dat er grote aanpassingen gemaakt
+hoeven te worden aan de back- of front-end code zelf.
 
-> [!TIP]
-> A decision may be "proposed" if the project stakeholders haven't agreed with it yet, or "accepted" once it is agreed. If a later ADR changes or reverses a decision, it may be marked as "deprecated" or "superseded" with a reference to its replacement.
+De facade geeft altijd een lijst met alle mogelijke reizen op een bruikbare manier terug aan de service. dit zorgt er
+voor dat er in princiepe 0 aanpassingen gemaakt hoeven te worden aan de backend code, de code wordt namelijk al in de
+facade opgeschoond en in de lijst gezet met de andere API's
 
-#### Consequences
+hoewel de facade veel voordelen met zich mee brengt heeft het alsnog ook zijn nadelen. Een groot nadeel is dat de code onoverzichtelijk wordt
+als er gebruik wordt gemaakt van te veel API's. dit kan als gevolg hebben dat de applicatie moeilijker wordt om te debuggen. in dit opzicht was de adapter pattern
+dus beter geweest.
 
-> [!TIP]
-> This section describes the resulting context, after applying the decision. All consequences should be listed here, not just the "positive" ones. A particular decision may have positive, negative, and neutral consequences, but all of them affect the team and project in the future.
+## Gevolgen
 
+Door gebruik te maken van de facade pattern krijgen relevante service classes een overzichtelijke lijst van alle mogelijke routes, van alle API's.
+dit zorgt er voor dat de service class het makkelijk kan verwerken en terug kan geven naar de gebruiker. Doordat er gebruik is gemaakt van een facade hoeft er geen
+gebruik gemaakt te worden van meerdere API's calls, alleen de facade hoeft aangeroepen te worden voor alle resultaten van alle reis API's.
+Dit heeft ook als effect dat aanpassingen in de API's geen gevolgen hebben voor de backend code waardoor er op dat vlak ook
+minder fout kan gaan.
 ## 9. Deployment, Operation and Support
 
 > [!TIP]
