@@ -635,6 +635,17 @@ We willen het adapter pattern gebruiken om de volgende ontwerpvragen te beantwoo
 In dit geval om BookingCom en tripAdvisor te integreren. Deze API's leveren de data in verschillende formaten, waardoor het moeilijk is om de data
 consistent weer te gegeven binnen ons systeem.
 
+Daarnaast maakt dit ook gebruik van de volgende design principes: 
+Single Responsibility Principle (SRP) 
+
+* Het adpater pattern isoleerd de interactie tussen de verschillende API's. Door deze elk een eigen Adapter klasse te geven.
+* Deze isolering zorgt ervoor dat alleen deze klasse hoeven worden aangepast als er veranderingen zijn aan de API.
+  
+Interface Segregation Principle (ISP)
+* De Adapter interface voor bezienswaardigheden defineert alleen de benodigde methodes, dit zorgt ervoor dat klasse die dit implementeren geen irrelevant functionaliteiten hoeven te ondersteunen. 
+
+ Open/Closed Principle (OCP)
+ * Het adapter pattern zorgt ervoor dat er makkelijk nieuwe externe services kunnen worden toegevoegd zonder hiervoor een groot deel bestaande code te hoeven aanpassen.
 #### Overwogen Opties
 
 | Voordelen                                                                                                                                                              | Nadelen                                                                                                                                                                                 |
