@@ -484,7 +484,7 @@ Afbeelding n Sequentie Diagram State pattern
 ##### Component diagram
 
 component diagram voor reis-boek systeem met facade pattern
-![](../FacadePatternPrototypeBo/ComponentDiagram.png)
+![](../FacadePatternPrototype/ComponentDiagram.png)
 Het component diagram laat zien welke componenten door het route systeem gebruikt gaan worden. Er wordt hier gebruik
 gemaakt van een facade om de response van de API te verwerken
 Er wordt hier gebruik gemaakt van een controller voor het krijgen van request van de front-end, een service om iets met
@@ -494,7 +494,7 @@ en als laatste 3 API's die mogelijke routes meegeven aan de facade. De keuze ach
 ##### Class diagram
 
 class diagram voor reis-boek systeem met facade pattern
-![](../FacadePatternPrototypeBo/ClassDiagram.png)
+![](../FacadePatternPrototype/ClassDiagram.png)
 Dit diagram laat de classes zien die gebruikt worden voor het boeken van vervoer. Er wordt hier gebruik gemaakt van een
 facade om er voor te zorgen dat er zonder moeite API’s kunnen worden toegevoegd en dit naar door kan worden gegeven aan
 de service.
@@ -505,14 +505,14 @@ en als laatste 3 API's die mogelijke routes meegeven aan de facade. De keuze ach
 ##### Container diagram
 
 container diagram voor reis-boek systeem met gebruik van facade pattern
-![](../FacadePatternPrototypeBo/ContainerDiagram.png)
+![](../FacadePatternPrototype/ContainerDiagram.png)
 Het container diagram laat de vervoer boek functionaliteit in hoofdlijnen zien. Hier wordt gebruik gemaakt van de front
 en backend, de actor en API’s relevant aan deze functionaliteit
 
 ##### Sqeuence diagram
 
 sequence diagram voor reis-boek systeem met facade pattern
-![](../FacadePatternPrototypeBo/SequenceDiagram.png)
+![](../FacadePatternPrototype/SequenceDiagram.png)
 Het sequentie diagram laat zien hoe er door de code heen gelopen worden. Hier worden alle componenten met de calls
 ertussen laten zien. er wordt gebruik gemaakt van een facade om de api responces op te halen en schoon te maken voor gebruik voor de service.
 De keuze achter de facade wordt in ADR005 beredeneerd.
