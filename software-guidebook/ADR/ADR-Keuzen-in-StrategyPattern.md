@@ -13,6 +13,7 @@ In TripTop willen we flexibel omgaan met keuzes van gebruikers. Denk aan dingen 
 - Moet er betaald worden via **Stripe**, **iDEAL**, of een andere provider?
 
 Voor al die gevallen heb je verschillende strategieën om je gekozen doel te bereiken.
+Ook zijn hierbij belangrijke designprincipes toegepast zoals Single Responsibility Principle (SRP) en Open Closed Principle (OCP).
 
 ### Ontwerp vraag
 **"Hoe zorg je voor een zo kort mogelijke reisroute waarbij gebruik gemaakt wordt van alle bouwstenen? 
@@ -29,6 +30,37 @@ Hoe zorg je ervoor dat de reisroute makkelijk aangepast kan worden als reisafsta
 | **Scheidt routeberekening van logica**      | Route-algoritmes zitten los van de rest van de business logica (Separation of Concerns)          | Kans op duplicatie als niet goed gedeeld wordt tussen strategieën        |
 | **Uitbreidbaarheid met nieuwe scenario’s**  | Nieuwe soorten routevoorkeuren (bijv. “eco”, “sightseeing first”, “geen overnachtingen”) zijn makkelijk toe te voegen | Kan verwarrend worden als het aantal strategieën te groot wordt          |
 | **Testbaarheid van routestrategieën**       | Elke routestrategie is zelfstandig te testen, los van UI en andere systemen                     | Afhankelijk van mockdata of simulatie voor complete route-validatie      |
+
+---
+
+## Toegepaste Design Principles
+Single Responsibility Principle (SRP)
+Elke klasse heeft één duidelijke verantwoordelijkheid. Bijvoorbeeld:
+
+De ReisplannerController is verantwoordelijk voor communicatie met de front-end.
+
+De ReisplannerService verwerkt de reisopties.
+
+Elke strategieklasse doet precies één ding: bepalen op basis van een criterium wat de juiste reisoptie is.
+
+Voor externe APIs wordt een aparte facade gebruikt om data op te schonen en bruikbaar te maken voor de rest van het systeem.
+
+We hebben dit principe toegepast door eerst te analyseren welke stappen nodig zijn in een proces (zoals data ophalen, opschonen, verwerken en terugsturen), en deze logischerwijs op te splitsen in aparte klassen. Hierdoor is de code overzichtelijker, minder foutgevoelig en makkelijker te onderhouden of aan te passen.
+
+## Open Closed Principle (OCP)
+De strategieklassen zijn hier een goed voorbeeld van OCP:
+
+Ze zijn open voor uitbreiding — je kunt altijd een nieuwe strategie toevoegen.
+
+Maar ze zijn gesloten voor aanpassing — bestaande code hoeft niet gewijzigd te worden bij uitbreidingen.
+
+In de context van TripTop betekent dit:
+
+Wil je een nieuwe strategie (zoals een milieuvriendelijke optie)? Dan voeg je gewoon een nieuwe klasse toe die SelectieStrategie implementeert.
+
+Geen wijzigingen in bestaande logica, dus minder kans op bugs.
+
+Dit maakt de code testbaarder, uitbreidbaar en stabiel.
 
 ---
 
