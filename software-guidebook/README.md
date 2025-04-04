@@ -628,7 +628,7 @@ query-ondersteuning nodig. PostgreSQL biedt hierin robuuste SQL-functionaliteite
 
 #### Context
 
-We willen het adapter pattern gebruiken om de volgende ontwerpvragen te beantwoorden: 
+We willen de adapter pattern gebruiken om de volgende ontwerpvragen te beantwoorden: 
 * Hoe zorg je ervoor dat je bij een wijziging in de datastructuur van een externe service niet de hele applicatie hoeft aan te passen?
 * Hoe zorg je ervoor dat je makkelijk een nieuwe externe service kan toevoegen? 
 
@@ -638,7 +638,7 @@ consistent weer te gegeven binnen ons systeem.
 Daarnaast maakt dit ook gebruik van de volgende design principes: 
 Single Responsibility Principle (SRP) 
 
-* Het adpater pattern isoleerd de interactie tussen de verschillende API's. Door deze elk een eigen Adapter klasse te geven.
+* De adapter pattern isoleert de interactie tussen de verschillende API's. Door deze elk een eigen Adapter klasse te geven.
 * Deze isolering zorgt ervoor dat alleen deze klasse hoeven worden aangepast als er veranderingen zijn aan de API.
   
 Interface Segregation Principle (ISP)
