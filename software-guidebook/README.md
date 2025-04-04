@@ -857,6 +857,9 @@ Bij mijn designvraag werkte de pattern erg goed. Ik kon hiermee snel hetgene mak
 beigehouden vanuit andere classes. De pattern paste goed bij mijn vraag en ik kon hierom snel veder. hetgeen wat ik wel
 moeilijk vond aan dit onderdeel is dat state een beetje overkill was
 
+In de code zelf kan je zie ndat ik gebruik maak van het single responsibility principle dit doe ik door te zerge dat elk onderdee verantwoordelijk is voor een ding
+Wat ik hiernaast ook heb ik ook Interface Segregation Principle in mijn code staan. Dit kan je zien omdat mijn interface ene duidelijke taak heeft en niet een grote algemene interface is
+
 ---
 
 ## Gevolgen
@@ -926,8 +929,8 @@ Dit heeft ook als effect dat aanpassingen in de API's geen gevolgen hebben voor 
 ook
 minder fout kan gaan.
 
-In de code zelf wordt ook gebruik gemaakt van het single responsibility principle. er is dus ervoor gezorgd dat iedere
-class maar 1 functie draagt. in dit geval is de functie die de facade draagt om de API responce op te schonen zodat deze
+In de code zelf wofrdt ook gebruik gemaakt van het single responsibility principle. er is dus ervoor gezorgd dat iedere
+class maar 1 unctie draagt. in dit geval is de functie die de facade draagt om de API responce op te schonen zodat deze
 probleemloos door de service gebruikt kan worden, zonder dat er door het aanpassen van 1 functie de functies elders
 aangepast hoeven te worden, in dit geval de service.
 
