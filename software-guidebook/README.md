@@ -317,7 +317,6 @@ Toelichting:
 Afbeelding n Sequentie Diagram Adapter Patroon
 ![Sequence Diagram Adapter.png](..%2Fafb%2FSequence%20Diagram%20Adapter.png)
 
-
 #### State patroon
 
 Het State patroon helpt bij het beantwoorden van de volgende onderzoeksvragen:
@@ -343,7 +342,7 @@ De parameters die de controller nodig heeft die komen vanuit bij het request via
 Postman
 
 
-Afbeelding n Klasse Diagram Pattern Patroon
+Afbeelding n Klasse Diagram State Pattern
 ![Class Diagram State.png](../afb/Class%20Diagram%20State.png)
 
 
@@ -355,9 +354,8 @@ Er word veel vanuit de BookingController gedaan
 en pas daarna word er beslist wat er gebeurt.
 Hiernaast word alles duidelijk in het diagram aangegeven
 
-Afbeelding n Sequentie Diagram Adapter State
+Afbeelding n Sequentie Diagram State pattern
 ![Sequence Diagram State.png](../afb/Sequence%20Diagram%20State.png)
-
 
 
 ## 8. Architectural Decision Records
