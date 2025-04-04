@@ -188,7 +188,6 @@ Stuurt via JSON/HTTPS verzoeken naar de backend.
 
 Afbeelding n Component Diagram 
 ![Component Diagram Compleet.png](..%2Fafb%2FComponent%20Diagram%20Compleet.png)
-
 Wat zien we hier?
 TripTop Webapplicatie (React)
 De gebruiker gebruikt deze frontend om z’n reis samen te stellen. Alles wat hij invoert (reisvoorkeuren, boekingen, etc.) wordt doorgestuurd naar de backend.
