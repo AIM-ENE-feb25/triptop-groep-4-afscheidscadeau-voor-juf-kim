@@ -44,6 +44,7 @@ public class ReisOptieApiController {
         return service.filterReisopties(request.getReisopties());
     }
 
+
     @GetMapping("/searchHotels")
     public String searchHotels(@RequestParam double latitude, @RequestParam double longitude, @RequestParam String arrivalDate, @RequestParam String departureDate, @RequestParam(required = false) Integer radius, @RequestParam(required = false) Integer adults, @RequestParam(required = false) String childrenAge, @RequestParam(required = false) Integer roomQty, @RequestParam(required = false) Integer priceMin, @RequestParam(required = false) Integer priceMax, @RequestParam(required = false) String units, @RequestParam(required = false) Integer pageNumber, @RequestParam(required = false) String temperatureUnit, @RequestParam(required = false) String languageCode, @RequestParam(required = false) String currencyCode, @RequestParam(required = false) String location) throws Exception {
         return bookingApiService.searchHotelsByCoordinates(latitude, longitude, arrivalDate, departureDate, radius, adults, childrenAge, roomQty, priceMin, priceMax, units, pageNumber, temperatureUnit, languageCode, currencyCode, location);
