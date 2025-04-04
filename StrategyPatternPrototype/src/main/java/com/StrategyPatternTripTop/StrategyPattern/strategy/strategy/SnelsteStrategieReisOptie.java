@@ -12,6 +12,7 @@ public class SnelsteStrategieReisOptie implements ReisOptieSelectieStrategie {
         return opties.stream()
                 .filter(ReisOptieModel::isBeschikbaar)
                 .sorted(Comparator.comparingInt(ReisOptieModel::getReistijdInMinuten))
+                .limit(1)
                 .collect(Collectors.toList());
     }
 }
