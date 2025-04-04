@@ -362,41 +362,67 @@ Door strategieën los te trekken van de rest van het systeem, kunnen we gedrag e
 
 #### Component Diagram
 
-Het onderstaande component diagram laat zien hoe de verschillende onderdelen van de strategiegebaseerde reisoptie-selectie samenwerken binnen TripTop.
+Het onderstaande component diagram laat zien hoe de strategiekeuze door de gebruiker via de controller wordt verwerkt en 
+doorgegeven aan de service. Deze past vervolgens de gekozen strategie toe op een lijst met reisopties.
 
-De controller ontvangt het filterverzoek met de gekozen strategie (bijv. "snelste"), waarna de service de juiste strategie toepast op een lijst met reisopties. De strategieën zijn losgekoppeld en makkelijk uit te breiden of te vervangen.
+De drie concrete strategieën zijn:
 
+GoedkoopsteStrategie
+
+SnelsteStrategie
+
+BeschikbaarheidStrategie
+
+Deze structuur sluit direct aan op het ADR-keuzen-in-strategy waarin gekozen is voor het Strategy Pattern om flexibele route-optimalisatie mogelijk te maken. 
+Door de strategie los te koppelen van de service (Separation of Concerns), kunnen we nieuwe strategieën toevoegen zonder bestaande code aan te passen — wat perfect aansluit 
+bij het Open/Closed Principle zoals benoemd in het ADR.
+
+Daarnaast ondersteunt dit componentdiagram de ontwerpvraag uit het ADR:
+
+“Hoe zorg je ervoor dat de reisroute makkelijk aangepast kan worden als reisafstand geen issue is?”
 Afbeelding n Component Diagram Strategy Patroon (Alleen de relevante componenten)  
 !![ComponentDiagram.png](../StrategyPatternPrototype/opdrachtDiagrammen/ComponentDiagram.png)
 
 ##### Klasse diagram
 
-Het onderstaande klassen-diagram toont de structuur van het Strategy Pattern zoals toegepast op reisoptie-selectie.  
-De `SelectieStrategie` interface definieert de methode `selecteer()`, en elke concrete strategie implementeert deze met zijn eigen logica (bijv. goedkoopste, snelste of beschikbaarheid).
+Het klassen-diagram hieronder toont hoe het Strategy Pattern is opgebouwd:
 
-De `ReisplannerService` maakt gebruik van deze strategie zonder te weten welke implementatie erachter zit. Dit maakt het makkelijk om nieuwe strategieën toe te voegen zonder bestaande code aan te passen.
+De SelectieStrategie interface zorgt ervoor dat alle strategieklassen dezelfde methode selecteer() implementeren. Dit maakt het systeem flexibel en stelt de ReisplannerService in staat om tijdens runtime van gedrag te wisselen.
 
-Toelichting:
+Elke concrete strategie (zoals GoedkoopsteStrategie) bevat zijn eigen logica. Dit maakt elke strategie afzonderlijk testbaar, wat een belangrijk punt is uit het ADR.
 
-* **SelectieStrategie**: Interface die alle strategieën implementeren. Bepaalt hoe gefilterd wordt.
-* **GoedkoopsteStrategie / SnelsteStrategie / BeschikbaarheidStrategie**: Concrete strategieën met eigen filterlogica.
-* **ReisplannerService**: Verwerkt een lijst met opties en gebruikt de gekozen strategie om de juiste selectie terug te geven.
+De ReisplannerService werkt op de interface (SelectieStrategie) en niet op specifieke implementaties — dit is een directe toepassing van het principe “Program to interfaces, not implementations” zoals benoemd in het ADR.
+
+Deze aanpak zorgt ervoor dat:
+
+Nieuwe strategieën zoals “eco-vriendelijk” of “kindvriendelijk” eenvoudig kunnen worden toegevoegd (uitbreidbaarheid).
+
+De bestaande code onaangetast blijft bij toevoegingen of wijzigingen (Open/Closed Principle).
+
+Gedrag eenvoudig te wijzigen is zonder afhankelijk te zijn van de concrete klassen (Dependency Inversion Principle).
 
 Afbeelding n Klasse Diagram Strategy Patroon  
 ![ClassDiagramStrategy.png](../StrategyPatternPrototype/opdrachtDiagrammen/ClassDiagramStrategy.png)
 
 ##### Sequentie Diagram
 
-Het sequentie-diagram hieronder toont het verloop van een strategiegebaseerd filterverzoek.
+Het sequentie-diagram laat het runtime gedrag van het Strategy Pattern zien binnen TripTop:
 
-Toelichting:
+De gebruiker stuurt een strategie en een lijst met reisopties.
 
-1. De gebruiker stuurt een filterverzoek met een strategie.
-2. De controller zet de strategie in de service.
-3. De service haalt reisopties op uit de database of ontvangt deze via het verzoek.
-4. De strategie wordt toegepast op de lijst met opties.
-5. De gefilterde opties worden teruggestuurd naar de gebruiker.
+De controller kiest de juiste strategie (bijv. “snelste”) en stelt deze in op de service.
 
+De service gebruikt de gekozen strategie om de lijst te filteren.
+
+De gebruiker ontvangt het resultaat.
+
+Deze flow maakt duidelijk dat de logica volledig verschoven is naar de strategieklassen. De controller en service blijven generiek en herbruikbaar. Dit is een concrete toepassing van het Separation of Concerns principe, wat als voordeel benoemd is in het ADR.
+
+Daarnaast biedt dit ontwerp ruimte voor uitbreiding, zoals beschreven in het ADR:
+
+Strategieën zijn verwisselbaar tijdens runtime, afhankelijk van gebruikersvoorkeur.
+
+Nieuwe scenario’s zijn eenvoudig toe te voegen met minimale impact op bestaande code.
 Afbeelding n Sequentie Diagram Strategy Patroon  
 ![SequenceDiagramStrategy.png](../StrategyPatternPrototype/opdrachtDiagrammen/SequenceDiagramStrategy.png)
 
