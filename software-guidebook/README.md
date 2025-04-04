@@ -139,7 +139,18 @@ Voordat deze casusomschrijving tot stand kwam, heeft de opdrachtgever de volgend
  
 
 ## 6. Principles
- 
+
+- Single Responsibility (SRP)
+  - Ook zorgen we er voor de interfaces zo specifiek mogelijk zijn, zodat classes die deze implementeren alleen de relevante methode hoeven te implementeren en niet een groot aantal onnodige methodes.
+
+  - waar 		
+    - wij hebben bij al onze code dit principe geprobeerd toe te passen. Wi hebben bijvoorbeeld voor het boeken gebruik gemaakt van een controller voor de communicatie met de front-end, de service om logica op gekregen data uit te voeren en een facade om data van een API op te schonen en door te geven
+  - Hoe 		
+    - wij hebben dit principe toegepast door te kijken naar wat er gebeurt moet worden en deze op te splitsen. Bij het verwerken van data moet er data opgehaald worden, opgeschoond en bruikbaar gemaakt worden ,de data moet verwerkt worden, en dit moet ergens geplaatst worden. Dit zijn allemaal functies waarmee je de code op kan splitsen
+  - waarom		
+    - door de code op te splitsen op functionaliteit zorg je er voor dat er minder fout kan gaan, elke class draagt namelijk maar 1 verantwoordelijkheid. Daarnaast geeft dit ook meer overzichtelijkheid omdat je bij de code kan zoeken naar de functionaliteit die je aan wilt passen of wilt debuggen. als laatste zorgt dit er voor dat je beter over je code na moet denken omdat niet alles in een enkele class gedaan wordt, maar op een logische manier moet worden opgesplitst  
+
+
  
 
 
