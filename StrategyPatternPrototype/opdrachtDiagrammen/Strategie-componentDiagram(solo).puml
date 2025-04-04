@@ -1,0 +1,44 @@
+@startuml C4_Elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Component Diagram - Strategiegebaseerde Reisoptie Selectie (TripTop)
+
+LAYOUT_WITH_LEGEND()
+
+Container(webapp, "TripTop Webapplicatie", "JavaScript, React", "Stelt gebruikers in staat om reizen te plannen en accommodaties te boeken.")
+
+System_Boundary(triptop, "Triptop Systeem") {
+    Component(reisPlannerController, "ReisPlannerController", "Java, Spring REST Controller", "Ontvangt filterverzoeken van de gebruiker en past de gekozen filterstrategie toe.")
+    Component(reisplannerService, "ReisplannerService", "Java, Spring Service", "Bevat de logica voor het toepassen van selectie strategieën op reisopties.")
+
+    Component(goedkoopsteStrategie, "GoedkoopsteStrategie", "Java Klasse (Strategy)", "Implementeert SelectieStrategie voor goedkoopste optie.")
+    Component(snelsteStrategie, "SnelsteStrategie", "Java Klasse (Strategy)", "Implementeert SelectieStrategie voor snelste optie.")
+    Component(beschikbaarheidStrategie, "BeschikbaarheidStrategie", "Java Klasse (Strategy)", "Implementeert SelectieStrategie voor beschikbare opties.")
+
+    Component(reisOptieModel, "ReisOptie", "Java Klasse (Model)", "Bevat data van een enkele reisoptie, zoals prijs, tijd en beschikbaarheid.")
+    Component(selectieStrategieInterface, "SelectieStrategie", "Java Interface", "Definieert de strategie-interface voor reisoptie selectie.")
+
+    Component(notificatieService, "Notificatie Service", "Java, Spring", "Verstuurt meldingen en bevestigingen naar gebruikers.")
+    Component(mailComponent, "Mail Component", "Java, MailPit, Spring", "Verstuurt e-mails voor boekingsbevestigingen en notificaties.")
+}
+
+System_Ext(NSAPI, "NS API", "Voor treinroutes en OV informatie binnen Nederland")
+System_Ext(KLMAPI, "KLM API", "Voor vluchtinformatie en boekingen")
+System_Ext(UberAPI, "Uber API", "Voor lokale taxiritten")
+
+Rel(webapp, reisPlannerController, "Verstuurt selectie/verzoek met strategie", "JSON/HTTPS")
+Rel(reisPlannerController, reisplannerService, "Geeft reisopties en strategie door")
+Rel(reisplannerService, selectieStrategieInterface, "Gebruikt strategie interface")
+Rel(selectieStrategieInterface, goedkoopsteStrategie, "Implementeert")
+Rel(selectieStrategieInterface, snelsteStrategie, "Implementeert")
+Rel(selectieStrategieInterface, beschikbaarheidStrategie, "Implementeert")
+Rel(reisplannerService, reisOptieModel, "Past strategie toe op lijst van opties")
+
+Rel(reisplannerService, notificatieService, "Stuurt notificatie bij selectie")
+Rel(notificatieService, mailComponent, "Stuurt bevestiging via mail")
+
+Rel(reisplannerService, NSAPI, "Vraagt OV opties op")
+Rel(reisplannerService, KLMAPI, "Vraagt vluchtschema's op")
+Rel(reisplannerService, UberAPI, "Vraagt taxiritopties op")
+
+@enduml

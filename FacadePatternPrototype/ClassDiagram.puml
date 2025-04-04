@@ -1,0 +1,46 @@
+@startuml
+
+class TravelController {
+    -TravelService travelService
+    +List<Routes> fetchRoutes(String curerntLocation, String destination)
+}
+
+
+class TravelService {
+    +List<Routes> fetchRoutes(String curerntLocation, String destination)
+
+}
+
+class TravelFacade {
+    -NSAPI nsAPI
+    -KLMAPI klmAPI
+    -UberAPI uberAPI
+    +List<Routes> fetchRoutes(String curerntLocation, String destination)
+}
+
+
+class NSAPI {
+    +String retrieveRoutes(String curerntLocation, String destination)
+}
+
+class KLMAPI {
+    +String retrieveRoutes(String curerntLocation, String destination)
+}
+
+class UberAPI {
+    +String retrieveRoutes(String curerntLocation, String destination)
+}
+
+
+
+TravelFacade --> NSAPI : uses
+TravelFacade --> KLMAPI : uses
+TravelFacade --> UberAPI : uses
+
+'NSAPI o-- NSRoutes : returns
+'KLMAPI o-- KLMRoutes : returns
+'UberAPI o-- UberRoutes : returns
+
+TravelController --> TravelService : uses
+TravelService --> TravelFacade : uses
+@enduml

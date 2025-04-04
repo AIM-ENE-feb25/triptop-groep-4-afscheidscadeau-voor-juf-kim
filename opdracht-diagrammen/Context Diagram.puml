@@ -1,0 +1,41 @@
+@startuml C4_Elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Context Diagram voor "Triptop" systeem
+
+SHOW_PERSON_OUTLINE()
+LAYOUT_WITH_LEGEND()
+
+Person(ReisAgent, "ReisAgent", "Een gebruiker die de reiziger kan helpen met het boeken en plannen van reizen")
+
+Person(Reiziger, "Reiziger", "Een gebruiker die reizen zoekt, boekt en beheert")
+
+System(TriptopApp, "Triptop", "Een online reisplanner waarmee gebruikers zelf hun reis kunnen samenstellen, boeken en beheren")
+
+System_Ext(BookingComAPI, "Booking.com API", "Reserveren van accommodaties via Booking.com")
+System_Ext(AirbnbAPI, "Airbnb API", "Reserveren van accommodaties via Airbnb")
+
+System_Ext(NSAPI, "NS API", "Voor treinroutes en OV informatie binnen Nederland")
+System_Ext(KLMAPI, "KLM API", "Voor vluchtinformatie en boekingen")
+System_Ext(UberAPI, "Uber API", "Voor lokale taxiritten")
+
+System_Ext(TripAdvisorAPI, "TripAdvisor API", "Voor toeristische informatie en excursies")
+
+System_Ext(TheForkAPI, "TheFork API", "Voor het vinden van restaurants en maken van reserveringen")
+System_Ext(OpenTableAPI, "OpenTable API", "Voor reserveren bij cafés en eetgelegenheden")
+
+System_Ext(GoogleLogin, "Google Login (OAuth 2.0)", "Authenticatie van gebruikers via Google")
+
+Rel(Reiziger, TriptopApp, "Plant, boekt en beheert reizen met")
+Rel(ReisAgent, TriptopApp, "Helpt samenstellen van reizen met")
+Rel(TriptopApp, BookingComAPI, "Boekt accommodaties via")
+Rel(TriptopApp, AirbnbAPI, "Boekt accommodaties via")
+Rel(TriptopApp, NSAPI, "Haalt OV-routes op via")
+Rel(TriptopApp, KLMAPI, "Haalt vluchtopties op via")
+Rel(TriptopApp, UberAPI, "Haalt taxigegevens op via")
+Rel(TriptopApp, TripAdvisorAPI, "Toont bezienswaardigheden via")
+Rel(TriptopApp, TheForkAPI, "Vindt restaurants via")
+Rel(TriptopApp, OpenTableAPI, "Reserveert eetgelegenheden via")
+Rel(TriptopApp, GoogleLogin, "Regelt login via")
+
+@enduml
