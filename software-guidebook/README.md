@@ -292,6 +292,8 @@ Notificaties
 
 #### Adapter pattern
 
+Het gebruik van het Adapter pattern in TripTop is gebaseerd op het Architectural Decision Record - 002 Gebruik van Adapter Pattern met betrekking tot bezienswaardigheden, waarin is vastgesteld dat het adapter pattern de beste manier is om de integratie van externe services te beheren. Dit zorgt er namelijk voor dat het ophalen van de data uit de API's flexibel gaat en aanpassingen aan API niet leiden tot grote veranderingen in de applicatie.
+
 Het Adapter pattern helpt bij het beantwoorden van de volgende onderzoeksvragen:
 
 * Hoe zorg je ervoor dat je bij een wijziging in de datastructuur van een externe service niet de hele applicatie hoeft
