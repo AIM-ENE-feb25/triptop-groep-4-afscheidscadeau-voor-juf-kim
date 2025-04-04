@@ -224,7 +224,7 @@ Het OCP zorgt voor stabiele, uitbreidbare en onderhoudsvriendelijke software.
 
 ### 7.1. Containers
 
-![containerDiagram.png](..%2Fafb%2FcontainerDiagram.png)
+![Container Diagram.png](..%2Fafb%2FContainer%20Diagram.png)
 Dit diagram is een Container Diagram van het TripTop-systeem en laat zien hoe de verschillende onderdelen (containers)
 van het systeem samenwerken, en hoe ze communiceren met externe systemen.
 
