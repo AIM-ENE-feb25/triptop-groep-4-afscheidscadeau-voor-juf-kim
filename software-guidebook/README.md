@@ -202,36 +202,39 @@ als belangrijk:
 Dit diagram is een Container Diagram van het TripTop-systeem en laat zien hoe de verschillende onderdelen (containers)
 van het systeem samenwerken, en hoe ze communiceren met externe systemen.
 
+#### Toelichting
 Acteur
-Reiziger: De eindgebruiker van het systeem. Deze persoon stelt reizen samen, boekt accommodaties en beheert zijn reis.
+* Reiziger: De eindgebruiker van het systeem. Deze persoon stelt reizen samen, boekt accommodaties en beheert zijn reis.
 
 Binnen het TripTop systeem
-Triptop Web App (React):
+
+* Triptop Web App (React)
 Frontend van de applicatie.
 Hier beheert de gebruiker zijn reis.
 Stuurt via JSON/HTTPS verzoeken naar de backend.
 
-Reisbeheer API-applicatie (Java MVC):
-Backend van het systeem.
+Reisbeheer API-applicatie (Java MVC)
+* Backend van het systeem.
 Ontvangt API-verzoeken van de frontend.
 Verwerkt reisgegevens, regelt boekingen en beheert wijzigingen van de reis.
 
 Database (PostgreSQL):
-Slaat alle gebruikersdata, voorkeuren, boekingen en wijzigingen op.
+* Slaat alle gebruikersdata, voorkeuren, boekingen en wijzigingen op.
 Alleen toegankelijk voor de backend, niet voor de gebruiker of externe APIs.
 
 Externe systemen (APIs)
 
-De backend communiceert met verschillende externe APIs om gegevens op te halen of acties uit te voeren:
+* De backend communiceert met verschillende externe APIs om gegevens op te halen of acties uit te voeren:
 Bookingcom API & Airbnb API: Voor het boeken van accommodaties.
 
-NS API, KLM API & Uber API: Voor vervoersinformatie (trein, vlucht, taxi).
+* NS API, KLM API & Uber API: Voor vervoersinformatie (trein, vlucht, taxi).
 
-TripAdvisor API: Voor bezienswaardigheden en excursies.
+* TripAdvisor API: Voor bezienswaardigheden en excursies.
 
-TheFork API & OpenTable API: Voor horecagegevens, zoals restaurants en cafés.
+* TheFork API & OpenTable API: Voor horecagegevens, zoals restaurants en cafés.
 
-Google Login (OAuth 2.0): Voor authenticatie van gebruikers.Frontend van de applicatie.
+Google Login (OAuth 2.0)
+* Voor authenticatie van gebruikers.Frontend van de applicatie.
 Hier beheert de gebruiker zijn reis.
 Stuurt via JSON/HTTPS verzoeken naar de backend.
 ![dynamischContainerInloggen.png](..%2Fafb%2FdynamischContainerInloggen.png)
