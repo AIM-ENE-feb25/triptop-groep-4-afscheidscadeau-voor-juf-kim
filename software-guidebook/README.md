@@ -441,6 +441,7 @@ Alle logica van de aplicatie na de decider staat in
 Booking Component. Denk hierbij aan. Wat gebeurt er als er
 wel of geen kamers beschikbaar zijn
 
+
 Afbeelding n Component Diagram State
 ![Component Diagram State.png](../afb/Component%20Diagram%20State.png)
 
@@ -454,7 +455,9 @@ Ik heb gekozen voor gekozen om voor
 een interface "State" gekozen omdat ik dit onderdeel vaker gebruik
 en het ook direct kan verbinden met de decider
 De parameters die de controller nodig heeft die komen vanuit bij het request via
-Postman
+Postman.
+In het ADR geef ik als nadeel aan dat er extra classes gebruikt worden wanneer dit pattern gebruikt word en dit zoe je goed terug in mijn klasse diagram
+
 
 Afbeelding n Klasse Diagram State Pattern
 
@@ -466,10 +469,13 @@ In dit diagram kan je duidelijk zien wat er wanneer geberut
 Er word veel vanuit de BookingController gedaan
 en pas daarna word er beslist wat er gebeurt.
 Hiernaast word alles duidelijk in het diagram aangegeven
+In het ADR geef ik aan dat het voordeel is dat elke klasse zijn eigen functionaliteit heeft.
+Dit kan je in het Sequentie diagram goed terug zien
 
 Afbeelding n Sequentie Diagram State pattern
 
 ![Sequence Diagram State.png](../afb/Sequence%20Diagram%20State.png)
+
 
 #### Facade Pattern
 
