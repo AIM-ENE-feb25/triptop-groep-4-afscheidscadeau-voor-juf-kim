@@ -481,7 +481,7 @@ Het component diagram laat zien welke componenten door het route systeem gebruik
 gemaakt van een facade om de response van de API te verwerken
 Er wordt hier gebruik gemaakt van een controller voor het krijgen van request van de front-end, een service om iets met
 de data te doen, een facade om alle API responces als lijst aan de service te geven,
-en als laatste 3 API's die mogelijke routes meegeven aan de facade.
+en als laatste 3 API's die mogelijke routes meegeven aan de facade. De keuze achter de facade wordt in ADR005 beredeneerd.
 
 ##### Class diagram
 
@@ -492,7 +492,7 @@ facade om er voor te zorgen dat er zonder moeite API’s kunnen worden toegevoeg
 de service.
 Er wordt hier gebruik gemaakt van een controller voor het krijgen van request van de front-end, een service om iets met
 de data te doen, een facade om alle API responces als lijst aan de service te geven,
-en als laatste 3 API's die mogelijke routes meegeven aan de facade.
+en als laatste 3 API's die mogelijke routes meegeven aan de facade. De keuze achter de facade wordt in ADR005 beredeneerd.
 
 ##### Container diagram
 
@@ -506,7 +506,8 @@ en backend, de actor en API’s relevant aan deze functionaliteit
 sequence diagram voor reis-boek systeem met facade pattern
 ![](../FacadePatternPrototypeBo/SequenceDiagram.png)
 Het sequentie diagram laat zien hoe er door de code heen gelopen worden. Hier worden alle componenten met de calls
-ertussen laten zien.
+ertussen laten zien. er wordt gebruik gemaakt van een facade om de api responces op te halen en schoon te maken voor gebruik voor de service.
+De keuze achter de facade wordt in ADR005 beredeneerd.
 
 - de gebruiker stuurt met de frontend een request naar de controller
 - de controller vraagt de informatie van de service aan
@@ -814,6 +815,12 @@ van alle reis API's.
 Dit heeft ook als effect dat aanpassingen in de API's geen gevolgen hebben voor de backend code waardoor er op dat vlak
 ook
 minder fout kan gaan.
+
+In de code zelf wordt ook gebruik gemaakt van het single responsibility principle. er is dus ervoor gezorgd dat iedere
+class maar 1 functie draagt. in dit geval is de functie die de facade draagt om de API responce op te schonen zodat deze
+probleemloos door de service gebruikt kan worden, zonder dat er door het aanpassen van 1 functie de functies elders
+aangepast hoeven te worden, in dit geval de service.
+
 
 ## 9. Deployment, Operation and Support
 
