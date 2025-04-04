@@ -273,7 +273,7 @@ Google Login (OAuth 2.0)
 
 ### 7.2. Components
 
-Afbeelding n Component Diagram
+Afbeelding Component Diagram
 ![Component Diagram Compleet.png](..%2Fafb%2FComponent%20Diagram%20Compleet.png)
 
 #### Toelichting Component Diagram:
@@ -340,7 +340,7 @@ Het onderstaande component diagram weergeeft de complete integratie van het adap
 Hierin is zijn de adapter uitwerkingen van zowel van bezienswaardigheden als accommodaties te zien. Er is gekozen om
 hier het adapter-pattern te gebruiken om zo mogelijk uitbreidingen (meer externe platformen) gemakkelijker te maken.
 
-Afbeelding n Component Diagram Adapter pattern (Alleen de relevante componenten)
+Afbeelding Component Diagram Adapter pattern (Alleen de relevante componenten)
 ![Component Diagram Adapater Pattern Ingezoomed.png](..%2Fafb%2FComponent%20Diagram%20Adapater%20Pattern%20Ingezoomed.png)
 
 ##### Klasse diagram:
@@ -363,7 +363,7 @@ Toelichting:
 * AttractionService: Deze klasse zorgt ervoor dat de data uit de verschillende bezienswaardigheid adapters samen wordt
   gevoegd tot een lijst voor een overzicht van alle mogelijk bezienswaardigheden op de gegeven locatie.
 
-Afbeelding n Klasse Diagram Adapter pattern
+Afbeelding Klasse Diagram Adapter pattern
 ![Class Diagram Adapter.png](..%2Fafb%2FClass%20Diagram%20Adapter.png)
 
 ##### Sequentie Diagram Adapter pattern
@@ -378,7 +378,7 @@ Toelichting:
 4. Hetzelfde proces wordt herhaald voor de TripAdvisorAdapter.
 5. Als beide lijsten van bezienswaardigheden zijn opgehaald, worden deze samengevoegd tot een lijst.
 
-Afbeelding n Sequentie Diagram Adapter pattern
+Afbeelding Sequentie Diagram Adapter pattern
 ![Sequence Diagram Adapter.png](..%2Fafb%2FSequence%20Diagram%20Adapter.png)
 
 ---
@@ -467,7 +467,7 @@ Daarnaast biedt dit ontwerp ruimte voor uitbreiding, zoals beschreven in het ADR
 Strategieën zijn verwisselbaar tijdens runtime, afhankelijk van gebruikersvoorkeur.
 
 Nieuwe scenario’s zijn eenvoudig toe te voegen met minimale impact op bestaande code.
-Afbeelding n Sequentie Diagram Strategy Patroon  
+Afbeelding Sequentie Diagram Strategy Patroon  
 ![SequenceDiagramStrategy.png](../StrategyPatternPrototype/opdrachtDiagrammen/SequenceDiagramStrategy.png)
 
 ---
@@ -485,7 +485,7 @@ Alle logica van de aplicatie na de decider staat in
 Booking Component. Denk hierbij aan. Wat gebeurt er als er
 wel of geen kamers beschikbaar zijn
 
-Afbeelding n Component Diagram State
+Afbeelding component Diagram State
 ![Component Diagram State.png](../afb/Component%20Diagram%20State.png)
 
 ##### Klasse diagram:
@@ -502,7 +502,7 @@ Postman.
 In het ADR geef ik als nadeel aan dat er extra classes gebruikt worden wanneer dit pattern gebruikt word en dit zoe je
 goed terug in mijn klasse diagram
 
-Afbeelding n Klasse Diagram State Pattern
+Afbeelding Klasse Diagram State Pattern
 
 ![Class Diagram State.png](../afb/Class%20Diagram%20State.png)
 
@@ -515,7 +515,7 @@ Hiernaast word alles duidelijk in het diagram aangegeven
 In het ADR geef ik aan dat het voordeel is dat elke klasse zijn eigen functionaliteit heeft.
 Dit kan je in het Sequentie diagram goed terug zien
 
-Afbeelding n Sequentie Diagram State pattern
+Afbeelding Sequentie Diagram State pattern
 
 ![Sequence Diagram State.png](../afb/Sequence%20Diagram%20State.png)
 
