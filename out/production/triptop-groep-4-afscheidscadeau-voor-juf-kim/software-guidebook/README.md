@@ -127,9 +127,15 @@ Voordat deze casusomschrijving tot stand kwam, heeft de opdrachtgever de volgend
 
 ## 5. Constraints
 
-Ons proof of concept word gemaakt met java en springboot
- Data word overgedragen via HTTP/JSON
- De aplicatie moet een webaplicatie worden
+- Ons proof of concept wordt gemaakt met Java en Spring Boot  
+  Omdat we hier het meeste kennis van hebben en het voor ons duidelijkst is hoe we dingen moeten aanpassen.
+- De applicatie moet een REST API zijn  
+  Hier hebben we als groep het meeste ervaring mee en kunnen daarom het proof of concept het beste uitwerken als een REST API.
+- Data wordt overgedragen via HTTP/JSON  
+  In onze ervaring past dit het beste bij een REST API.
+- De applicatie moet een webapplicatie worden  
+  Deze keuze hebben we gemaakt omdat de applicatie waar we de frontend op baseren ook een webapplicatie is.
+
  
 
 ## 6. Principles
@@ -182,7 +188,6 @@ Stuurt via JSON/HTTPS verzoeken naar de backend.
 
 Afbeelding n Component Diagram 
 ![Component Diagram Compleet.png](..%2Fafb%2FComponent%20Diagram%20Compleet.png)
-
 Wat zien we hier?
 TripTop Webapplicatie (React)
 De gebruiker gebruikt deze frontend om z’n reis samen te stellen. Alles wat hij invoert (reisvoorkeuren, boekingen, etc.) wordt doorgestuurd naar de backend.
@@ -293,8 +298,8 @@ Het onderstaande component diagram weergeeft de complete integratie van het adap
 Hierin is zijn de adapter uitwerkingen van zowel van bezienswaardigheden als accommodaties te zien. Er is gekozen om
 hier het adapter-patroon te gebruiken om zo mogelijk uitbreidingen (meer externe platformen) gemakkelijker te maken.
 
-Afbeelding n Component Diagram Adapter Patroon
-![Component Diagram Adapter.png](..%2Fafb%2FComponent%20Diagram%20Adapter.png)
+Afbeelding n Component Diagram Adapter Patroon (Alleen de relevante componenten)
+![Component Diagram Adapater Pattern Ingezoomed.png](..%2Fafb%2FComponent%20Diagram%20Adapater%20Pattern%20Ingezoomed.png)
 
 ##### Klasse diagram:
 

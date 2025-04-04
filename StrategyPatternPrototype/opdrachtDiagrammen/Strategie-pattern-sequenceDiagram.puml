@@ -1,0 +1,27 @@
+@startuml
+title Sequence Diagram - Strategie voor Reisoptie Selectie (Triptop)
+
+actor Gebruiker
+participant "ReisplannerService" as Service
+participant "SelectieStrategie" as Strategie
+participant "Database" as DB
+participant "List<ReisOptie>" as Opties
+
+
+Gebruiker -> Service : setStrategie(Strategie)
+
+Gebruiker -> Service : filterReisopties()
+
+Service -> DB : getReisOpties()
+DB --> Service : lijst met ReisOptie
+create Opties
+note right of DB : De lijst van beschikbare \nreisopties wordt opgehaald
+
+Service -> Opties : create
+note right of DB : De lijst van beschikbare \nreisopties wordt o
+Strategie --> Service : gefilterdeOpties
+Service --> Gebruiker : gefilterdeOpties
+deactivate Service
+
+@enduml
+
