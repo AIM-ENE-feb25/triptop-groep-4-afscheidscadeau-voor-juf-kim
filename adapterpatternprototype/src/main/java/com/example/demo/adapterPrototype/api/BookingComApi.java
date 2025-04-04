@@ -11,8 +11,8 @@ public class BookingComApi {
     public List<BookingComAttractionDto> retrieveAttractions(String location) {
         List<BookingComAttractionDto> attractions = new ArrayList<>();
         List<BookingComAttractionDto> validAttractions = new ArrayList<>();
-        attractions.add(new BookingComAttractionDto("Restaurant van booking", "Nederland, Utrecht", 4.9));
-        attractions.add(new BookingComAttractionDto("Nog eeen Restaurant bookingcom", "Nijmegen, Maastricht", 3.4));
+        attractions.add(new BookingComAttractionDto("Restaurant van booking", "Nederland, Nijmegen", 4.9));
+        attractions.add(new BookingComAttractionDto("Nog eeen Restaurant bookingcom", "Nederland, Maastricht", 3.4));
 
         for (BookingComAttractionDto attraction : attractions) {
             if(attraction.location().contains(location)) {
