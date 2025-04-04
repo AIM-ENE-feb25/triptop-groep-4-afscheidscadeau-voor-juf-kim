@@ -188,6 +188,7 @@ Stuurt via JSON/HTTPS verzoeken naar de backend.
 
 Afbeelding n Component Diagram 
 ![Component Diagram Compleet.png](..%2Fafb%2FComponent%20Diagram%20Compleet.png)
+
 Wat zien we hier?
 TripTop Webapplicatie (React)
 De gebruiker gebruikt deze frontend om z’n reis samen te stellen. Alles wat hij invoert (reisvoorkeuren, boekingen, etc.) wordt doorgestuurd naar de backend.
@@ -230,7 +231,7 @@ Notificatie Service stuurt meldingen.
 
 Mail Component verstuurt e-mails (via MailPit bijv.).
 
-Nieuw toegevoegde componenten — Jouw bijdrage
+Nieuwe toegevoegde onderdelen:
 Strategiegebaseerde Selectie (Strategy Pattern)
 ReisplannerService: kiest de juiste strategie (bijv. snelste route).
 
@@ -249,17 +250,6 @@ SelectieStrategie is de interface die dit allemaal verbindt.
 ReisOptie is het model dat al die info bevat (zoals prijs, reistijd, beschikbaarheid).
 
 Deze onderdelen zorgen ervoor dat het systeem op basis van gebruikersvoorkeuren zelf kan bepalen welke reisoptie het beste past.
-
-Externe API’s
-Hier haalt TripTop data vandaan over vervoersopties, verblijfplaatsen en restaurants:
-
-TripAdvisor API → info over excursies
-
-NS API, KLM API, Uber API → vervoer
-
-BookingCom API, Airbnb API → overnachtingen
-
-TheFork API, OpenTable API → horeca
 
 Toelichting:
 De Accommodatie Beheer component vormt een soort tussenlaag tussen:
