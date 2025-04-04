@@ -158,41 +158,44 @@ als belangrijk:
 
 ## 6. Principles
 
-- Single Responsibility (SRP)
-- Ook zorgen we er voor de interfaces zo specifiek mogelijk zijn, zodat classes die deze implementeren alleen de
-  relevante methode hoeven te implementeren en niet een groot aantal onnodige methodes.
+# Interface Segregation Principle (ISP)
 
-- waar
-    - wij hebben bij al onze code dit principe geprobeerd toe te passen. Wi hebben bijvoorbeeld voor het boeken gebruik
-      gemaakt van een controller voor de communicatie met de front-end, de service om logica op gekregen data uit te
-      voeren en een facade om data van een API op te schonen en door te geven
-- Hoe
-    - wij hebben dit principe toegepast door te kijken naar wat er gebeurt moet worden en deze op te splitsen. Bij het
-      verwerken van data moet er data opgehaald worden, opgeschoond en bruikbaar gemaakt worden ,de data moet verwerkt
-      worden, en dit moet ergens geplaatst worden. Dit zijn allemaal functies waarmee je de code op kan splitsen
-- waarom
-    - door de code op te splitsen op functionaliteit zorg je er voor dat er minder fout kan gaan, elke class draagt
-      namelijk maar 1 verantwoordelijkheid. Daarnaast geeft dit ook meer overzichtelijkheid omdat je bij de code kan
-      zoeken naar de functionaliteit die je aan wilt passen of wilt debuggen. als laatste zorgt dit er voor dat je beter
-      over je code na moet denken omdat niet alles in een enkele class gedaan wordt, maar op een logische manier moet
-      worden opgesplitst
+### Waarom gebruiken we het ISP?
+Het Interface Segregation Principle helpt ons duidelijk te maken welk onderdeel welke verantwoordelijkheden heeft en welke interface daarbij hoort. Dit maakt het makkelijker om te zien welke klassen afhankelijk zijn van welke onderdelen, en zorgt ervoor dat klassen alleen afhankelijk zijn van de interfaces die ze daadwerkelijk gebruiken.
 
--Open Closed Principle (OCP):
+### Hoe past het ISP toe?
+In plaats van één interface met veel verantwoordelijkheden, splits je deze op in meerdere, gerichte interfaces. Hierdoor implementeren klassen alleen de methodes die relevant zijn voor hun specifieke taken.
 
--Waarom gebruiken we het Open Closed Principle (OCP)?
--Het OCP stelt dat code open moet zijn voor uitbreiding, maar gesloten voor aanpassing.
+---
 
--Waarom?
--Voorkomt bugs in bestaande code
+# Single Responsibility Principle (SRP)
 
--Maakt het makkelijk om nieuwe functionaliteit toe te voegen
--Verbetert onderhoud en testbaarheid
+### Waarom gebruiken we het SRP?
+Het SRP zorgt ervoor dat de interfaces zo specifiek mogelijk zijn, zodat de klassen die deze implementeren alleen de relevante methodes hoeven te implementeren en niet een groot aantal onnodige methodes.
 
--Voorbeeld (zoals bij TripTop):
--Nieuwe filterstrategie? Voeg een nieuwe klasse toe, zonder oude code te wijzigen.
+### Hoe past het SRP toe?
+Bij onze code hebben we dit principe toegepast door taken op te splitsen. Bijvoorbeeld, voor het boeken hebben we een controller voor de communicatie met de front-end, een service voor de logica op de verkregen data, en een facade om data van een API op te schonen en door te geven.
 
--Kortom:
--OCP zorgt voor stabiele, uitbreidbare en onderhoudsvriendelijke software.
+### Waarom is het belangrijk?
+Door de code op te splitsen op basis van functionaliteit zorg je ervoor dat er minder fouten ontstaan, aangezien elke klasse slechts één verantwoordelijkheid draagt. Dit verhoogt de overzichtelijkheid, omdat je gericht kunt zoeken naar de functionaliteit die je wilt aanpassen of debuggen. Bovendien zorgt het ervoor dat je beter nadenkt over de structuur van je code, omdat niet alles in één enkele klasse wordt gedaan, maar op een logische en overzichtelijke manier is opgesplitst.
+
+---
+
+# Open Closed Principle (OCP)
+
+### Waarom gebruiken we het OCP?
+Het Open Closed Principle stelt dat code open moet zijn voor uitbreiding, maar gesloten voor aanpassing. Dit betekent dat we nieuwe functionaliteiten kunnen toevoegen zonder de bestaande code te wijzigen, wat het risico op bugs vermindert.
+
+### Waarom is het belangrijk?
+- **Voorkomt bugs in bestaande code**
+- **Maakt het makkelijk om nieuwe functionaliteit toe te voegen**
+- **Verbetert onderhoud en testbaarheid**
+
+### Voorbeeld (zoals bij TripTop):
+Als we een nieuwe filterstrategie willen toevoegen, kunnen we eenvoudig een nieuwe klasse toevoegen zonder de oude code aan te passen. Hierdoor blijft de bestaande functionaliteit intact en kunnen we de nieuwe functionaliteit uitbreiden zonder risico's.
+
+### Kortom:
+Het OCP zorgt voor stabiele, uitbreidbare en onderhoudsvriendelijke software.
 
 ## 7. Software Architecture
 
