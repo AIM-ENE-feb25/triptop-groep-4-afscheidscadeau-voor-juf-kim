@@ -15,7 +15,6 @@ System_Boundary(triptop, "Triptop Systeem") {
     Component(bookingController, "Boeking controller", "Java, Spring", "Behandelt boekings verzoeken van gebruikers.")
     Component(bookingComponent, "Boeking Component", "Java, Spring", "Bevat de bedrijfslogica voor het boeken van reizen.")
     Component(bookingRepo, "Boeking Repository", "Java, Spring", "Beheert opslag en ophalen van boekingsgegevens.")
-    Component(boekingBeheerAdapter, "Boeking Beheer Adapter", "Java, Spring", "Adapter voor Boeking Beheer service om boekingen te beheren.")
 
     Component(accommodatieBeheer, "Accommodatie Beheer", "Java, Spring", "Verwerkt en beheert accommodatiegegevens.")
     Component(accommodatieRepo, "Accommodatie Repository", "Java, Spring", "Slaat accommodatiedata op.")
@@ -94,8 +93,6 @@ Rel(accommodatieRepo, database, "Opslag van accommodatiegegevens", "SQL")
 Rel(accommodatieBeheer, accommodatieAdapter, "Adapter voor externe accommodatiebeheerdiensten")
 Rel(accommodatieAdapter, BookingComAPI, "Ophalen van accommodatie-informatie via Booking.com scraper", "JSON/HTTPS")
 Rel(accommodatieAdapter, TripAdvisorAPI, "Ophalen van accommodatie-informatie via Tripadvisor scraper", "JSON/HTTPS")
-
-Rel(bookingComponent, boekingBeheerAdapter, "Adapter voor Boeking Beheer service")
 
 Rel(bookingComponent, bezienswaardighedenBeheer, "Behandelt bezienswaardigheden gegevens")
 Rel(bezienswaardighedenBeheer, bezienswaardighedenRepo, "Interactie met database voor bezienswaardigheden gegevens")
