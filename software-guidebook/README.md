@@ -533,7 +533,7 @@ query-ondersteuning nodig. PostgreSQL biedt hierin robuuste SQL-functionaliteite
 
 #### Context
 
-De problemen waarvoor we het Adapter Pattern kunnen gebruiken is: 
+We willen het adapter pattern gebruiken om de volgende ontwerpvragen te beantwoorden: 
 * Hoe zorg je ervoor dat je bij een wijziging in de datastructuur van een externe service niet de hele applicatie hoeft aan te passen?
 * Hoe zorg je ervoor dat je makkelijk een nieuwe externe service kan toevoegen? 
 
