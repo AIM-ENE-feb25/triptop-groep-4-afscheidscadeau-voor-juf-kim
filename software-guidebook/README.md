@@ -668,7 +668,7 @@ Geaccepteerd
 Dit pattern maakt het mogelijk om data van verschillende providers te integreren zonder hoofdfunctionaliteiten van het
 systeem aan te passen. Daarnaast zorgt het voor consistentie binnen de applicatie.
 
-### ADR: Waarom kiezen voor het Strategy Pattern
+### ADR-003 Waarom kiezen voor het Strategy Pattern
 
 **Datum:** 28-03-2025  
 **Status:** Geaccepteerd
