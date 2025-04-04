@@ -290,9 +290,9 @@ Als meerdere onderdelen van je backend (bijv. een admin dashboard of een scraper
 
 ###     7.3. Design & Code
 
-#### Adapter patroon
+#### Adapter pattern
 
-Het Adapter patroon helpt bij het beantwoorden van de volgende onderzoeksvragen:
+Het Adapter pattern helpt bij het beantwoorden van de volgende onderzoeksvragen:
 
 * Hoe zorg je ervoor dat je bij een wijziging in de datastructuur van een externe service niet de hele applicatie hoeft
   aan te passen?
@@ -300,23 +300,23 @@ Het Adapter patroon helpt bij het beantwoorden van de volgende onderzoeksvragen:
 
 ##### Component Diagram:
 
-Het onderstaande component diagram weergeeft de complete integratie van het adapter-patroon in het Triptop systeem.
+Het onderstaande component diagram weergeeft de complete integratie van het adapter-pattern in het Triptop systeem.
 Hierin is zijn de adapter uitwerkingen van zowel van bezienswaardigheden als accommodaties te zien. Er is gekozen om
-hier het adapter-patroon te gebruiken om zo mogelijk uitbreidingen (meer externe platformen) gemakkelijker te maken.
+hier het adapter-pattern te gebruiken om zo mogelijk uitbreidingen (meer externe platformen) gemakkelijker te maken.
 
 Afbeelding n Component Diagram Adapter Patroon (Alleen de relevante componenten)
 ![Component Diagram Adapater Pattern Ingezoomed.png](..%2Fafb%2FComponent%20Diagram%20Adapater%20Pattern%20Ingezoomed.png)
 
 ##### Klasse diagram:
 
-Het onderstaande klassen diagram laat zien hoe in de applicatie het adapter patroon wordt toegepast, specifiek met
+Het onderstaande klassen diagram laat zien hoe in de applicatie het adapter pattern wordt toegepast, specifiek met
 betrekking tot bezienswaardigheden (Attractions). Naast bezienswaardigheden wordt dit ook toegepast op
 accommodaties zoals te zien is in het component-diagram. De "AttractionAdapter" interface abstraheert het gedrag van de
 verschillende bezienswaardigheden providers, in dit geval BookingCom en TripAdvisor. Door deze interface te gebruiken is
 het mogelijk om verschillende dataproviders toe te voegen en aan te passen, zonder de hele serviceklasse te hoeven
 veranderen.
 
-Het klassen-diagram hieronder weergeeft de architectuur van hoe het Adapter patroon wordt gebruikt om data van
+Het klassen-diagram hieronder weergeeft de architectuur van hoe het Adapter pattern wordt gebruikt om data van
 verschillende bezienswaardigheid providers te verwerken.
 
 Toelichting:
@@ -400,6 +400,26 @@ Toelichting:
 Afbeelding n Sequentie Diagram Strategy Patroon  
 ![Strategie-pattern-sequenceDiagram-Sequence_Diagram___Strategie_voor_Reisoptie_Selectie__Triptop_.png](../StrategyPatternPrototype/opdrachtDiagrammen/Strategie-pattern-sequenceDiagram-Sequence_Diagram___Strategie_voor_Reisoptie_Selectie__Triptop_.png)
 
+#### Facade Pattern
+
+![](../FacadePatternPrototypeBo/ComponentDiagram.png)
+Het component diagram laat zien welke componenten door het route systeem gebruikt gaan worden. Er wordt hier gebruik gemaakt van een facade om de response van de API te verwerken
+Er wordt hier gebruik gemaakt van een controller voor het krijgen van request van de front-end, een service om iets met de data te doen, een facade om alle API responces als lijst aan de service te geven,
+en als laatste 3 API's die mogelijke routes meegeven aan de facade.
+
+![](../FacadePatternPrototypeBo/ClassDiagram.png)
+Dit diagram laat de classes zien die gebruikt worden voor het boeken van vervoer. Er wordt hier gebruik gemaakt van een facade om er voor te zorgen dat er zonder moeite API’s kunnen worden toegevoegd en dit naar door kan worden gegeven aan de service.
+Er wordt hier gebruik gemaakt van een controller voor het krijgen van request van de front-end, een service om iets met de data te doen, een facade om alle API responces als lijst aan de service te geven,
+en als laatste 3 API's die mogelijke routes meegeven aan de facade.
+
+![](../FacadePatternPrototypeBo/ContainerDiagram.png)
+Het container diagram laat de vervoer boek functionaliteit in hoofdlijnen zien. Hier wordt gebruik gemaakt van de front en backend, de actor en API’s relevant aan deze functionaliteit
+
+![](../FacadePatternPrototypeBo/SequenceDiagram.png)
+Het sequentie diagram laat zien hoe er door de code heen gelopen worden. Hier worden alle componenten met de calls ertussen laten zien.
+
+
+
 ## 8. Architectural Decision Records
 
 ### 8.1. ADR-001 Keuze voor PostgreSQL als databasesysteem
@@ -474,11 +494,11 @@ Het probleem waarvoor we het Adapter Pattern kunnen gebruiken is, het integreren
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Integratie:<br/>Het maakt integratie van verschillende API's (met verschillende data formaten) makkelijker, zonder hiervoor (veel) bestaande code te moeten aanpassen. | Complexiteit:<br/>Het verhoogt de complexiteit binnen de applicatie: voor iedere API moet ten minste één extra class worden toegevoegd.                                                 |
 | Onderhoud:<br/>Het toepassen van dit patroon maakt het makkelijker om de code te onderhouden en uit te breiden.                                                        | Flexibiliteit:<br/>Het koppelen van de API's aan een interface kan de flexibiliteit beperken, maar er kan gebruik worden gemaakt van meerder adapters om dit te verhelpen.              |
-| Consistentie:<br/>Het zorgt ervoor dat de data van alle bronnen in hetzelfde formaat wordt geformatteerd.                                                             | Tijd:<br/>Het kost in het begin extra tijd om dit patroon te implementeren, maar uiteindelijk kan het tijd besparen, doordat het implementeren van nieuwe API's veel eenvoudiger wordt. |
+| Consistentie:<br/>Het zorgt ervoor dat de data van alle bronnen in hetzelfde formaat wordt geformatteerd.                                                              | Tijd:<br/>Het kost in het begin extra tijd om dit patroon te implementeren, maar uiteindelijk kan het tijd besparen, doordat het implementeren van nieuwe API's veel eenvoudiger wordt. |
 
 #### Beslissing
 
-We hebben besloten om dit patroon toe te passen in ons systeem, zodat we de data gestructureerd op kunnen halen, en zo makkelijker de bezienswaardigheid data op te halen.
+We hebben besloten om dit pattern toe te passen in ons systeem, zodat we de data gestructureerd op kunnen halen, en zo makkelijker de bezienswaardigheid data op te halen.
 
 #### Status
 
@@ -486,7 +506,7 @@ Geaccepteerd
 
 #### Gevolgen
 
-Dit patroon maakt het mogelijk om data van verschillende providers te integreren zonder hoofdfunctionaliteiten van het systeem aan te passen. Daarnaast zorgt het voor consistentie binnen de applicatie.
+Dit pattern maakt het mogelijk om data van verschillende providers te integreren zonder hoofdfunctionaliteiten van het systeem aan te passen. Daarnaast zorgt het voor consistentie binnen de applicatie.
 
 ### 8.3. ADR-003 Waarom kiezen voor het Strategy Pattern
 
@@ -526,7 +546,7 @@ Hoe zorg je ervoor dat de reisroute makkelijk aangepast kan worden als reisafsta
 
 Met deze overwegingen in gedachten gaan het strategy pattern toepassen op deze technologie.
 
-Dit patroon is handig als je hetzelfde probleem op meerdere manieren wilt oplossen. Je stopt elke manier in een losse klasse, en je kunt makkelijk wisselen
+Dit pattern is handig als je hetzelfde probleem op meerdere manieren wilt oplossen. Je stopt elke manier in een losse klasse, en je kunt makkelijk wisselen
 tussen die strategieën zonder dat je de rest van de code moet aanpassen.
 
 ---
@@ -543,7 +563,7 @@ tussen die strategieën zonder dat je de rest van de code moet aanpassen.
 ##### Nadelen
 
 - Je gaat wat meer losse klassen hebben in je project.
-- Je moet het patroon wel even snappen, anders wordt het rommelig.
+- Je moet het pattern wel even snappen, anders wordt het rommelig.
 
 ---
 
