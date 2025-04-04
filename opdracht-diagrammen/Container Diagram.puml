@@ -3,6 +3,7 @@
 
 title Container diagram Voor TripTop Systeem
 
+Person(ReisAgent, "ReisAgent", "Een gebruiker die de reiziger kan helpen met het boeken en plannen van reizen")
 Person(user, "Reiziger", "Beheert en wijzigt zijn reis")
 
 System_Boundary(triptop, "Triptop Systeem") {
@@ -33,6 +34,7 @@ System_Ext(OpenTableAPI, "OpenTable API", "Voor reserveren bij cafés en eetgele
 
 System_Ext(GoogleLogin, "Google Login (OAuth 2.0)", "Authenticatie van gebruikers via Google")
 
+Rel(ReisAgent, web, "Helpt samenstellen van reizen met")
 Rel(user, web, "Bekijkt en wijzigt reisgegevens\n(HTTPS, JSON)")
 Rel(web, trip_manager, "Maakt API verzoeken naar", "JSON/HTTPS")
 
