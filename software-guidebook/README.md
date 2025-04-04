@@ -329,6 +329,7 @@ Booking Component. Denk hierbij aan. Wat gebeurt er als er
 wel of geen kamers beschikbaar zijn
 
 Afbeelding n Component Diagram State
+
 ![Component Diagram State.png](../afb/Component%20Diagram%20State.png)
 
 ##### Klasse diagram:
@@ -343,6 +344,7 @@ Postman
 
 
 Afbeelding n Klasse Diagram State Pattern
+
 ![Class Diagram State.png](../afb/Class%20Diagram%20State.png)
 
 
@@ -355,6 +357,7 @@ en pas daarna word er beslist wat er gebeurt.
 Hiernaast word alles duidelijk in het diagram aangegeven
 
 Afbeelding n Sequentie Diagram State pattern
+
 ![Sequence Diagram State.png](../afb/Sequence%20Diagram%20State.png)
 
 
