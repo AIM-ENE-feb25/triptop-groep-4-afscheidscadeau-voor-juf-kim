@@ -215,16 +215,10 @@ Betaal Component verwerkt dat.
 
 Betaal Repository slaat het op.
 
-Via Stripe API wordt de betaling extern geregeld.
-
 Accommodaties
 Accommodatie Beheer verwerkt de data.
 
 Accommodatie Repository slaat het lokaal op.
-
-BookingCom Service haalt het op van Bookingcom.
-
-Externe API’s: BookingCom API, Airbnb API.
 
 Notificaties
 Notificatie Service stuurt meldingen.
@@ -232,20 +226,13 @@ Notificatie Service stuurt meldingen.
 Mail Component verstuurt e-mails (via MailPit bijv.).
 
 Nieuwe toegevoegde onderdelen:
-Strategiegebaseerde Selectie (Strategy Pattern)
-ReisplannerService: kiest de juiste strategie (bijv. snelste route).
 
+ReisplannerService: kiest de juiste strategie (bijv. snelste route).
 ReisPlannerController: ontvangt het verzoek van de gebruiker met hun voorkeur.
 
 Strategie Klassen:
 
-GoedkoopsteStrategie
-
-SnelsteStrategie
-
-BeschikbaarheidStrategie
-
-SelectieStrategie is de interface die dit allemaal verbindt.
+GoedkoopsteStrategie, SnelsteStrategie en BeschikbaarheidStrategie. SelectieStrategie is de interface die dit allemaal verbindt.
 
 ReisOptie is het model dat al die info bevat (zoals prijs, reistijd, beschikbaarheid).
 
