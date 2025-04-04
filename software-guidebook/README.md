@@ -151,6 +151,23 @@ Voordat deze casusomschrijving tot stand kwam, heeft de opdrachtgever de volgend
   - door de code op te splitsen op functionaliteit zorg je er voor dat er minder fout kan gaan, elke class draagt namelijk maar 1 verantwoordelijkheid. Daarnaast geeft dit ook meer overzichtelijkheid omdat je bij de code kan zoeken naar de functionaliteit die je aan wilt passen of wilt debuggen. als laatste zorgt dit er voor dat je beter over je code na moet denken omdat niet alles in een enkele class gedaan wordt, maar op een logische manier moet worden opgesplitst  
 
 
+-Open Closed Principle (OCP):
+
+-Waarom gebruiken we het Open Closed Principle (OCP)?
+-Het OCP stelt dat code open moet zijn voor uitbreiding, maar gesloten voor aanpassing.
+
+-Waarom?
+-Voorkomt bugs in bestaande code
+
+-Maakt het makkelijk om nieuwe functionaliteit toe te voegen
+-Verbetert onderhoud en testbaarheid
+
+-Voorbeeld (zoals bij TripTop):
+-Nieuwe filterstrategie? Voeg een nieuwe klasse toe, zonder oude code te wijzigen.
+
+-Kortom:
+-OCP zorgt voor stabiele, uitbreidbare en onderhoudsvriendelijke software.
+
 ## 7. Software Architecture
 
 ###     7.1. Containers
